@@ -6,7 +6,7 @@ Network Working Group                                     P. Saint-Andre
 Internet-Draft                                               independent
 Obsoletes: 6125 (if approved)                                    R. Salz
 Intended status: Standards Track                     Akamai Technologies
-Expires: 31 December 2022                                   29 June 2022
+Expires: 5 January 2023                                      4 July 2022
 
 
                         Service Identity in TLS
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 December 2022.
+   This Internet-Draft will expire on 5 January 2023.
 
 Copyright Notice
 
@@ -222,13 +222,15 @@ Table of Contents
       beyond the scope of this document.
 
    *  Identifiers other than FQDNs.  Identifiers such as IP address are
-      not discussed.  In addition, the focus of this document is on
-      application service identities, not specific resources located at
-      such services.  Therefore this document discusses Uniform Resource
-      Identifiers [URI] only as a way to communicate a DNS domain name
-      (via the URI "host" component or its equivalent), not other
-      aspects of a service such as a specific resource (via the URI
-      "path" component) or parameters (via the URI "query" component).
+      not discussed.  Protocols other than HTTP may want to consider
+      [HTTP-SEMANTICS], Section 4.3.5 as a validation model.  In
+      addition, the focus of this document is on application service
+      identities, not specific resources located at such services.
+      Therefore this document discusses Uniform Resource Identifiers
+      [URI] only as a way to communicate a DNS domain name (via the URI
+      "host" component or its equivalent), not other aspects of a
+      service such as a specific resource (via the URI "path" component)
+      or parameters (via the URI "query" component).
 
    *  Certification authority policies.  This includes items such as the
       following:
@@ -991,9 +993,9 @@ Table of Contents
               "Recommendations for Secure Use of Transport Layer
               Security (TLS) and Datagram Transport Layer Security
               (DTLS)", Work in Progress, Internet-Draft, draft-ietf-uta-
-              rfc7525bis-08, 25 June 2022,
+              rfc7525bis-09, 30 June 2022,
               <https://datatracker.ietf.org/doc/html/draft-ietf-uta-
-              rfc7525bis-08>.
+              rfc7525bis-09>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -1065,6 +1067,12 @@ Table of Contents
               DOI 10.17487/RFC6186, March 2011,
               <https://www.rfc-editor.org/rfc/rfc6186>.
 
+   [HTTP-SEMANTICS]
+              Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
+              Ed., "HTTP Semantics", STD 97, RFC 9110,
+              DOI 10.17487/RFC9110, June 2022,
+              <https://www.rfc-editor.org/rfc/rfc9110>.
+
    [HTTPSbytes]
               Sokol, J. and R. Hansen, "HTTPS Can Byte Me", BlackHat Abu
               Dhabi, November 2010, <https://media.blackhat.com/bh-ad-
@@ -1121,9 +1129,9 @@ Table of Contents
    [TLS-SUBCERTS]
               Barnes, R., Iyengar, S., Sullivan, N., and E. Rescorla,
               "Delegated Credentials for (D)TLS", Work in Progress,
-              Internet-Draft, draft-ietf-tls-subcerts-14, 17 May 2022,
+              Internet-Draft, draft-ietf-tls-subcerts-15, 30 June 2022,
               <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
-              subcerts-14>.
+              subcerts-15>.
 
    [US-ASCII] American National Standards Institute, "Coded Character
               Set - 7-bit American Standard Code for Information

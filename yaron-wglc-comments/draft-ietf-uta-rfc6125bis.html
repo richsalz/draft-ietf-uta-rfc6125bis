@@ -16,22 +16,22 @@ procedures for representing and verifying the identity of application services
 in such interactions. 
        This document obsoletes RFC 6125. 
     " name="description">
-<meta content="xml2rfc 3.12.10" name="generator">
+<meta content="xml2rfc 3.13.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-uta-rfc6125bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.12.10
+  xml2rfc 3.13.0
     Python 3.10.4
     appdirs 1.4.4
     ConfigArgParse 1.5.3
-    google-i18n-address 2.5.1
+    google-i18n-address 2.5.2
     html5lib 1.1
     intervaltree 3.1.0
-    Jinja2 2.11.3
+    Jinja2 3.1.2
     kitchen 1.2.6
-    lxml 4.8.0
-    MarkupSafe 2.0.1
-    pycountry 20.7.3
+    lxml 4.9.1
+    MarkupSafe 2.1.1
+    pycountry 22.3.5
     pyflakes 2.4.0
     PyYAML 6.0
     requests 2.27.1
@@ -1033,11 +1033,11 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Service Identity</td>
-<td class="right">June 2022</td>
+<td class="right">July 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Saint-Andre &amp; Salz</td>
-<td class="center">Expires 31 December 2022</td>
+<td class="center">Expires 5 January 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1053,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc6125" class="eref">6125</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-06-29" class="published">29 June 2022</time>
+<time datetime="2022-07-04" class="published">4 July 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-12-31">31 December 2022</time></dd>
+<dd class="expires"><time datetime="2023-01-05">5 January 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1113,7 +1113,7 @@ in such interactions.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 31 December 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 January 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1404,7 +1404,10 @@ described above, such as rfc822Name, are beyond the scope
 of this document.<a href="#section-1.4.2-2.3" class="pilcrow">¶</a>
 </li>
             <li class="normal" id="section-1.4.2-2.4">Identifiers other than FQDNs.
-Identifiers such as IP address are not discussed. In addition, the focus of
+Identifiers such as IP address are not discussed.
+Protocols other than HTTP may want to consider
+<span>[<a href="#HTTP-SEMANTICS" class="xref">HTTP-SEMANTICS</a>], <a href="https://rfc-editor.org/rfc/rfc9110#section-4.3.5" class="relref">Section 4.3.5</a></span> as a validation model.
+In addition, the focus of
 this document is on application service identities, not specific resources
 located at such services.  Therefore this document discusses Uniform
 Resource Identifiers <span>[<a href="#URI" class="xref">URI</a>]</span> only as a way to communicate a DNS domain name
@@ -2247,7 +2250,7 @@ name constraint for URI-IDs.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="RFC7525bis">[RFC7525bis]</dt>
         <dd>
-<span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Saint-Andre, P.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-uta-rfc7525bis-08</span>, <time datetime="2022-06-25" class="refDate">25 June 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-uta-rfc7525bis-08">https://datatracker.ietf.org/doc/html/draft-ietf-uta-rfc7525bis-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Saint-Andre, P.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-uta-rfc7525bis-09</span>, <time datetime="2022-06-30" class="refDate">30 June 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-uta-rfc7525bis-09">https://datatracker.ietf.org/doc/html/draft-ietf-uta-rfc7525bis-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
@@ -2308,6 +2311,10 @@ name constraint for URI-IDs.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Daboo, C.</span>, <span class="refTitle">"Use of SRV Records for Locating Email Submission/Access Services"</span>, <span class="seriesInfo">RFC 6186</span>, <span class="seriesInfo">DOI 10.17487/RFC6186</span>, <time datetime="2011-03" class="refDate">March 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6186">https://www.rfc-editor.org/rfc/rfc6186</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="HTTP-SEMANTICS">[HTTP-SEMANTICS]</dt>
+        <dd>
+<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="HTTPSbytes">[HTTPSbytes]</dt>
         <dd>
 <span class="refAuthor">Sokol, J.</span> and <span class="refAuthor">R. Hansen</span>, <span class="refTitle">"HTTPS Can Byte Me"</span>, <span class="seriesInfo">BlackHat Abu Dhabi</span>, <time datetime="2010-11" class="refDate">November 2010</time>, <span>&lt;<a href="https://media.blackhat.com/bh-ad-10/Hansen/Blackhat-AD-2010-Hansen-Sokol-HTTPS-Can-Byte-Me-slides.pdf">https://media.blackhat.com/bh-ad-10/Hansen/Blackhat-AD-2010-Hansen-Sokol-HTTPS-Can-Byte-Me-slides.pdf</a>&gt;</span>. </dd>
@@ -2354,7 +2361,7 @@ name constraint for URI-IDs.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="TLS-SUBCERTS">[TLS-SUBCERTS]</dt>
         <dd>
-<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Iyengar, S.</span>, <span class="refAuthor">Sullivan, N.</span>, and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"Delegated Credentials for (D)TLS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-subcerts-14</span>, <time datetime="2022-05-17" class="refDate">17 May 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-subcerts-14">https://datatracker.ietf.org/doc/html/draft-ietf-tls-subcerts-14</a>&gt;</span>. </dd>
+<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Iyengar, S.</span>, <span class="refAuthor">Sullivan, N.</span>, and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"Delegated Credentials for (D)TLS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-subcerts-15</span>, <time datetime="2022-06-30" class="refDate">30 June 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-subcerts-15">https://datatracker.ietf.org/doc/html/draft-ietf-tls-subcerts-15</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="US-ASCII">[US-ASCII]</dt>
         <dd>
