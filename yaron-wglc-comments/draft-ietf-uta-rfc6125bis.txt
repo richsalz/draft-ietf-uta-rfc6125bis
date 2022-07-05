@@ -6,7 +6,7 @@ Network Working Group                                     P. Saint-Andre
 Internet-Draft                                               independent
 Obsoletes: 6125 (if approved)                                    R. Salz
 Intended status: Standards Track                     Akamai Technologies
-Expires: 5 January 2023                                      4 July 2022
+Expires: 6 January 2023                                      5 July 2022
 
 
                         Service Identity in TLS
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 January 2023.
+   This Internet-Draft will expire on 6 January 2023.
 
 Copyright Notice
 
@@ -812,11 +812,12 @@ Table of Contents
    list of reference identifiers includes an SRV-ID of _xmpp-
    client.im.example.org and a DNS-ID of apps.example.net, the client
    MUST check both the combination of an application service type of
-   xmpp-client and a DNS domain name of im.example.org and a DNS domain
-   name of apps.example.net.  However, the client MUST NOT check the
-   combination of an application service type of xmpp-client and a DNS
-   domain name of apps.example.net because it does not have an SRV-ID of
-   _xmpp-client.apps.example.net in its list of reference identifiers.
+   xmpp-client and a DNS domain name of im.example.org and, separately,
+   a DNS domain name of apps.example.net.  However, the client MUST NOT
+   check the combination of an application service type of xmpp-client
+   and a DNS domain name of apps.example.net because it does not have an
+   SRV-ID of _xmpp-client.apps.example.net in its list of reference
+   identifiers.
 
    If the identifier is an SRV-ID, then the application service name
    MUST be matched in a case-insensitive manner, in accordance with
