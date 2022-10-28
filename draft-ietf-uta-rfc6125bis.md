@@ -103,6 +103,12 @@ informative:
     date: 2010-11
     seriesinfo:
       BlackHat: Abu Dhabi
+  ICANN-AGB:
+    target: https://newgtlds.icann.org/en/applicants/agb
+    title: "gTLD Applicant Guidebook"
+    author:
+    - org: "ICANN"
+    date: 2012-06-04
   Defeating-SSL:
     target: http://www.blackhat.com/presentations/bh-dc-09/Marlinspike/BlackHat-DC-09-Marlinspike-Defeating-SSL.pdf
     title: New Tricks for Defeating SSL in Practice
@@ -272,7 +278,7 @@ on PKIX (more precisely, certificates structured via {{X.509}} or
 specific encodings thereof such as {{X.690}}), at least in certain
 modes.  Alternatively, a TLS peer could issue delegated credentials
 that are based on a CA-issued certificate, as in {{TLS-SUBCERTS}}.
-In both of these cases, a TLS client could learn of a service identity
+In both cases, a TLS client could learn of a service identity
 through its inclusion in the relevant certificate.  The rules specified
 here are intended to apply whenever service identities are included in
 X.509 certificates or credentials that are derived from such certificates.
@@ -316,7 +322,7 @@ The following topics are out of scope for this specification:
   application service can involve several steps, for our purposes we care
   only about the fact that the client needs to verify the identity of the
   entity with which it communicates as a result of the resolution process.
-  Thus the resolution process itself is out of scope for this specification.
+  Thus, the resolution process itself is out of scope for this specification.
 
 * User interface issues.
   In general, such issues are properly the responsibility of client
@@ -360,7 +366,7 @@ identifier:
   server in a certificate or referenced by a client for matching purposes.
 
 identifier type:
-: A formally-defined category of identifier that can be included in a
+: A formally defined category of identifier that can be included in a
   certificate and therefore that can also be used for matching purposes. For
   conciseness and convenience, we define the following identifier types of
   interest:
@@ -383,7 +389,7 @@ PKIX:
 : The short name for the Internet Public Key Infrastructure using X.509
   defined in {{PKIX}}.  That document provides a profile of the X.509v3
   certificate specifications and X.509v2 certificate revocation list (CRL)
-  specifications for use in the Internet.
+  specifications for use on the Internet.
 
 presented identifier:
 : An identifier presented by a server to a client within a PKIX certificate
@@ -432,7 +438,7 @@ TLS handshake; there is no requirement that the roles at the application
 layer match the TLS layer.
 
 Security-related terms used in this document, but not defined here or in
-{{PKIX}} should be understood in the the sense defined in {{SECTERMS}}. Such
+{{PKIX}} should be understood in the sense defined in {{SECTERMS}}. Such
 terms include "attack", "authentication", "identity", "trust", "validate",
 and "verify".
 
@@ -463,7 +469,7 @@ The DNS name conforms to one of the following forms:
   documents.
 
 An IP address is either a 4-byte IPv4 address {{!IPv4=RFC0791}} or a 16-byte
-IPv6 address {{!IPv6=RFC4291}}.  The identifer might need to be converted from a
+IPv6 address {{!IPv6=RFC4291}}.  The identifier might need to be converted from a
 textual representation to obtain this value.
 
 From the perspective of the application client or user, some identifiers are
@@ -483,7 +489,7 @@ one type of service, such as a special-purpose certificate that can only be
 used for an IMAP service.  This distinction matters most for certificate
 issuance.
 
-We can categorize the three identifier types as follows:
+We can categorize the four identifier types as follows:
 
 * A DNS-ID is direct and unrestricted.
 
@@ -496,9 +502,9 @@ We can categorize the three identifier types as follows:
 It is important to keep these distinctions in mind, because best practices
 for the deployment and use of the identifiers differ.
 Note that cross-protocol attacks such as {{ALPACA}}
-are possibile when two
+are possible when two
 different protocol services use the same certificate.
-This can be addressed by using restricted identifiers, or deploying
+This can be addressed by using restricted identifiers or deploying
 services so that they do not share certificates.
 Protocol specifications MUST specify which identifiers are
 mandatory-to-implement and SHOULD provide operational guidance when necessary.
@@ -521,7 +527,7 @@ Its specification
 MAY choose to allow only one of the identifier types defined here.
 
 If the technology does not use DNS SRV records to resolve the DNS domain
-names of application services then its specification MUST state that SRV-ID
+names of application services, then its specification MUST state that SRV-ID
 as defined in this document is not supported.  Note that many existing
 application technologies use DNS SRV records to resolve the DNS domain names
 of application services, but do not rely on representations of those records
@@ -543,7 +549,7 @@ example {{URI}}.  In this case, applications need to be aware that the textual
 representation of an IPv4 address can appear to be a valid DNS name, though it is not.  The two
 types can be distinguished by first testing if the identifier is a valid IPv4
 address.  Note also that by policy, Top-Level Domains ({{DNS-TERMS}}) do not
-start with a digit (TODO: citation needed).
+start with a digit (see Section 2.2.1.3.2 of {{ICANN-AGB}}).
 
 # Representing Server Identity {#represent}
 
@@ -623,7 +629,7 @@ certificate for this service might include SRV-IDs of
 This section provides instructions for service providers regarding
 the information to include in certificate signing requests (CSRs).
 In general, service providers SHOULD request certificates that
-include all of the identifier types that are required or recommended for
+include all the identifier types that are required or recommended for
 the application service type that will be secured using the certificate to
 be issued.
 
@@ -720,7 +726,7 @@ In the DNS case, not treating intermediate domain names as reference identifiers
 removes DNS and DNS resolution from the attack surface. However, an application
 might define a process for authenticating these intermediate identifiers in a way
 that then allows them to be used as a reference identifier; see for example
-{{?SMTP-TLS}}.
+{{SMTP-TLS}}.
 
 As one example of the process of generating a reference identifier, from user
 input of the URI \<sip:alice@example.net> a client could derive the application
@@ -753,7 +759,7 @@ identifiers, and their priority, is a matter of local policy.  For example, a
 client that is built to connect only to a particular kind of service might be
 configured to accept as valid only certificates that include an SRV-ID for
 that application service type.  By contrast, a more lenient client, even if
-built to connect only to a particular kind of service, might include both
+built to connect only to a particular kind of service, might include
 SRV-IDs, DNS-IDs, and IP-IDs in its list of reference identifiers.
 
 ### Examples {#verify-reference-examples}
@@ -787,7 +793,7 @@ SRV-ID of `_xmpp-client.im.example.org` (see {{XMPP}}), a DNS-ID of
 `im.example.org`, and an XMPP-specific `XmppAddr` of `im.example.org`
 (see {{XMPP}}).
 
-In all of these cases, presented identifiers that do not match the reference
+In all these cases, presented identifiers that do not match the reference
 identifier(s) would be rejected; for instance:
 
 * With regard to the first example a DNS-ID of "web.example.com" would
@@ -904,7 +910,7 @@ certificates, see {{security-wildcards}}.
 An IP-ID matches based on an octet-for-octet comparison of the bytes of the reference identity with the
 bytes contained in the iPAddress subjectAltName.
 The iPAddress field does not include the IP version, so IPv4 addresses are
-distinguish from IPv6 addresses only by their length (4 as opposed to 16 bytes).
+distinguished from IPv6 addresses only by their length (4 as opposed to 16 bytes).
 
 For an IP address that appears in a URI-ID, the "host" component of both the
 reference identity and the presented identifier.  These are parsed as either
@@ -976,7 +982,7 @@ The application MAY also present the user with the ability to accept the
 presented certificate as valid for subsequent connections.  Such ad-hoc
 "pinning" SHOULD NOT restrict future connections to just the pinned
 certificate. Local policy that statically enforces a given certificate for a
-given peer SHOULD made available only as prior configuration, rather than a
+given peer SHOULD be made available only as prior configuration, rather than a
 just-in-time override for a failed connection.
 
 # Security Considerations {#security}
@@ -1014,7 +1020,7 @@ different components of a system to classify the value differently, which might 
 to vulnerabilities. For example, one system component enforces a security rule
 that is conditional on the type of identifier.  This component misclassifies an
 IP address as an FQDN.  A different component correctly classifies the
-identifier, but might incorrectly assume that rules regarding IP addresses have
+identifier but might incorrectly assume that rules regarding IP addresses have
 been enforced.  Consistent classification of identifiers avoids this problem.
 
 ## Multiple Presented Identifiers {#security-multi}
@@ -1043,7 +1049,7 @@ have a strong minimum configuration as described in {{RFC7525bis}}.
 ## Multiple Reference Identifiers
 
 This specification describes how a client may construct multiple acceptable
-reference identifiers, and may match any of those reference identifiers with
+reference identifiers and may match any of those reference identifiers with
 the set of presented identifiers. {{PKIX, Section 4.2.1.10}} describes a
 mechanism to allow CA certificates to be constrained in the set of presented
 identifiers that they may include within server certificates.  However, these
