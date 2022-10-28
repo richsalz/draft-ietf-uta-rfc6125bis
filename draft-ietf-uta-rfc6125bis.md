@@ -913,7 +913,7 @@ The iPAddress field does not include the IP version, so IPv4 addresses are
 distinguished from IPv6 addresses only by their length (4 as opposed to 16 bytes).
 
 For an IP address that appears in a URI-ID, the "host" component of both the
-reference identity and the presented identifier.  These are parsed as either
+reference identity and the presented identifier must match.  These are parsed as either
 an "IP-literal" (following {{!IPv6}}) or an "IPv4address" (following {{!IPv4}}).
 If the resulting bytes are equal, the IP address matches.
 
