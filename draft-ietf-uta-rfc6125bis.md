@@ -30,6 +30,7 @@ author:
   email: rsalz@akamai.com
 normative:
   DNS-CONCEPTS: RFC1034
+  DNS-NAMES: RFC1035
   DNS-SRV: RFC2782
   DNS-WILDCARDS: RFC4592
   IDNA-DEFS: RFC5890
@@ -544,12 +545,16 @@ it does so, then the specification MUST state that wildcard certificates as
 defined in this document are not supported.
 
 A protocol can allow the use of an IP address in place of a DNS name.  This
-might use the same field without distinguishing the type of identifier, see for
-example {{URI}}.  In this case, applications need to be aware that the textual
-representation of an IPv4 address can appear to be a valid DNS name, though it is not.  The two
+might use the same field without distinguishing the type of identifier, as for
+example in the "host" components of a URI.  In this case, applications need to be aware that the textual
+representation of an IPv4 address can appear to be a valid DNS name, even though it is not; the two
 types can be distinguished by first testing if the identifier is a valid IPv4
-address.  Note also that by policy, Top-Level Domains ({{DNS-TERMS}}) do not
-start with a digit (see Section 2.2.1.3.2 of {{ICANN-AGB}}).
+address, as is done by the "first-match-wins" algorithm in {{Section 3.2.2 of URI}}.  
+Note also that by policy, Top-Level Domains ({{DNS-TERMS}}) do not
+start with a digit (see Section 2.2.1.3.2 of {{ICANN-AGB}}); historically 
+this rule was also intended to apply to all labels in a domain name (see 
+{{Section 2.3.1 of {{DNS-NAMES}}), although that is not always the case
+in practice.
 
 # Representing Server Identity {#represent}
 
