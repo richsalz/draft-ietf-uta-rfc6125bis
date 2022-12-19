@@ -38,7 +38,7 @@ normative:
   PKIX: RFC5280
   SRVNAME: RFC4985
   URI: RFC3986
-  RFC7525bis: I-D.ietf-uta-rfc7525bis
+  TLS-REQS: RFC9325
 informative:
   ABNF: RFC5234
   ACME: RFC8555
@@ -174,6 +174,8 @@ informative:
     - ins: T. Roessler
       name: Thomas Roessler
     date: '2010-08-12'
+  XSS: 
+    target: https://owasp.org/www-community/attacks/xss/
 
 --- abstract
 
@@ -995,9 +997,29 @@ convenient for administrators but also poses the risk of vouching for rogue
 or buggy hosts. See for example {{Defeating-SSL}} (beginning at slide 91) and
 {{HTTPSbytes}} (slides 38-40).
 
+As specified in {{verify-domain}}, restricting certificates to only one 
+wildcard character (e.g., `\*.example.com` but not `\*.\*.example.com`) and
+restricting the use of wildcards to only the left-most domain label can 
+help to mitigate certain aspects of the attack described in {{Defeating-SSL}}.
+
+That same attack also relies on the initial use of a cleartext HTTP connection, 
+which is hijacked by an active on-path attacker and subsequently upgraded to 
+HTTPS.  In order to mitigate such an attack, administrators and software
+developers are advised to follow the strict TLS guidelines provided in 
+{{TLS-REQS, Section 3.2}}.
+
+Because the attack described in {{HTTPSbytes}} relies on an underlying
+cross-site scripting (XSS) attack, web browsers and applications are advised 
+to follow best practices to prevent XSS attacks; see for example {{XSS}} 
+published by the Open Web Application Security Project (OWASP).
+
 Protection against a wildcard that identifies a public suffix
 {{Public-Suffix}}, such as `*.co.uk` or `*.com`, is beyond the scope of this
 document.
+
+As noted in {{design}}, application protocols can disallow the use of 
+wildcard certificates entirely as a more foolproof mitigation.
+
 
 ## Internationalized Domain Names {#security-idn}
 
@@ -1044,7 +1066,7 @@ weakest of those servers that offer the names.
 
 The way to mitigate this risk is to limit the number of names that
 any server can speak for, and to ensure that all servers in the set
-have a strong minimum configuration as described in {{RFC7525bis}}.
+have a strong minimum configuration as described in {{TLS-REQS}}.
 
 ## Multiple Reference Identifiers
 
@@ -1136,4 +1158,4 @@ Brian Smith,
 and
 Martin Thomson.
 
-A few descriptive sentences were borrowed from {{RFC7525bis}}.
+A few descriptive sentences were borrowed from {{TLS-REQS}}.
