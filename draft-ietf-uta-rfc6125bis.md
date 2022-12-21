@@ -174,7 +174,7 @@ informative:
     - ins: T. Roessler
       name: Thomas Roessler
     date: '2010-08-12'
-  XSS: 
+  XSS:
     target: https://owasp.org/www-community/attacks/xss/
     title: "Cross Site Scripting (XSS)"
     author:
@@ -1001,27 +1001,27 @@ convenient for administrators but also poses the risk of vouching for rogue
 or buggy hosts. See for example {{Defeating-SSL}} (beginning at slide 91) and
 {{HTTPSbytes}} (slides 38-40).
 
-As specified in {{verify-domain}}, restricting certificates to only one 
+As specified in {{verify-domain}}, restricting certificates to only one
 wildcard character (e.g., `\*.example.com` but not `\*.\*.example.com`) and
-restricting the use of wildcards to only the left-most domain label can 
+restricting the use of wildcards to only the left-most domain label can
 help to mitigate certain aspects of the attack described in {{Defeating-SSL}}.
 
-That same attack also relies on the initial use of a cleartext HTTP connection, 
-which is hijacked by an active on-path attacker and subsequently upgraded to 
+That same attack also relies on the initial use of a cleartext HTTP connection,
+which is hijacked by an active on-path attacker and subsequently upgraded to
 HTTPS.  In order to mitigate such an attack, administrators and software
-developers are advised to follow the strict TLS guidelines provided in 
+developers are advised to follow the strict TLS guidelines provided in
 {{TLS-REQS, Section 3.2}}.
 
 Because the attack described in {{HTTPSbytes}} relies on an underlying
-cross-site scripting (XSS) attack, web browsers and applications are advised 
-to follow best practices to prevent XSS attacks; see for example {{XSS}} 
+cross-site scripting (XSS) attack, web browsers and applications are advised
+to follow best practices to prevent XSS attacks; see for example {{XSS}}
 published by the Open Web Application Security Project (OWASP).
 
 Protection against a wildcard that identifies a public suffix
 {{Public-Suffix}}, such as `*.co.uk` or `*.com`, is beyond the scope of this
 document.
 
-As noted in {{design}}, application protocols can disallow the use of 
+As noted in {{design}}, application protocols can disallow the use of
 wildcard certificates entirely as a more foolproof mitigation.
 
 
