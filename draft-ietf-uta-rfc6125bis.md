@@ -1133,7 +1133,8 @@ Alexey Melnikov,
 Yaron Sheffer,
 Ryan Sleevi,
 Brian Smith,
+Martin Thomson,
 and
-Martin Thomson.
+Qin Wu.
 
 A few descriptive sentences were borrowed from {{RFC7525bis}}.
