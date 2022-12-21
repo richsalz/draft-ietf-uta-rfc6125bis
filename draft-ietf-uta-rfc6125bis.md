@@ -176,6 +176,10 @@ informative:
     date: '2010-08-12'
   XSS: 
     target: https://owasp.org/www-community/attacks/xss/
+    title: "Cross Site Scripting (XSS)"
+    author:
+    - org: "OWASP"
+    date: 2022
 
 --- abstract
 
