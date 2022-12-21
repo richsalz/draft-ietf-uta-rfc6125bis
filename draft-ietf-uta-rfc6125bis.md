@@ -553,7 +553,7 @@ address, as is done by the "first-match-wins" algorithm in {{Section 3.2.2 of UR
 Note also that by policy, Top-Level Domains ({{DNS-TERMS}}) do not
 start with a digit (see Section 2.2.1.3.2 of {{ICANN-AGB}}); historically 
 this rule was also intended to apply to all labels in a domain name (see 
-{{Section 2.3.1 of {{DNS-NAMES}}), although that is not always the case
+{{Section 2.3.1 of DNS-NAMES}}), although that is not always the case
 in practice.
 
 # Representing Server Identity {#represent}
