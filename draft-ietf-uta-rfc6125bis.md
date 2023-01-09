@@ -387,7 +387,7 @@ identifier type:
 
   * URI-ID: a subjectAltName entry of type uniformResourceIdentifier
     as defined in {{PKIX}}. This entry MUST include both a "scheme" and
-    a "host" component (or its equivalent) that matches the "reg-name"
+    a "host" component that matches the "reg-name"
     rule (where the quoted terms represent the associated {{ABNF}}
     productions from {{URI}}).  If the entry does not have both, it is not a
     valid URI-ID and MUST be ignored.
@@ -590,7 +590,7 @@ document.
   identifiers of type URI-ID (e.g., {{SIP}} as specified by
   {{SIP-CERTS}}), then the certificate SHOULD include a URI-ID.  The scheme
   MUST be that of the protocol associated with the application service type
-  and the "host" component (or its equivalent) MUST be the FQDN
+  and the "host" component MUST be the FQDN
   of the service.  The application protocol specification
   MUST specify which URI schemes are acceptable in URI-IDs contained in PKIX
   certificates used for the application protocol (e.g., `sip` but not `sips`
