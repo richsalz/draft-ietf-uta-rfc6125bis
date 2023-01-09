@@ -360,8 +360,8 @@ application service type:
 delegated domain:
 : A domain name or host name that is explicitly configured for communicating
   with the source domain, either by the human user controlling the client
-  or by a trusted administrator.  For example, a server at mail.example.net
-  could be a delegated domain for connecting to an IMAP server hosting an email address of
+  or by a trusted administrator.  For example, an IMAP server at mail.example.net
+  could be a delegated domain for a source domain of example.net associated with an email address of
   user@example.net.
 
 derived domain:
