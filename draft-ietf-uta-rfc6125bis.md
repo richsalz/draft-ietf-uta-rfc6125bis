@@ -1145,10 +1145,11 @@ names that could be affected by a compromise of any other server named in
 the set: the strength of any server in the set of names is determined by the
 weakest of those servers that offer the names.
 
-The way to mitigate this risk is to limit the number of names that
-any server can speak for, and to ensure that all servers in the set
-have a strong minimum configuration as described in Sections 3.8 and 3.9 
-of {{TLS-REQS}}.
+Methods for mitigating this risk includes: limiting the number of names that
+any server can speak for, following the guidelines for use of {{ALPN}} 
+described in Section 3.8 of {{TLS-REQS}}), and ensuring that all servers in 
+the set have a strong minimum configuration as described in Section 3.9 of 
+{{TLS-REQS}}.
 
 ## Multiple Reference Identifiers
 
