@@ -603,20 +603,20 @@ document.
 1. The certificate MUST include at least one identifier.
 
 2. The certificate SHOULD include a DNS-ID as a baseline
-   for interoperability.  However, even this is not mandatory because 
+   for interoperability.  This is not mandatory because 
    it is legitimate for a certificate to include only an SRV-ID or 
    URI-ID so as to scope its use to a particular application type.
 
 3. If the service using the certificate deploys a technology for which
-   the relevant specification stipulates that certificates ought to
-   include identifiers of type "SRV-ID" (e.g., {{XMPP}}),
+   the relevant specification stipulates that certificates should
+   include identifiers of type "SRV-ID" (e.g., this is true of {{XMPP}}),
    then the certificate SHOULD include an SRV-ID.  Typically this
    identifier type would supplement the DNS-ID, unless the certificate 
    is meant to be scoped to only the protocol in question.
 
 4. If the service using the certificate deploys a technology for which
-   the relevant specification stipulates that certificates ought to include
-   identifiers of type URI-ID (e.g., {{SIP}} as specified by
+   the relevant specification stipulates that certificates should include
+   identifiers of type URI-ID (e.g., this is true of {{SIP}} as specified by
    {{SIP-CERTS}}), then the certificate SHOULD include a URI-ID.  The scheme
    MUST be that of the protocol associated with the application service type
    and the "host" component MUST be the FQDN
