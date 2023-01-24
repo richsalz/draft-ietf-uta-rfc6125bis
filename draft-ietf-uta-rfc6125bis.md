@@ -610,8 +610,8 @@ document.
 3. If the service using the certificate deploys a technology for which
    the relevant specification stipulates that certificates should
    include identifiers of type "SRV-ID" (e.g., this is true of {{XMPP}}),
-   then the certificate SHOULD include an SRV-ID.  Typically this
-   identifier type would supplement the DNS-ID, unless the certificate 
+   then the certificate SHOULD include an SRV-ID.  This
+   identifier type could supplement the DNS-ID, unless the certificate 
    is meant to be scoped to only the protocol in question.
 
 4. If the service using the certificate deploys a technology for which
