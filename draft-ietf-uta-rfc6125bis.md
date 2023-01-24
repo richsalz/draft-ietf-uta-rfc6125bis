@@ -483,7 +483,7 @@ server at example.net") or a URI.
 The DNS name conforms to one of the following forms:
 
 1. A "traditional domain name", i.e., a FQDN that conforms to "preferred
-   name syntax" as described in Section 3.5 of {{DNS-CONCEPTS}} and for which all of
+   name syntax" as described in {{Section 3.5 of DNS-CONCEPTS}} and for which all of
    its labels are "LDH labels" as described in {{IDNA-DEFS}}.  Informally,
    such labels are constrained to {{US-ASCII}} letters, digits, and the
    hyphen, with the hyphen prohibited in the first character position.
