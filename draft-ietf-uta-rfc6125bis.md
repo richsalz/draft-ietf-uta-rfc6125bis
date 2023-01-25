@@ -138,9 +138,34 @@ informative:
     date: 1986
     seriesinfo:
       ANSI: X3.4
+  URL:
+    target: https://url.spec.whatwg.org/
+    title: URL
+    author:
+    - ins: A. van Kesteren
+      name: Anne van Kesteren
+    date: 2023
+  UTS-36:
+    target: https://unicode.org/reports/tr36/
+    title: Unicode Security Considerations
+    author:
+    - ins: M. Davis
+      name: Mark Davis
+    - ins: M. Suignard
+      name: Michel Suignard
+    date: 2014
   UTS-39:
     target: https://unicode.org/reports/tr39/
-    title: Unicode Security Mechanisms Contexts
+    title: Unicode Security Mechanisms
+    author:
+    - ins: M. Davis
+      name: Mark Davis
+    - ins: M. Suignard
+      name: Michel Suignard
+    date: 2022
+  UTS-46:
+    target: https://unicode.org/reports/tr46/
+    title: Unicode IDNA Compatibility Processing
     author:
     - ins: M. Davis
       name: Mark Davis
@@ -315,7 +340,7 @@ The following topics are out of scope for this specification:
 * Certification authority policies.
   This includes items such as the following:
 
-  * How to certify or validate FQDNs and application
+  * How to certify or validate fully-qualified domain names (FQDNs) and application
     service types (see {{ACME}} for some definition of this).
 
   * Types or "classes" of certificates to issue and whether to apply different
@@ -386,11 +411,7 @@ identifier type:
     SRVName, as defined in {{SRVNAME}}.
 
   * URI-ID: a subjectAltName entry of type uniformResourceIdentifier
-    as defined in {{PKIX}}. This entry MUST include both a "scheme" and
-    a "host" component that matches the "reg-name"
-    rule (where the quoted terms represent the associated {{ABNF}}
-    productions from {{URI}}).  If the entry does not have both, it is not a
-    valid URI-ID and MUST be ignored.
+    as defined in {{PKIX}}. See further discussion in {{security-uri}}.
 
 PKIX:
 : The short name for the Internet Public Key Infrastructure using X.509
@@ -461,21 +482,23 @@ server at example.net") or a URI.
 
 The DNS name conforms to one of the following forms:
 
-1. A "traditional domain name", i.e., a FQDN (see {{DNS-CONCEPTS}}) all of
-  whose labels are "LDH labels" as described in {{IDNA-DEFS}}.  Informally,
-  such labels are constrained to {{US-ASCII}} letters, digits, and the
-  hyphen, with the hyphen prohibited in the first character position.
-  Additional qualifications apply (refer to the above-referenced
-  specifications for details), but they are not relevant here.
+1. A "traditional domain name", i.e., a FQDN that conforms to "preferred
+   name syntax" as described in {{Section 3.5 of DNS-CONCEPTS}} and for which all of
+   its labels are "LDH labels" as described in {{IDNA-DEFS}}.  Informally,
+   such labels are constrained to {{US-ASCII}} letters, digits, and the
+   hyphen, with the hyphen prohibited in the first character position.
+   Additional qualifications apply (refer to the above-referenced
+   specifications for details), but they are not relevant here.
 
 2. An "internationalized domain name", i.e., a DNS domain name that includes at
-  least one label containing appropriately encoded Unicode code points
-  outside the traditional US-ASCII range. That is, it contains at least one
-  U-label or A-label, but otherwise may contain any mixture of NR-LDH labels,
-  A-labels, or U-labels, as described in {{IDNA-DEFS}} and the associated
-  documents.
+   least one label containing appropriately encoded Unicode code points
+   outside the traditional US-ASCII range and conforming to the processing
+   and validity checks specified for "IDNA2008" in {{IDNA-DEFS}} and the
+   associated documents. In particular, it contains at least one U-label or
+   A-label, but otherwise may contain any mixture of NR-LDH labels, A-labels,
+   or U-labels.
 
-An IP address is either a 4-byte IPv4 address {{!IPv4=RFC0791}} or a 16-byte
+An IP address is either a 4-octet IPv4 address {{!IPv4=RFC0791}} or a 16-octet
 IPv6 address {{!IPv6=RFC4291}}.  The identifier might need to be converted from a
 textual representation to obtain this value.
 
@@ -577,31 +600,41 @@ Note that some of these rules are cumulative
 and can interact in important ways that are illustrated later in this
 document.
 
-1. The certificate SHOULD include a "DNS-ID" as a baseline
-   for interoperability.
+1. The certificate MUST include at least one identifier.
 
-2. If the service using the certificate deploys a technology for which
-  the relevant specification stipulates that certificates ought to
-  include identifiers of type SRV-ID (e.g., {{XMPP}}),
-  then the certificate SHOULD include an SRV-ID.
+2. The certificate SHOULD include a DNS-ID as a baseline
+   for interoperability.  This is not mandatory because
+   it is legitimate for a certificate to include only an SRV-ID or
+   URI-ID so as to scope its use to a particular application type.
 
 3. If the service using the certificate deploys a technology for which
-  the relevant specification stipulates that certificates ought to include
-  identifiers of type URI-ID (e.g., {{SIP}} as specified by
-  {{SIP-CERTS}}), then the certificate SHOULD include a URI-ID.  The scheme
-  MUST be that of the protocol associated with the application service type
-  and the "host" component MUST be the FQDN
-  of the service.  The application protocol specification
-  MUST specify which URI schemes are acceptable in URI-IDs contained in PKIX
-  certificates used for the application protocol (e.g., `sip` but not `sips`
-  or `tel` for SIP as described in {{SIP-SIPS}}).
+   the relevant specification stipulates that certificates should
+   include identifiers of type "SRV-ID" (e.g., this is true of {{XMPP}}),
+   then the certificate SHOULD include an SRV-ID.  This
+   identifier type could supplement the DNS-ID, unless the certificate
+   is meant to be scoped to only the protocol in question.
 
-4. The certificate MAY contain more than one DNS-ID, SRV-ID, URI-ID, or IP-ID
-  as further explained under {{security-multi}}.
+4. If the service using the certificate deploys a technology for which
+   the relevant specification stipulates that certificates should include
+   identifiers of type URI-ID (e.g., this is true of {{SIP}} as specified by
+   {{SIP-CERTS}}), then the certificate SHOULD include a URI-ID.  The scheme
+   MUST be that of the protocol associated with the application service type
+   and the "host" component MUST be the FQDN
+   of the service.  The application protocol specification
+   MUST specify which URI schemes are acceptable in URI-IDs contained in PKIX
+   certificates used for the application protocol (e.g., `sip` but not `sips`
+   or `tel` for SIP as described in {{SIP-SIPS}}). Typically this
+   identifier type would supplement the DNS-ID, unless the certificate
+   is meant to be scoped to only the protocol in question.
 
-5. The certificate MAY include other application-specific identifiers
-  for compatibility with a deployed base. Such identifiers are out of
-  scope for this specification.
+5. The certificate MAY contain more than one DNS-ID, SRV-ID, URI-ID, or IP-ID
+   as further explained under {{security-multi}}.
+
+6. The certificate MAY include other application-specific identifiers
+   for compatibility with a deployed base, especially identifiers for
+   types that were defined before publication of {{SRVNAME}} or for which
+   SRV service names or URI schemes do not exist. Such identifiers are out
+   of scope for this specification.
 
 ## Examples {#represent-examples}
 
@@ -676,17 +709,17 @@ At a high level, the client verifies the application service's
 identity by performing the following actions:
 
 1. The client constructs a list of acceptable reference identifiers
-  based on the source domain and, optionally, the type of service to
-  which the client is connecting.
+   based on the source domain and, optionally, the type of service to
+   which the client is connecting.
 
 2. The server provides its identifiers in the form of a PKIX
    certificate.
 
 3. The client checks each of its reference identifiers against the
-  presented identifiers for the purpose of finding a match. When checking a
-  reference identifier against a presented identifier, the client matches the
-  source domain of the identifiers and, optionally, their application service
-  type.
+   presented identifiers for the purpose of finding a match. When checking a
+   reference identifier against a presented identifier, the client matches the
+   source domain of the identifiers and, optionally, their application service
+   type.
 
 Naturally, in addition to checking identifiers, a client should perform
 further checks, such as expiration and revocation, to ensure that the server
@@ -778,31 +811,32 @@ SRV-IDs, DNS-IDs, and IP-IDs in its list of reference identifiers.
 The following examples are for illustrative purposes only and are not
 intended to be comprehensive.
 
-1. A web browser that is connecting via HTTPS to the website at `https://www.example.com/`
-would have a single reference identifier: a DNS-ID of `www.example.com`.
+1. A web browser that is connecting via HTTPS to the website at
+   `https://www.example.com/` would have a single reference identifier:
+   a DNS-ID of `www.example.com`.
 
-2. A web browser connecting to `https://192.0.2.107/` would have a single IP-ID
-reference identifier of `192.0.2.107`.
+2. A web browser connecting to `https://192.0.2.107/` would have a single
+   IP-ID reference identifier of `192.0.2.107`.
 
 3. A mail user agent that is connecting via IMAPS to the email service at
-`example.net` (resolved as `mail.example.net`) might have three reference
-identifiers: an SRV-ID of `_imaps.example.net` (see {{EMAIL-SRV}}), and
-DNS-IDs of `example.net` and `mail.example.net`.  An email user agent that
-does not support {{EMAIL-SRV}} would probably be explicitly configured to
-connect to `mail.example.net`, whereas an SRV-aware user agent would derive
-`example.net` from an email address of the form `user@example.net` but might
-also accept `mail.example.net` as the DNS domain name portion of reference
-identifiers for the service.
+   `example.net` (resolved as `mail.example.net`) might have three reference
+   identifiers: an SRV-ID of `_imaps.example.net` (see {{EMAIL-SRV}}), and
+   DNS-IDs of `example.net` and `mail.example.net`.  An email user agent that
+   does not support {{EMAIL-SRV}} would probably be explicitly configured to
+   connect to `mail.example.net`, whereas an SRV-aware user agent would derive
+   `example.net` from an email address of the form `user@example.net` but might
+   also accept `mail.example.net` as the DNS domain name portion of reference
+   identifiers for the service.
 
 4. A voice-over-IP (VoIP) user agent that is connecting via SIP to the voice
-service at `voice.example.edu` might have only one reference identifier:
-a URI-ID of `sip:voice.example.edu` (see {{SIP-CERTS}}).
+   service at `voice.example.edu` might have only one reference identifier:
+   a URI-ID of `sip:voice.example.edu` (see {{SIP-CERTS}}).
 
 5. An instant messaging (IM) client that is connecting via XMPP to the IM
-service at `im.example.org` might have three reference identifiers: an
-SRV-ID of `_xmpp-client.im.example.org` (see {{XMPP}}), a DNS-ID of
-`im.example.org`, and an XMPP-specific `XmppAddr` of `im.example.org`
-(see {{XMPP}}).
+   service at `im.example.org` might have three reference identifiers: an
+   SRV-ID of `_xmpp-client.im.example.org` (see {{XMPP}}), a DNS-ID of
+   `im.example.org`, and an XMPP-specific `XmppAddr` of `im.example.org`
+   (see {{XMPP}}).
 
 In all these cases, presented identifiers that do not match the reference
 identifier(s) would be rejected; for instance:
@@ -890,11 +924,11 @@ wildcard labels given below.
 
 If the DNS domain name portion of a reference identifier is an
 internationalized domain name, then the client MUST convert any U-labels
-{{IDNA-DEFS}} in the domain name to A-labels before checking the domain name.
-In accordance with {{IDNA-PROTO}}, A-labels MUST be compared as
-case-insensitive ASCII.  Each label MUST match in order for the domain names
-to be considered to match, except as supplemented by the rule about checking
-of wildcard labels given below.
+{{IDNA-DEFS}} in the domain name to A-labels before checking the domain name
+or comparing it with others.  In accordance with {{IDNA-PROTO}}, A-labels
+MUST be compared as case-insensitive ASCII.  Each label MUST match in order
+for the domain names to be considered to match, except as supplemented by
+the rule about checking of wildcard labels given below.
 
 If the technology specification supports wildcards, then the client MUST
 match the reference identifier against a presented identifier whose DNS
@@ -918,15 +952,16 @@ certificates, see {{security-wildcards}}.
 
 ## Matching an IP Address Portion {#verify-ip}
 
-An IP-ID matches based on an octet-for-octet comparison of the bytes of the reference identity with the
-bytes contained in the iPAddress subjectAltName.
-The iPAddress field does not include the IP version, so IPv4 addresses are
-distinguished from IPv6 addresses only by their length (4 as opposed to 16 bytes).
+An IP-ID matches based on an octet-for-octet comparison of the bytes of the
+reference identity with the bytes contained in the iPAddress subjectAltName.
+Because the iPAddress field does not include the IP version, a helpful
+heuristic for implementors is to distinguish IPv4 addresses from IPv6 addresses
+by their length.
 
 For an IP address that appears in a URI-ID, the "host" component of both the
 reference identity and the presented identifier must match.  These are parsed as either
 an "IP-literal" (following {{!IPv6}}) or an "IPv4address" (following {{!IPv4}}).
-If the resulting bytes are equal, the IP address matches.
+If the resulting octets are equal, the IP address matches.
 
 This document does not specify how an SRV-ID reference identity can include an
 IP address.
@@ -1030,12 +1065,49 @@ As noted in {{design}}, application protocols can disallow the use of
 wildcard certificates entirely as a more foolproof mitigation.
 
 
+## Uniform Resource Identifiers {#security-uri}
+
+The URI-ID type is a subjectAltName entry of type uniformResourceIdentifier
+as defined in {{PKIX}}.  For the purposes of this specification, the URI-ID
+MUST include both a "scheme" and a "host" component that matches the "reg-name"
+rule; if the entry does not include both, it is not a valid URI-ID and MUST be
+ignored.  Any other components are ignored, because only the "scheme" and "host"
+components are used for certificate matching as specified under {{verify}}.
+
+The quoted component names in the previous paragraph represent the associated
+{{ABNF}} productions from the IETF standard for Uniform Resource Identifiers
+{{URI}}.  Although the reader should be aware that some applications (e.g.,
+web browsers) might instead conform to the Uniform Resource Locator (URL)
+specification maintained by the WHATWG {{URL}}, it is not expected that
+differences between the URI and URL specifications would manifest themselves
+in certificate matching.
+
+
 ## Internationalized Domain Names {#security-idn}
 
-Allowing internationalized domain names can lead to visually similar
-characters, also referred to as "confusables", being included within
-certificates. For discussion, see for example {{IDNA-DEFS, Section 4.4}}
-and {{UTS-39}}.
+As specified under {{verify}}, matching of internationalized domain names
+is performed on A-labels, not U-labels.  As a result, potential confusion
+caused by the use of visually similar characters in domain names is likely
+mitigated in certificate matching as described in this document.
+
+As with URIs and URLs, there are in practice at least two primary approaches
+to internationalized domain names: "IDNA2008" (see {{IDNA-DEFS}} and the
+associated documents) and an alternative approach specified by the Unicode
+Consortium in {{UTS-46}}. (At this point the transition from the older
+"IDNA2003" technology is mostly complete.)  Differences in specification,
+interpretation, and deployment of these technologies can be relevant to
+Internet services that are secured through certificates (e.g., some
+top-level domains might allow registration of names containing Unicode code
+points that typically are discouraged, either formally or otherwise).
+Although there is little that can be done by certificate matching software
+itself to mitigate these differences (aside from matching exclusively on
+A-labels), the reader needs to be aware that the handling of internationalized
+domain names is inherently complex and can lead to significant security
+vulnerabilities if not properly implemented.
+
+Relevant security considerations for handling of internationalized domain
+names can be found in {{IDNA-DEFS, Section 4.4}}, {{UTS-36}}, and {{UTS-39}}.
+
 
 ## IP Addresses
 
@@ -1073,9 +1145,11 @@ names that could be affected by a compromise of any other server named in
 the set: the strength of any server in the set of names is determined by the
 weakest of those servers that offer the names.
 
-The way to mitigate this risk is to limit the number of names that
-any server can speak for, and to ensure that all servers in the set
-have a strong minimum configuration as described in {{TLS-REQS}}.
+Methods for mitigating this risk includes: limiting the number of names that
+any server can speak for, following the guidelines for use of {{ALPN}}
+described in Section 3.8 of {{TLS-REQS}}), and ensuring that all servers in
+the set have a strong minimum configuration as described in Section 3.9 of
+{{TLS-REQS}}.
 
 ## Multiple Reference Identifiers
 
@@ -1159,6 +1233,7 @@ provided especially helpful feedback:
 Viktor Dukhovni,
 Jim Fenton,
 Olle Johansson,
+John Klensin,
 John Mattson,
 Alexey Melnikov,
 Yaron Sheffer,
