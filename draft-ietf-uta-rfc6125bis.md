@@ -424,10 +424,10 @@ identifier type:
 
 NC-label:
 : A label in native character form which yields a P-label when encoded
-using the Punycode algorithm (as defined in {{PUNYCODE}}, Section 6.2)
-and prepended with the string "xn--". A NC-label differs from a U-label in that
-both types of labels are in native character form, but NC-labels may fail the
-other quality checks prescribed by {{IDNA-DEFS}} for U-labels.
+  using the Punycode algorithm (as defined in {{PUNYCODE}}, Section 6.2)
+  and prepended with the string "xn--". A NC-label differs from a U-label in that
+  both types of labels are in native character form, but NC-labels may fail the
+  other quality checks prescribed by {{IDNA-DEFS}} for U-labels.
 
 PKIX:
 : The short name for the Internet Public Key Infrastructure using X.509
@@ -437,11 +437,11 @@ PKIX:
 
 P-label:
 : A LDH label that begins with the string "xn--" (case insensitive), followed by
-valid output of the Punycode algorithm (as defined in {{PUNYCODE}}, Section 6.3)
-from the fifth and subsequent positions. A P-label differs from an A-label in that
-both types of labels contain valid output of the Punycode algorithm, but P-labels
-may fail the other quality checks prescribed by {{IDNA-DEFS}} for A-labels. This
-term has been adopted from {{CABF}}.
+  valid output of the Punycode algorithm (as defined in {{PUNYCODE}}, Section 6.3)
+  from the fifth and subsequent positions. A P-label differs from an A-label in that
+  both types of labels contain valid output of the Punycode algorithm, but P-labels
+  may fail the other quality checks prescribed by {{IDNA-DEFS}} for A-labels. This
+  term has been adopted from {{CABF}}.
 
 presented identifier:
 : An identifier presented by a server to a client within a PKIX certificate
