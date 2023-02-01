@@ -37,6 +37,7 @@ normative:
   IDNA-PROTO: RFC5891
   LDAP-DN: RFC4514
   PKIX: RFC5280
+  PUNYCODE: RFC3492
   SRVNAME: RFC4985
   URI: RFC3986
   TLS-REQS: RFC9325
@@ -206,6 +207,14 @@ informative:
     author:
     - org: "OWASP"
     date: 2022
+  CABF:
+    target: https://cabforum.org/baseline-requirements/
+    title: >
+      Baseline Requirements for the Issuance and
+      Management of Publicly-Trusted Certificates
+    author:
+      -org: "CA/Browser Forum"
+    date: 2022-12-14
 
 --- abstract
 
@@ -413,11 +422,26 @@ identifier type:
   * URI-ID: a subjectAltName entry of type uniformResourceIdentifier
     as defined in {{PKIX}}. See further discussion in {{security-uri}}.
 
+NC-label:
+: A label in native character form which yields a P-label when encoded
+using the Punycode algorithm (as defined in {{PUNYCODE}}, Section 6.2)
+and prepended with the string "xn--". A NC-label differs from a U-label in that
+both types of labels are in native character form, but NC-labels may fail the
+other quality checks prescribed by {{IDNA-DEFS}} for U-labels.
+
 PKIX:
 : The short name for the Internet Public Key Infrastructure using X.509
   defined in {{PKIX}}.  That document provides a profile of the X.509v3
   certificate specifications and X.509v2 certificate revocation list (CRL)
   specifications for use on the Internet.
+
+P-label:
+: A LDH label that begins with the string "xn--" (case insensitive), followed by
+valid output of the Punycode algorithm (as defined in {{PUNYCODE}}, Section 6.3)
+from the fifth and subsequent positions. A P-label differs from an A-label in that
+both types of labels contain valid output of the Punycode algorithm, but P-labels
+may fail the other quality checks prescribed by {{IDNA-DEFS}} for A-labels. This
+term has been adopted from {{CABF}}.
 
 presented identifier:
 : An identifier presented by a server to a client within a PKIX certificate
@@ -490,13 +514,15 @@ The DNS name conforms to one of the following forms:
    Additional qualifications apply (refer to the above-referenced
    specifications for details), but they are not relevant here.
 
-2. An "internationalized domain name", i.e., a DNS domain name that includes at
-   least one label containing appropriately encoded Unicode code points
-   outside the traditional US-ASCII range and conforming to the processing
-   and validity checks specified for "IDNA2008" in {{IDNA-DEFS}} and the
-   associated documents. In particular, it contains at least one U-label or
-   A-label, but otherwise may contain any mixture of NR-LDH labels, A-labels,
-   or U-labels.
+2. An "internationalized domain name", i.e., a DNS domain name that
+   includes at least one label containing appropriately encoded
+   Unicode code points outside the traditional US-ASCII range.
+   In particular, it contains at least one NC-label or P-label, but
+   otherwise may contain any mixture of NR-LDH labels, P-labels,
+   or NC-labels. Refer to [[Section 7.3]] for further details and the rationale
+   for this document's usage of the terms "NC-label" and "P-label" as opposed
+   to the terms "U-label" and "A-label" as defined in {{IDNA-DEFS}}.
+
 
 An IP address is either a 4-octet IPv4 address {{!IPv4=RFC0791}} or a 16-octet
 IPv6 address {{!IPv6=RFC4291}}.  The identifier might need to be converted from a
@@ -923,9 +949,9 @@ considered to match, except as supplemented by the rule about checking of
 wildcard labels given below.
 
 If the DNS domain name portion of a reference identifier is an
-internationalized domain name, then the client MUST convert any U-labels
-{{IDNA-DEFS}} in the domain name to A-labels before checking the domain name
-or comparing it with others.  In accordance with {{IDNA-PROTO}}, A-labels
+internationalized domain name, then the client MUST convert any NC-labels
+in the domain name to P-labels before checking the domain name
+or comparing it with others.  In accordance with {{IDNA-PROTO}}, P-labels
 MUST be compared as case-insensitive ASCII.  Each label MUST match in order
 for the domain names to be considered to match, except as supplemented by
 the rule about checking of wildcard labels given below.
@@ -1085,25 +1111,37 @@ in certificate matching.
 
 ## Internationalized Domain Names {#security-idn}
 
+The IETF document covering internationalized domain names is
+"IDNA2008" [IDNA-DEFS]. The Unicode Consortium publishes
+a similar document known as "UTS-46". To account for the use of UTS-46 in
+practice, this document employs the terms "P-label" and "NC-label" as opposed
+to "A-label" and "U-label", which are specific to IDNA2008.
+
 As specified under {{verify}}, matching of internationalized domain names
-is performed on A-labels, not U-labels.  As a result, potential confusion
+is performed on P-labels, not NC-labels.  As a result, potential confusion
 caused by the use of visually similar characters in domain names is likely
 mitigated in certificate matching as described in this document.
 
-As with URIs and URLs, there are in practice at least two primary approaches
-to internationalized domain names: "IDNA2008" (see {{IDNA-DEFS}} and the
-associated documents) and an alternative approach specified by the Unicode
-Consortium in {{UTS-46}}. (At this point the transition from the older
-"IDNA2003" technology is mostly complete.)  Differences in specification,
-interpretation, and deployment of these technologies can be relevant to
-Internet services that are secured through certificates (e.g., some
-top-level domains might allow registration of names containing Unicode code
-points that typically are discouraged, either formally or otherwise).
-Although there is little that can be done by certificate matching software
-itself to mitigate these differences (aside from matching exclusively on
-A-labels), the reader needs to be aware that the handling of internationalized
-domain names is inherently complex and can lead to significant security
-vulnerabilities if not properly implemented.
+UTS-46 allows names that are valid in IDNA2003 but not IDNA2008,
+and additionally allows characters that are not valid in either IETF
+document, such as emoji characters. This more lenient approach
+carries additional risk of semantic ambiguity and additional security
+considerations. ICANN recommends IDNA2008
+[https://features.icann.org/ssac-advisory-use-emoji-domain-names]
+and correspondingly recommends against emoji characters in DNS names.
+However, the internet contains old content published under IDNA2003,
+and people enjoy emoji characters, so consumer applications often
+end up using the approach in [UTS-46]. DNS names that conform to
+IDNA2008 are likely to face fewer interoperability barriers,
+while applications that conform to UTS-46 may be able to verify a broader
+range of certificates.
+
+The conversion from a NC-label to a P-label MUST be done once and
+used both to carry out the DNS lookup and the evaluation of the end
+entity cert. Name constraints MUST be evaluated against the P-label
+converted name. This ensures that the same DNS entity as is actually
+connected to is validated against the certificate even in the presence
+of bugs in the conversion process.
 
 Relevant security considerations for handling of internationalized domain
 names can be found in {{IDNA-DEFS, Section 4.4}}, {{UTS-36}}, and {{UTS-39}}.
