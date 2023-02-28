@@ -383,11 +383,13 @@ application service type:
   identifier.
 
 delegated domain:
-: A domain name or host name that is explicitly configured for communicating
+: A domain name or host name that is explicitly configured at the application layer for communicating
   with the source domain, either by the human user controlling the client
   or by a trusted administrator.  For example, an IMAP server at mail.example.net
   could be a delegated domain for a source domain of example.net associated with an email address of
-  user@example.net.
+  user@example.net.  (This kind of application-layer delegation is not to be confused
+  with delegation in the DNS, by which a separate zone is created in the name space 
+  beneath the apex of a given domain; see for instance {{RFC8499}}.)
 
 derived domain:
 : A domain name or host name that a client has derived from the source domain
@@ -1086,7 +1088,7 @@ in certificate matching.
 ## Internationalized Domain Names {#security-idn}
 
 As specified under {{verify}}, matching of internationalized domain names
-is performed on A-labels, not U-labels.  As a result, potential confusion
+is performed on A-labels. As a result, potential confusion
 caused by the use of visually similar characters in domain names is likely
 mitigated in certificate matching as described in this document.
 
