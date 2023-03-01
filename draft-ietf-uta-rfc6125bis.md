@@ -163,15 +163,6 @@ informative:
     - ins: M. Suignard
       name: Michel Suignard
     date: 2022
-  UTS-46:
-    target: https://unicode.org/reports/tr46/
-    title: Unicode IDNA Compatibility Processing
-    author:
-    - ins: M. Davis
-      name: Mark Davis
-    - ins: M. Suignard
-      name: Michel Suignard
-    date: 2022
   X.509:
     title: >
      Information Technology - Open Systems Interconnection -
@@ -388,9 +379,9 @@ delegated domain:
   by a trusted administrator who sets policy for such clients, or by means of
   automated configuration in the client itself).  For example, an IMAP server at mail.example.net
   could be a delegated domain for a source domain of example.net associated with an email address of
-  user@example.net.  (This kind of application-layer delegation is not to be confused
+  user@example.net.  This kind of application-layer delegation is not to be confused
   with delegation in the DNS, by which a separate zone is created in the name space
-  beneath the apex of a given domain; see for instance {{RFC8499}}.)
+  beneath the apex of a given domain; see for instance {{RFC8499}}.
 
 derived domain:
 : A domain name or host name that a client has derived from the source domain
@@ -484,7 +475,7 @@ that contains additional supplementary information.  Supplementary information
 is limited to the application service type as expressed in SRV (e.g., "the IMAP
 server at example.net") or a URI.
 
-In a DNS-ID, and in the DNS domain name portion of an SRV-ID or URI-ID, any
+In a DNS-ID - and in the DNS domain name portion of an SRV-ID or URI-ID - any
 characters outside the {{US-ASCII}} range are prohibited and internationalized
 domain labels are represented as A-labels {{IDNA-DEFS}}.
 
@@ -862,7 +853,7 @@ optionally an application service type as follows:
   name and there is no application service type.
 
 * An IP-ID reference identifier MUST be exactly equal to the value of a
-  iPAddress entry in subjectAltName, with no partial matching. There is no application service type.
+  iPAddress entry in subjectAltName, with no partial (e.g., network-level) matching. There is no application service type.
 
 * For an SRV-ID reference identifier, the DNS domain name portion is
   the Name and the application service type portion is the Service.  For
@@ -981,8 +972,8 @@ identifiers.
 
 If the identifier is an SRV-ID, then the application service name MUST
 be matched in a case-insensitive manner, in accordance with {{DNS-SRV}}.
-(Note that, per {{SRVNAME}}, the `_` character is part of the service name in
-DNS SRV records and in SRV-IDs.)
+Note that, per {{SRVNAME}}, the `_` character is part of the service name in
+DNS SRV records and in SRV-IDs.
 
 If the identifier is a URI-ID, then the scheme name portion MUST be
 matched in a case-insensitive manner, in accordance with {{URI}}.
