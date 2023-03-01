@@ -485,7 +485,7 @@ is limited to the application service type as expressed in SRV (e.g., "the IMAP
 server at example.net") or a URI.
 
 In a DNS-ID, and in the DNS domain name portion of an SRV-ID or URI-ID, any
-characters outside the {{US-ASCII}} range are prohibited and internationalized 
+characters outside the {{US-ASCII}} range are prohibited and internationalized
 domain labels are represented as A-labels {{IDNA-DEFS}}.
 
 An IP address is either a 4-octet IPv4 address {{!IPv4=RFC0791}} or a 16-octet
@@ -903,8 +903,8 @@ also specifies a supplemental rule for such "wildcard certificates".
 This section uses the description of labels and domain names in
 {{DNS-CONCEPTS}}.
 
-If the DNS domain name portion of a reference identifier is a "traditional 
-domain name" (i.e., a FQDN that conforms to "preferred name syntax" as 
+If the DNS domain name portion of a reference identifier is a "traditional
+domain name" (i.e., a FQDN that conforms to "preferred name syntax" as
 described in {{Section 3.5 of DNS-CONCEPTS}}),
 then matching of the reference identifier against the presented
 identifier MUST be performed by comparing the set of domain name labels using
@@ -1081,11 +1081,11 @@ in certificate matching.
 
 This document specifies only matching between reference identifiers and
 presented identifiers, not the visual presentation of domain names. More
-specifically, matching of internationalized domain names is performed on 
+specifically, matching of internationalized domain names is performed on
 A-labels only {{verify}}. The limited scope of this specification likely
-mitigates potential confusion caused by the use of visually similar characters 
-in domain names (as described for example in {{IDNA-DEFS, Section 4.4}}, 
-{{UTS-36}}, and {{UTS-39}}); in any case, such concerns are a matter for 
+mitigates potential confusion caused by the use of visually similar characters
+in domain names (as described for example in {{IDNA-DEFS, Section 4.4}},
+{{UTS-36}}, and {{UTS-39}}); in any case, such concerns are a matter for
 application-level protocols and user interfaces, not the matching of certificates.
 
 
