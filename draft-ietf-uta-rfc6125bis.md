@@ -278,7 +278,7 @@ length in the remainder of this document:
   subjectAlternativeName extensions where appropriate such as
   uniformResourceIdentifier, iPAddress, and the otherName form SRVName.
 
-* Wildcard support is now the default.
+* Wildcard support is now the default in certificates.
   Constrain wildcard certificates so that the wildcard can only
   be the complete left-most component of a domain name.
 
@@ -384,8 +384,9 @@ application service type:
 
 delegated domain:
 : A domain name or host name that is explicitly configured at the application layer for communicating
-  with the source domain, either by the human user controlling the client
-  or by a trusted administrator.  For example, an IMAP server at mail.example.net
+  with the source domain (e.g., by the human user controlling an application client,
+  by a trusted administrator who sets policy for such clients, or by means of
+  automated configuration in the client itself).  For example, an IMAP server at mail.example.net
   could be a delegated domain for a source domain of example.net associated with an email address of
   user@example.net.  (This kind of application-layer delegation is not to be confused
   with delegation in the DNS, by which a separate zone is created in the name space
@@ -393,7 +394,7 @@ delegated domain:
 
 derived domain:
 : A domain name or host name that a client has derived from the source domain
-  in an automated fashion (e.g., by means of a {{DNS-SRV}} lookup).
+  in an automated fashion (e.g., by means of an MX or SRV lookup).
 
 identifier:
 : A particular instance of an identifier type that is either presented by a
@@ -438,12 +439,13 @@ Relative Distinguished Name (RDN):
   Distinguished Names. See {{LDAP-DN, Section 2}}.
 
 source domain:
-: The FQDN that a client expects an application
+: The fully qualified domain name (FQDN) that a client expects an application
   service to present in the certificate. This is typically input by
   a human user, configured into a client, or provided by reference such as
   a URL. The combination of a source domain and, optionally, an application
   service type enables a client to construct one or more reference
-  identifiers.
+  identifiers. This specification covers FQDNs only and provides no support
+  for bare hostnames or any other name that does not include all labels.
 
 subjectAltName entry:
 : An identifier placed in a subjectAltName extension.
@@ -482,23 +484,9 @@ that contains additional supplementary information.  Supplementary information
 is limited to the application service type as expressed in SRV (e.g., "the IMAP
 server at example.net") or a URI.
 
-The DNS name conforms to one of the following forms:
-
-1. A "traditional domain name", i.e., a FQDN that conforms to "preferred
-   name syntax" as described in {{Section 3.5 of DNS-CONCEPTS}} and for which all of
-   its labels are "LDH labels" as described in {{IDNA-DEFS}}.  Informally,
-   such labels are constrained to {{US-ASCII}} letters, digits, and the
-   hyphen, with the hyphen prohibited in the first character position.
-   Additional qualifications apply (refer to the above-referenced
-   specifications for details), but they are not relevant here.
-
-2. An "internationalized domain name", i.e., a DNS domain name that includes at
-   least one label containing appropriately encoded Unicode code points
-   outside the traditional US-ASCII range and conforming to the processing
-   and validity checks specified for "IDNA2008" in {{IDNA-DEFS}} and the
-   associated documents. In particular, it contains at least one U-label or
-   A-label, but otherwise may contain any mixture of NR-LDH labels, A-labels,
-   or U-labels.
+In a DNS-ID, and in the DNS domain name portion of an SRV-ID or URI-ID, any
+characters outside the {{US-ASCII}} range are prohibited and internationalized 
+domain labels are represented as A-labels {{IDNA-DEFS}}.
 
 An IP address is either a 4-octet IPv4 address {{!IPv4=RFC0791}} or a 16-octet
 IPv6 address {{!IPv6=RFC4291}}.  The identifier might need to be converted from a
@@ -571,7 +559,7 @@ supported.  Note that many existing application technologies use URIs to
 identify application services, but do not rely on representation of those
 URIs in PKIX certificates by means of URI-IDs.
 
-A technology MAY disallow the use of the wildcard character in DNS names. If
+A technology MAY disallow the use of the wildcard character in presented identifiers. If
 it does so, then the specification MUST state that wildcard certificates as
 defined in this document are not supported.
 
@@ -873,8 +861,8 @@ optionally an application service type as follows:
 * A DNS-ID reference identifier MUST be used directly as the DNS domain
   name and there is no application service type.
 
-* An IP-ID reference identifier MUST be exactly equal, octet for octet, to the value of a
-  iPAddress entry in subjectAltName. There is no application service type.
+* An IP-ID reference identifier MUST be exactly equal to the value of a
+  iPAddress entry in subjectAltName, with no partial matching. There is no application service type.
 
 * For an SRV-ID reference identifier, the DNS domain name portion is
   the Name and the application service type portion is the Service.  For
@@ -910,19 +898,21 @@ This section describes how the client must determine if the presented DNS
 name matches the reference DNS name.  The rules differ depending on whether
 the domain to be checked is a traditional domain name or an
 internationalized domain name, as defined in {{names}}.  For clients
-that support names containing the wildcard character "\*", this section
+that support presented identifiers containing the wildcard character "\*", this section
 also specifies a supplemental rule for such "wildcard certificates".
 This section uses the description of labels and domain names in
 {{DNS-CONCEPTS}}.
 
-If the DNS domain name portion of a reference identifier is a traditional
-domain name, then matching of the reference identifier against the presented
+If the DNS domain name portion of a reference identifier is a "traditional 
+domain name" (i.e., a FQDN that conforms to "preferred name syntax" as 
+described in {{Section 3.5 of DNS-CONCEPTS}}),
+then matching of the reference identifier against the presented
 identifier MUST be performed by comparing the set of domain name labels using
 a case-insensitive ASCII comparison, as clarified by {{DNS-CASE}}.  For
 example, `WWW.Example.Com` would be lower-cased to `www.example.com` for
 comparison purposes.  Each label MUST match in order for the names to be
 considered to match, except as supplemented by the rule about checking of
-wildcard labels given below.
+wildcard labels in presented identifiers given below.
 
 If the DNS domain name portion of a reference identifier is an
 internationalized domain name, then the client MUST convert any U-labels
@@ -930,9 +920,9 @@ internationalized domain name, then the client MUST convert any U-labels
 or comparing it with others.  In accordance with {{IDNA-PROTO}}, A-labels
 MUST be compared as case-insensitive ASCII.  Each label MUST match in order
 for the domain names to be considered to match, except as supplemented by
-the rule about checking of wildcard labels given below.
+the rule about checking of wildcard labels in presented identifiers given below.
 
-If the technology specification supports wildcards, then the client MUST
+If the technology specification supports wildcards in presented identifiers, then the client MUST
 match the reference identifier against a presented identifier whose DNS
 domain name portion contains the wildcard character "\*" in a label provided
 these requirements are met:
@@ -945,9 +935,12 @@ If the requirements are not met, the presented identifier is invalid and MUST
 be ignored.
 
 A wildcard in a presented identifier can only match exactly one label in a
-reference identifier. Note that this is not the same as DNS wildcard
+reference identifier.  This specification covers only wildcard characters in
+presented identifiers, not wildcard characters in reference identifiers or in
+DNS domain names more generally.  Therefore the use of wildcard characters
+as described herein is not to be confused with DNS wildcard
 matching, where the "\*" label always matches at least one whole label and
-sometimes more. See {{DNS-CONCEPTS, Section 4.3.3}} and {{DNS-WILDCARDS}}.
+sometimes more; see {{DNS-CONCEPTS, Section 4.3.3}} and {{DNS-WILDCARDS}}.
 
 For information regarding the security characteristics of wildcard
 certificates, see {{security-wildcards}}.
@@ -988,9 +981,8 @@ identifiers.
 
 If the identifier is an SRV-ID, then the application service name MUST
 be matched in a case-insensitive manner, in accordance with {{DNS-SRV}}.
-Note that the `_` character is prepended to the service identifier in
-DNS SRV records and in SRV-IDs (per {{SRVNAME}}), and thus does not
-need to be included in any comparison.
+(Note that, per {{SRVNAME}}, the `_` character is part of the service name in
+DNS SRV records and in SRV-IDs.)
 
 If the identifier is a URI-ID, then the scheme name portion MUST be
 matched in a case-insensitive manner, in accordance with {{URI}}.
@@ -1043,7 +1035,7 @@ convenient for administrators but also poses the risk of vouching for rogue
 or buggy hosts. See for example {{Defeating-SSL}} (beginning at slide 91) and
 {{HTTPSbytes}} (slides 38-40).
 
-As specified in {{verify-domain}}, restricting certificates to only one
+As specified in {{verify-domain}}, restricting the presented identifiers in certificates to only one
 wildcard character (e.g., `\*.example.com` but not `\*.\*.example.com`) and
 restricting the use of wildcards to only the left-most domain label can
 help to mitigate certain aspects of the attack described in {{Defeating-SSL}}.
@@ -1087,28 +1079,14 @@ in certificate matching.
 
 ## Internationalized Domain Names {#security-idn}
 
-As specified under {{verify}}, matching of internationalized domain names
-is performed on A-labels. As a result, potential confusion
-caused by the use of visually similar characters in domain names is likely
-mitigated in certificate matching as described in this document.
-
-As with URIs and URLs, there are in practice at least two primary approaches
-to internationalized domain names: "IDNA2008" (see {{IDNA-DEFS}} and the
-associated documents) and an alternative approach specified by the Unicode
-Consortium in {{UTS-46}}. (At this point the transition from the older
-"IDNA2003" technology is mostly complete.)  Differences in specification,
-interpretation, and deployment of these technologies can be relevant to
-Internet services that are secured through certificates (e.g., some
-top-level domains might allow registration of names containing Unicode code
-points that typically are discouraged, either formally or otherwise).
-Although there is little that can be done by certificate matching software
-itself to mitigate these differences (aside from matching exclusively on
-A-labels), the reader needs to be aware that the handling of internationalized
-domain names is inherently complex and can lead to significant security
-vulnerabilities if not properly implemented.
-
-Relevant security considerations for handling of internationalized domain
-names can be found in {{IDNA-DEFS, Section 4.4}}, {{UTS-36}}, and {{UTS-39}}.
+This document specifies only matching between reference identifiers and
+presented identifiers, not the visual presentation of domain names. More
+specifically, matching of internationalized domain names is performed on 
+A-labels only {{verify}}. The limited scope of this specification likely
+mitigates potential confusion caused by the use of visually similar characters 
+in domain names (as described for example in {{IDNA-DEFS, Section 4.4}}, 
+{{UTS-36}}, and {{UTS-39}}); in any case, such concerns are a matter for 
+application-level protocols and user interfaces, not the matching of certificates.
 
 
 ## IP Addresses
