@@ -381,7 +381,7 @@ delegated domain:
   could be a delegated domain for a source domain of example.net associated with an email address of
   user@example.net.  This kind of application-layer delegation is not to be confused
   with delegation in the DNS, by which a separate zone is created in the name space
-  beneath the apex of a given domain; see for instance {{RFC8499}}.
+  beneath the apex of a given domain; see for instance {{DNS-TERMS}}.
 
 derived domain:
 : A domain name or host name that a client has derived from the source domain
