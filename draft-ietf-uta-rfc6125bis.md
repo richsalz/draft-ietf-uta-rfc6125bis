@@ -1027,7 +1027,7 @@ or buggy hosts. See for example {{Defeating-SSL}} (beginning at slide 91) and
 {{HTTPSbytes}} (slides 38-40).
 
 As specified in {{verify-domain}}, restricting the presented identifiers in certificates to only one
-wildcard character (e.g., `\*.example.com` but not `\*.\*.example.com`) and
+wildcard character (e.g., "\*.example.com" but not "\*.\*.example.com") and
 restricting the use of wildcards to only the left-most domain label can
 help to mitigate certain aspects of the attack described in {{Defeating-SSL}}.
 
