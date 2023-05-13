@@ -746,7 +746,7 @@ During the course of processing, a client might be exposed to identifiers that
 look like but are not reference identifiers. For example, DNS resolution that
 starts at a DNS-ID reference identifier might produce intermediate domain names
 that need to be further resolved. Any intermediate values are not reference
-identifiers and MUST NOT be treated as such, except as defined by the application.
+identifiers and MUST NOT be treated as such.
 In the DNS case, not treating intermediate domain names as reference identifiers
 removes DNS and DNS resolution from the attack surface. However, an application
 might define a process for authenticating these intermediate identifiers in a way
@@ -940,9 +940,6 @@ certificates, see {{security-wildcards}}.
 
 An IP-ID matches based on an octet-for-octet comparison of the bytes of the
 reference identity with the bytes contained in the iPAddress subjectAltName.
-Because the iPAddress field does not include the IP version, a helpful
-heuristic for implementors is to distinguish IPv4 addresses from IPv6 addresses
-by their length.
 
 For an IP address that appears in a URI-ID, the "host" component of both the
 reference identity and the presented identifier must match.  These are parsed as either
@@ -994,8 +991,8 @@ reference identifiers, then the client MUST proceed as described as follows.
 If the client is an automated application,
 then it SHOULD terminate the communication attempt with a bad
 certificate error and log the error appropriately.  The application MAY
-provide a configuration setting to disable this behavior, but it MUST enable
-it by default.
+provide a configuration setting to disable this behavior, but it MUST NOT
+disable this security control by default.
 
 If the client is one that is directly controlled by a human
 user, then it SHOULD inform the user of the identity mismatch and
