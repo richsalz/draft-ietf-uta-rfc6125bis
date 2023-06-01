@@ -435,8 +435,9 @@ source domain:
   a human user, configured into a client, or provided by reference such as
   a URL. The combination of a source domain and, optionally, an application
   service type enables a client to construct one or more reference
-  identifiers. This specification covers FQDNs only and provides no support
-  for bare hostnames or any other name that does not include all labels.
+  identifiers. This specification covers FQDNs. Use of any names that
+  are not fully qualified is out of scope and may result in unexpected
+  or undefined behavior.
 
 subjectAltName entry:
 : An identifier placed in a subjectAltName extension.
@@ -472,8 +473,8 @@ and "verify".
 This document assumes that an application service is identified by a DNS domain
 name (e.g., `example.com`), an IP address (IPv4 or IPv6), or by an identifier
 that contains additional supplementary information.  Supplementary information
-is limited to the application service type as expressed in SRV (e.g., "the IMAP
-server at example.net") or a URI.
+is limited to the application service type as expressed in a DNS SRV record
+(e.g., "the IMAP server at example.net" for "\_imap.example.net") or a URI.
 
 In a DNS-ID - and in the DNS domain name portion of an SRV-ID or URI-ID - any
 characters outside the {{US-ASCII}} range are prohibited and internationalized
@@ -557,7 +558,7 @@ defined in this document are not supported.
 A protocol can allow the use of an IP address in place of a DNS name.  This
 might use the same field without distinguishing the type of identifier, as for
 example in the "host" components of a URI.  In this case, applications need to be aware that the textual
-representation of an IPv4 address can appear to be a valid DNS name, even though it is not; the two
+representation of an IPv4 address can is a valid DNS name. The two
 types can be distinguished by first testing if the identifier is a valid IPv4
 address, as is done by the "first-match-wins" algorithm in {{Section 3.2.2 of URI}}.
 Note also that by policy, Top-Level Domains ({{DNS-TERMS}}) do not
@@ -690,7 +691,7 @@ At a high level, the client verifies the application service's
 identity by performing the following actions:
 
 1. The client constructs a list of acceptable reference identifiers
-   based on the source domain and, optionally, the type of service to
+   based on the source domain and, if applicable, the type of service to
    which the client is connecting.
 
 2. The server provides its identifiers in the form of a PKIX
