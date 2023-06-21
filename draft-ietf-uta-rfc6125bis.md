@@ -558,7 +558,7 @@ defined in this document are not supported.
 A protocol can allow the use of an IP address in place of a DNS name.  This
 might use the same field without distinguishing the type of identifier, as for
 example in the "host" components of a URI.  In this case, applications need to be aware that the textual
-representation of an IPv4 address can is a valid DNS name. The two
+representation of an IPv4 address is a valid DNS name. The two
 types can be distinguished by first testing if the identifier is a valid IPv4
 address, as is done by the "first-match-wins" algorithm in {{Section 3.2.2 of URI}}.
 Note also that by policy, Top-Level Domains ({{DNS-TERMS}}) do not
@@ -933,6 +933,7 @@ DNS domain names more generally.  Therefore the use of wildcard characters
 as described herein is not to be confused with DNS wildcard
 matching, where the "\*" label always matches at least one whole label and
 sometimes more; see {{DNS-CONCEPTS, Section 4.3.3}} and {{DNS-WILDCARDS}}.
+In particular, it also deviates from {{DNS-WILDCARDS, Section 2.1.3}}.
 
 For information regarding the security characteristics of wildcard
 certificates, see {{security-wildcards}}.
@@ -948,7 +949,8 @@ an "IP-literal" (following {{!IPv6}}) or an "IPv4address" (following {{!IPv4}}).
 If the resulting octets are equal, the IP address matches.
 
 This document does not specify how an SRV-ID reference identity can include an
-IP address.
+IP address, as {{SRVNAME}} only defines string names, not octet identifiers
+such as an IP address.
 
 ## Matching the Application Service Type Portion {#verify-app}
 
@@ -1094,6 +1096,9 @@ that is conditional on the type of identifier.  This component misclassifies an
 IP address as an FQDN.  A different component correctly classifies the
 identifier but might incorrectly assume that rules regarding IP addresses have
 been enforced.  Consistent classification of identifiers avoids this problem.
+
+See also {{design}}, particularly the last paragraph.
+
 
 ## Multiple Presented Identifiers {#security-multi}
 
