@@ -1147,6 +1147,17 @@ name constraint for DNS-IDs, then all other forms of acceptable reference
 identities are also constrained, such as requiring a uniformResourceIndicator
 name constraint for URI-IDs.
 
+## Certificate Trust
+
+This document assumes that, if a client trusts a given CA, it trusts all 
+certificates issued by that CA.  The certificate checking process does not
+include additional checks for bad behavior by the hosts identified with
+such certificates, for instance rogue servers or buggy applications.  Any
+additional checks (e.g., checking the server name against trusted block 
+lists) are the responsibility of the application protocol or the client 
+itself.
+
+
 # IANA Considerations
 
 This document has no actions for IANA.
