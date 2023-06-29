@@ -1124,16 +1124,21 @@ to Markdown so that we could more easily use Martin Thomson's `i-d-template`
 software.
 
 In addition to discussion on the mailing list, the following people
-provided especially helpful feedback:
+provided official reviews or especially helpful feedback:
 Viktor Dukhovni,
+Patrik Fältström,
 Jim Fenton,
 Olle Johansson,
+John Klensin,
 John Mattson,
 Alexey Melnikov,
+Ines Robles,
 Yaron Sheffer,
 Ryan Sleevi,
 Brian Smith,
+Petr Špaček,
 Martin Thomson,
+Paul Wouters,
 and
 Qin Wu.
 
