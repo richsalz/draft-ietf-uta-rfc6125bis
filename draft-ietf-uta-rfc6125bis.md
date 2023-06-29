@@ -690,7 +690,7 @@ types of `imap`, `imaps`, `pop3`, `pop3s`, and `submission` as described in
 At a high level, the client verifies the application service's
 identity by performing the following actions:
 
-1. The client constructs a list of acceptable reference identifiers
+1. The client constructs a list of reference identifiers it would find acceptable
    based on the source domain and, if applicable, the type of service to
    which the client is connecting.
 
@@ -1115,7 +1115,7 @@ the set: the strength of any server in the set of names is determined by the
 weakest of those servers that offer the names.
 
 Methods for mitigating this risk includes: limiting the number of names that
-any server can speak for, following the guidelines for use of {{ALPN}}
+any server can represent, following the guidelines for use of {{ALPN}}
 described in Section 3.8 of {{TLS-REQS}}), and ensuring that all servers in
 the set have a strong minimum configuration as described in Section 3.9 of
 {{TLS-REQS}}.
@@ -1180,6 +1180,8 @@ The major changes, in no particular order, include:
 
 - IP-ID reference identifiers are added.  This builds on the definition in {{Section
   4.3.5 of HTTP}}.
+
+- Shortened the document title because the previous title was difficult to cite.
 
 # Contributors
 
