@@ -317,9 +317,8 @@ The following topics are out of scope for this specification:
 * Keys or certificates employed outside the context of PKIX-based systems.
 
 * Client or end-user identities.
-  Certificates representing client identities other than as
-  described above, such as rfc822Name, are beyond the scope
-  of this document.
+  Other than as described above, certificates representing client identities
+  (e.g., rfc822Name) are beyond the scope of this document.
 
 * Identification of servers using other than a domain name, IP address, or SRV service name.
   This document discusses Uniform Resource Identifiers {{URI}} only to the
@@ -342,10 +341,11 @@ The following topics are out of scope for this specification:
 
 * Resolution of DNS domain names.
   Although the process whereby a client resolves the DNS domain name of an
-  application service can involve several steps, for our purposes we care
-  only about the fact that the client needs to verify the identity of the
-  entity with which it communicates as a result of the resolution process.
-  Thus, the resolution process itself is out of scope for this specification.
+  application service can involve several steps, for the purposes of this
+  specification the only relevant consideration is that the client needs to 
+  verify the identity of the entity with which it will communicate once the 
+  resolution process is complete.  Thus, the resolution process itself is 
+  out of scope for this specification.
 
 * User interface issues.
   In general, such issues are properly the responsibility of client
