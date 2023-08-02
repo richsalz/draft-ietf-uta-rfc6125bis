@@ -271,7 +271,7 @@ length in the remainder of this document:
 
 * Wildcard support is now the default in certificates.
   Constrain wildcard certificates so that the wildcard can only
-  be the complete left-most component of a domain name.
+  be the complete left-most label of a domain name.
 
 * Do not include or check strings that look like domain names
   in the subject's Common Name.
@@ -317,9 +317,8 @@ The following topics are out of scope for this specification:
 * Keys or certificates employed outside the context of PKIX-based systems.
 
 * Client or end-user identities.
-  Certificates representing client identities other than as
-  described above, such as rfc822Name, are beyond the scope
-  of this document.
+  Other than as described above, certificates representing client identities
+  (e.g., rfc822Name) are beyond the scope of this document.
 
 * Identification of servers using other than a domain name, IP address, or SRV service name.
   This document discusses Uniform Resource Identifiers {{URI}} only to the
@@ -342,10 +341,11 @@ The following topics are out of scope for this specification:
 
 * Resolution of DNS domain names.
   Although the process whereby a client resolves the DNS domain name of an
-  application service can involve several steps, for our purposes we care
-  only about the fact that the client needs to verify the identity of the
-  entity with which it communicates as a result of the resolution process.
-  Thus, the resolution process itself is out of scope for this specification.
+  application service can involve several steps, for the purposes of this
+  specification the only relevant consideration is that the client needs to 
+  verify the identity of the entity with which it will communicate once the 
+  resolution process is complete.  Thus, the resolution process itself is 
+  out of scope for this specification.
 
 * User interface issues.
   In general, such issues are properly the responsibility of client
@@ -1171,7 +1171,7 @@ on the decade of experience and changes since it was published.
 The major changes, in no particular order, include:
 
 - The only legal place for a certificate wildcard is as the complete left-most
-  component in a domain name.
+  label in a domain name.
 
 - The server identity can only be expressed in the subjectAltNames
   extension; it is no longer valid to use the commonName RDN,
