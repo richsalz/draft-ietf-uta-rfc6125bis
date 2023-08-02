@@ -271,7 +271,7 @@ length in the remainder of this document:
 
 * Wildcard support is now the default in certificates.
   Constrain wildcard certificates so that the wildcard can only
-  be the complete left-most component of a domain name.
+  be the complete left-most label of a domain name.
 
 * Do not include or check strings that look like domain names
   in the subject's Common Name.
@@ -1171,7 +1171,7 @@ on the decade of experience and changes since it was published.
 The major changes, in no particular order, include:
 
 - The only legal place for a certificate wildcard is as the complete left-most
-  component in a domain name.
+  label in a domain name.
 
 - The server identity can only be expressed in the subjectAltNames
   extension; it is no longer valid to use the commonName RDN,
