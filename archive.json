@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-07-02T01:25:54.304620+00:00",
+  "timestamp": "2023-08-03T01:05:11.339214+00:00",
   "repo": "richsalz/draft-ietf-uta-rfc6125bis",
   "labels": [
     {
@@ -1006,6 +1006,138 @@
       "updatedAt": "2023-06-29T20:27:43Z",
       "closedAt": "2023-06-29T20:27:43Z",
       "comments": []
+    },
+    {
+      "number": 98,
+      "id": "I_kwDOFrdhtM5tQmvc",
+      "title": "\u00c9ric Vyncke's feedback (1 or 2): SVCB",
+      "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/98",
+      "state": "OPEN",
+      "author": "richsalz",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "stpeter"
+      ],
+      "labels": [],
+      "body": "I find this document update useful ***BUT*** it lacks the support of the new\r\nSVCB (draft-ietf-dnsop-svcb-https)... May I recommend that this document is\r\nsent back to the WG in order to incorporate the SCVB (it is very similar to SRV\r\nIMHO)? I appreciate that the SVCB started in a different WG hence the\r\ndisconnect even if some authors of the two I-Ds have the same affiliation ;-) I\r\nadded the SVCB authors in copy to this ballot, just in case.",
+      "createdAt": "2023-08-02T12:15:35Z",
+      "updatedAt": "2023-08-02T22:44:11Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "I will be talking with Mike Bishop (one of the authors rumored to work at Akamai:) in a day or two about this.",
+          "createdAt": "2023-08-02T15:32:05Z",
+          "updatedAt": "2023-08-02T15:32:05Z"
+        },
+        {
+          "author": "enygren",
+          "authorAssociation": "NONE",
+          "body": "At least for HTTPS the SVCB record does not have the same special-handling that SRV has.\r\nIn particular, the draft in the RFC editor queue (draft-ietf-dnsop-svcb-https-12) has:\r\n\r\n> Note that none of these forms alter the origin or authority for validation purposes. For example, TLS clients MUST continue to validate TLS certificates for the original service name.\r\n> ...\r\n> Note that none of these forms alter the HTTPS origin or authority. For example, clients MUST continue to validate TLS certificate hostnames based on the origin.\r\n> ...\r\n> Similar to CNAME, HTTPS RRs have no impact on the origin name. When connecting, clients will continue to treat the authoritative origins as \"https://www.aliased.example\" and \"https://aliased.example\", respectively, and will validate TLS server certificates accordingly.\r\n\r\nFor HTTPS RRs it's pretty clear that just DNS-IDs would be used in this case and that AliasMode and TargetNames would not have any influence.\r\n\r\nIt is an interesting point that while this is fairly clear for HTTPS RRs not using alternate ports, the SVCB draft is less clear on how this fits in or what is desirable for SVCB lookups of the form _8080._foo.example.com and what would be the \"original service name\" in that case.  Would these want to also be SRV-IDs?  \r\n\r\nEven with HTTPS RRs with Web Origins on alternate ports (eg, \"https://example.com:8443\"), how to handle _8443._https.example.com is less clear.  To be non-breaking, example.com as a DNS-ID might still be needed.\r\n\r\nWould it make sense to also allow the SRV-IDs in this case (eg, \"_8080._foo.example.com\") but to be clear that unlike SRV these don't carry through to TargetName and/or through AliasMode?\r\n\r\n(It would be good to loop Ben Schwartz in here as well since he has thought about this part lots as well.  There may be people we want to include in the discussion for going past the HTTPS use-case.)\r\n\r\n\r\n\r\n",
+          "createdAt": "2023-08-02T18:47:55Z",
+          "updatedAt": "2023-08-02T18:47:55Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "Ping @bemasc\r\n",
+          "createdAt": "2023-08-02T19:18:19Z",
+          "updatedAt": "2023-08-02T19:18:19Z"
+        },
+        {
+          "author": "enygren",
+          "authorAssociation": "NONE",
+          "body": "Taking a deeper read through draft-ietf-uta-rfc6125bis, some of this may be generalizing to also be clear that protocols using SVCB (or SVCB-compatible record  types) need to define their validation rules and what identifiers are allowed.  (Similar to what the draft says for other protocols.)",
+          "createdAt": "2023-08-02T19:20:40Z",
+          "updatedAt": "2023-08-02T19:20:40Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "Yes, I am thinking -- if only for simplicity -- we say something like this:\r\n```\r\nAnything other than a simple origin name is out of scope for this specification.\r\nProtocols that use identifiers that look like SRV IDs, for example, must define their\r\nown rules.\r\n```\r\n\r\n",
+          "createdAt": "2023-08-02T19:35:18Z",
+          "updatedAt": "2023-08-02T19:35:18Z"
+        },
+        {
+          "author": "bemasc",
+          "authorAssociation": "NONE",
+          "body": "Defining WebPKI integration rules generally for all future protocols and ID types sounds very hard.\r\n\r\nI'm not sure whether \"https://example.com:12345\" looks like an SRV ID (or a URI ID) or not, so I'm not sure what to make of that rule.\r\n\r\nI think the truth is:\r\n\r\n> Use of SVCB-compatible records during connection establishment does not alter any PKIX validation requirements unless the applicable SVCB mapping document states otherwise.  For example, the PKIX validation rules for HTTP over TLS {{?RFC2818}} and DNS over TLS {{?RFC7858}} do not change when the client uses HTTPS records {{?I-D.ietf-dnsop-svcb-https}} or SVCB for DNS {{?I-D.ietf-add-svcb-dns}}.\r\n\r\nThat's a bit squishy but anything else seems a bit speculative.",
+          "createdAt": "2023-08-02T20:14:28Z",
+          "updatedAt": "2023-08-02T20:14:28Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "@bemasc I like your suggestion.  @stpeter , do you want to make a PR that integrates this (and the appropriate refernces) or me?\r\n",
+          "createdAt": "2023-08-02T20:23:42Z",
+          "updatedAt": "2023-08-02T20:23:42Z"
+        },
+        {
+          "author": "stpeter",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes, I will create a PR.",
+          "createdAt": "2023-08-02T20:27:58Z",
+          "updatedAt": "2023-08-02T20:27:58Z"
+        },
+        {
+          "author": "stpeter",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Now see https://github.com/richsalz/draft-ietf-uta-rfc6125bis/pull/102 - feedback welcome.",
+          "createdAt": "2023-08-02T22:44:10Z",
+          "updatedAt": "2023-08-02T22:44:10Z"
+        }
+      ]
+    },
+    {
+      "number": 99,
+      "id": "I_kwDOFrdhtM5tQnRj",
+      "title": "\u00c9ric Vynke's feedback (2 of 2): Minor issues",
+      "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/99",
+      "state": "CLOSED",
+      "author": "richsalz",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "stpeter"
+      ],
+      "labels": [],
+      "body": "## Component or label ?\r\n\r\nThe text uses terms like `component of a domain name` while RFC 8499 (DNS\r\nterminology) would prefer to use `label of a domain name`. Most parts of the\r\ndocument correctly use 'labels' but there are some use of 'component'.\r\n\r\n## Section 1.4.2\r\n\r\ns/Certificates representing client identities other than as described above,\r\nsuch as rfc822Name, are beyond the scope of this document/Certificates\r\nrepresenting client identities, such as rfc822Name, other than as described\r\nabove are beyond the scope of this document/ to simplify the parsing ?\r\n\r\n# NITS\r\n\r\n## Section 1.4.2\r\n\r\n`for our purposes we care`, RFCs usually do not use a personal voice. But this\r\nis a matter of taste.\r\n\r\n",
+      "createdAt": "2023-08-02T12:16:56Z",
+      "updatedAt": "2023-08-02T17:35:14Z",
+      "closedAt": "2023-08-02T17:35:14Z",
+      "comments": [
+        {
+          "author": "stpeter",
+          "authorAssociation": "COLLABORATOR",
+          "body": "These edits seem straightforward and I will submit a PR for them.",
+          "createdAt": "2023-08-02T15:43:52Z",
+          "updatedAt": "2023-08-02T15:43:52Z"
+        }
+      ]
+    },
+    {
+      "number": 101,
+      "id": "I_kwDOFrdhtM5tTlVN",
+      "title": "Proposed updates/clarifications",
+      "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/101",
+      "state": "OPEN",
+      "author": "enygren",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Some comments on a read-through if not too late:\r\n\r\n1) On DNS names starting with Labels:\r\n\r\n> historically this rule was also intended to apply to all labels in a domain name (see [Section 2.3.1](https://rfc-editor.org/rfc/rfc1035#section-2.3.1) of [[DNS-NAMES](https://www.rfc-editor.org/rfc/rfc1035)]), although that is not always the case in practice.\r\n\r\nThis should probably be more clear that domain names are explicitly allowed to start with digits.  As per  https://datatracker.ietf.org/doc/html/rfc1123#section-2.1 and https://datatracker.ietf.org/doc/html/rfc2181#section-11 clearly update this.  For example from the former clearly states:\r\n\"One aspect of host name syntax is hereby changed: the restriction on the first character is relaxed to allow either a letter or a digit.  Host software MUST support this more liberal syntax\"\r\n\r\n2) On the Web example:\r\n\r\n>Consider a simple website at www.example.com, which is not discoverable via DNS SRV lookups. Because HTTP does not specify the use of URIs in server certificates, a certificate for this service might include only a DNS-ID of www.example.com.\r\n> Consider the same website, which is reachable by a fixed IP address of 2001:db8::5c. The certificate might include this value in an IP-ID to allow clients to use the fixed IP address as a reference identity.\r\n\r\nThis would not be the same \"website\".  In particular, the web origin (rfc6454) is the tuple of scheme, authority, and port.  Since the authority is different (ie, the IP vs the hostname) they would be distinct.   If we're going to include this example, we should be clear that https://www.example.com/ and https://[2001:db8::5c]/ might be multi-tenant on the same server but are different web origins (ie, different \"websites\")\r\n\r\n3) Example in 6.1.2 (nit)\r\nPer https://www.iab.org/2016/11/07/iab-statement-on-ipv6/ it would also be worth including some more IPv6 examples in the examples (eg, for \"https://[2001:db8::abcd]\" as an example origin, perhaps augmenting the existing IPv4 examples so we always have both?)\r\n\r\n4) Clarification on IP address matching\r\n>For an IP address that appears in a URI-ID, the \"host\" component of both the reference identity and the presented identifier must match. These are parsed as either an \"IP-literal\" (following [[IPv6](https://www.rfc-editor.org/rfc/rfc4291)]) or an \"IPv4address\" (following [[IPv4](https://www.rfc-editor.org/rfc/rfc791)]). If the resulting octets are equal, the IP address matches.\r\n\r\nIn the IPv6 case, it may be better to reference https://datatracker.ietf.org/doc/html/rfc3986 section 3.2.2 since what is being matched isn't \"IP-literal\" (which is in square brackets) per the below ABNF but the address inside those brackets:\r\n\r\n      IP-literal = \"[\" ( IPv6address / IPvFuture  ) \"]\"\r\n\r\nThere is also the case of https://www.rfc-editor.org/rfc/rfc6874 (which allows zoneids) but since the zoneid has host scope it makes no sense for it to be included in how certs are verified.  (But perhaps there should be a requirement that the IPv6 IP-ID address NOT be LinkLocal?)\r\n\r\n",
+      "createdAt": "2023-08-02T20:18:01Z",
+      "updatedAt": "2023-08-02T20:21:36Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "We already passed WGLC, and IETF LC, so yes, sorry, I think this is kinda too late.\r\n\r\n\r\n",
+          "createdAt": "2023-08-02T20:21:36Z",
+          "updatedAt": "2023-08-02T20:21:36Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -5487,25 +5619,33 @@
       "id": "PR_kwDOFrdhtM5JBn-i",
       "title": "IDNA changes as discussed on the list",
       "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/pull/88",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "CBonnell",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Change that incorporates Rob's, Watson's, and my feedback on the handling of IDNs as discussed on the list.",
       "createdAt": "2023-02-01T16:37:39Z",
-      "updatedAt": "2023-02-02T16:52:37Z",
+      "updatedAt": "2023-08-02T12:27:54Z",
       "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
       "baseRefName": "main",
       "baseRefOid": "ebbe1263598e09e9760994c99e44c9a0df3b1d32",
-      "headRepository": "CBonnell/draft-ietf-uta-rfc6125bis",
+      "headRepository": null,
       "headRefName": "idna-guidance",
       "headRefOid": "043b3808cdbaa523f3ea22d80087f7b600030533",
-      "closedAt": null,
+      "closedAt": "2023-08-02T12:27:53Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "The WG consensus is to leave things as-is.  Closing this.  Thanks @CBonnell for your efforts here.",
+          "createdAt": "2023-08-02T12:27:53Z",
+          "updatedAt": "2023-08-02T12:27:53Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOFrdhtM5MTTFS",
@@ -5920,6 +6060,74 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 100,
+      "id": "PR_kwDOFrdhtM5XCCb5",
+      "title": "Part 2 of \u00c9ric Vynke's feedback",
+      "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/pull/100",
+      "state": "MERGED",
+      "author": "stpeter",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/99",
+      "createdAt": "2023-08-02T17:06:10Z",
+      "updatedAt": "2023-08-02T17:35:13Z",
+      "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
+      "baseRefName": "main",
+      "baseRefOid": "ad5e30a4e0f1b44356a3ccbc664ccd84194280a3",
+      "headRepository": "richsalz/draft-ietf-uta-rfc6125bis",
+      "headRefName": "issue99",
+      "headRefOid": "0d0044566fb123542027dfa6f7a5c5125722f110",
+      "closedAt": "2023-08-02T17:35:12Z",
+      "mergedAt": "2023-08-02T17:35:12Z",
+      "mergedBy": "stpeter",
+      "mergeCommit": {
+        "oid": "eaf568b62b13d3fb26231831cbc103909190a1ce"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFrdhtM5c9BjT",
+          "commit": {
+            "abbreviatedOid": "0d00445"
+          },
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Looks good to me.  I see nothing here that requires another WGLC. (But of course we should post the diffs when we decide to push a new version.)",
+          "createdAt": "2023-08-02T17:17:56Z",
+          "updatedAt": "2023-08-02T17:17:56Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 102,
+      "id": "PR_kwDOFrdhtM5XDanQ",
+      "title": "text from @bemasc with further massaging",
+      "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/pull/102",
+      "state": "OPEN",
+      "author": "stpeter",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/98",
+      "createdAt": "2023-08-02T22:43:12Z",
+      "updatedAt": "2023-08-02T22:43:12Z",
+      "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
+      "baseRefName": "main",
+      "baseRefOid": "eaf568b62b13d3fb26231831cbc103909190a1ce",
+      "headRepository": "richsalz/draft-ietf-uta-rfc6125bis",
+      "headRefName": "issue98",
+      "headRefOid": "c140af40dbe71790797850782922074336343923",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
