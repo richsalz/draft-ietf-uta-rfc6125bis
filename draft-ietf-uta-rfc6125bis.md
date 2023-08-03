@@ -538,11 +538,12 @@ that are not direct is out of scope for this document.
 The IETF continues to define methods for looking up information needed
 to make connections to network services. One recent example is service
 binding via the "SVCB" and "HTTPS" DNS resource record (RR) types. This
-document does not define identity representation and verification procedures
-for SVCB-compatible records; however, the use of such records during
-connection establishment does not alter any of the PKIX validation
-requirements specified herein or in other relevant specification unless the
-applicable SVCB mapping document states otherwise. For example, the PKIX
+document does not define any identity representation or verification procedures
+that are specific to SVCB-compatible records because the use of such records during
+connection establishment does not currently alter any of the PKIX validation
+requirements specified herein or in any other relevant specification.  (Future
+SVCB mapping documents could specify altered PKIX rules for new use cases.)
+For example, the PKIX
 validation rules for {{HTTP-OVER-TLS}} and {{DNS-OVER-TLS}} do not change
 when the client uses {{SVCB-FOR-HTTPS}} or {{SVCB-FOR-DNS}}.
 
