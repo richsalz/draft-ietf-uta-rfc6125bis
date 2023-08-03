@@ -45,10 +45,12 @@ informative:
   ALPN: RFC7301
   DANE: RFC6698
   DNS-CASE: RFC4343
+  DNS-OVER-TLS: RFC7858
   DNS-TERMS: RFC8499
   DTLS: RFC9147
   EMAIL-SRV: RFC6186
   HTTP: RFC9110
+  HTTP-OVER-TLS: RFC2818
   NAPTR: RFC3403
   NTS: RFC8915
   QUIC: RFC9001
@@ -59,6 +61,8 @@ informative:
   SMTP-TLS: RFC8689
   TLS: RFC8446
   TLS-SUBCERTS: I-D.ietf-tls-subcerts
+  SVCB-FOR-DNS: I-D.ietf-add-svcb-dns
+  SVCB-FOR-HTTPS: I-D.ietf-dnsop-svcb-https
   VERIFY: RFC6125
   XMPP: RFC6120
   ALPACA:
@@ -529,6 +533,17 @@ identify a service.
 
 An IP address that is the result of a DNS query is not direct. Use of IP-IDs
 that are not direct is out of scope for this document.
+
+The IETF continues to define methods for looking up information needed
+to make connections to network services. One recent example is service
+binding via the "SVCB" and "HTTPS" DNS resource record (RR) types. This
+document does not define any identity representation or verification procedures
+that are specific to SVCB-compatible records, because the use of such records during
+connection establishment does not currently alter any of the PKIX validation
+requirements specified herein or in any other relevant specification. For example, 
+the PKIX validation rules for {{HTTP-OVER-TLS}} and {{DNS-OVER-TLS}} do not change
+when the client uses {{SVCB-FOR-HTTPS}} or {{SVCB-FOR-DNS}}. However, it is possible
+that future SVCB mapping documents could specify altered PKIX rules for new use cases.
 
 # Designing Application Protocols {#design}
 
