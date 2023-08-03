@@ -30,7 +30,6 @@ author:
   email: rsalz@akamai.com
 normative:
   DNS-CONCEPTS: RFC1034
-  DNS-NAMES: RFC1035
   DNS-SRV: RFC2782
   DNS-WILDCARDS: RFC4592
   IDNA-DEFS: RFC5890
@@ -342,9 +341,9 @@ The following topics are out of scope for this specification:
 * Resolution of DNS domain names.
   Although the process whereby a client resolves the DNS domain name of an
   application service can involve several steps, for the purposes of this
-  specification the only relevant consideration is that the client needs to 
-  verify the identity of the entity with which it will communicate once the 
-  resolution process is complete.  Thus, the resolution process itself is 
+  specification the only relevant consideration is that the client needs to
+  verify the identity of the entity with which it will communicate once the
+  resolution process is complete.  Thus, the resolution process itself is
   out of scope for this specification.
 
 * User interface issues.
@@ -562,10 +561,7 @@ representation of an IPv4 address is a valid DNS name. The two
 types can be distinguished by first testing if the identifier is a valid IPv4
 address, as is done by the "first-match-wins" algorithm in {{Section 3.2.2 of URI}}.
 Note also that by policy, Top-Level Domains ({{DNS-TERMS}}) do not
-start with a digit (see Section 2.2.1.3.2 of {{ICANN-AGB}}); historically
-this rule was also intended to apply to all labels in a domain name (see
-{{Section 2.3.1 of DNS-NAMES}}), although that is not always the case
-in practice.
+start with a digit (see Section 2.2.1.3.2 of {{ICANN-AGB}}).
 
 # Representing Server Identity {#represent}
 
@@ -625,8 +621,9 @@ DNS SRV lookups.  Because HTTP does not specify the use of URIs in server
 certificates, a certificate for this service might include only a DNS-ID of
 `www.example.com`.
 
-Consider the same website, which is reachable by a fixed IP address of
-`2001:db8::5c`.  The certificate might include this value in an IP-ID to allow
+Consider another website, which is reachable by a fixed IP address of
+`2001:db8::5c`.  If the two sites refer to the same web service, then
+the certificate might also include this value in an IP-ID to allow
 clients to use the fixed IP address as a reference identity.
 
 Consider an IMAP-accessible email server at the host `mail.example.net`
@@ -798,7 +795,9 @@ intended to be comprehensive.
    a DNS-ID of `www.example.com`.
 
 2. A web browser connecting to `https://192.0.2.107/` would have a single
-   IP-ID reference identifier of `192.0.2.107`.
+   IP-ID reference identifier of `192.0.2.107`. Likewise, if connecting
+   to `https://[2001:db8::abcd]` , it would have a single IP-ID
+   reference identifier of `2001:db8::abcd`.
 
 3. A mail user agent that is connecting via IMAPS to the email service at
    `example.net` (resolved as `mail.example.net`) might have three reference
@@ -945,7 +944,7 @@ reference identity with the bytes contained in the iPAddress subjectAltName.
 
 For an IP address that appears in a URI-ID, the "host" component of both the
 reference identity and the presented identifier must match.  These are parsed as either
-an "IP-literal" (following {{!IPv6}}) or an "IPv4address" (following {{!IPv4}}).
+an "IPv6address" (following {{!RFC3986, Section 3.2.2}}) or an "IPv4address" (following {{!IPv4}}).
 If the resulting octets are equal, the IP address matches.
 
 This document does not specify how an SRV-ID reference identity can include an
@@ -1149,12 +1148,12 @@ name constraint for URI-IDs.
 
 ## Certificate Trust
 
-This document assumes that, if a client trusts a given CA, it trusts all 
+This document assumes that, if a client trusts a given CA, it trusts all
 certificates issued by that CA.  The certificate checking process does not
 include additional checks for bad behavior by the hosts identified with
 such certificates, for instance rogue servers or buggy applications.  Any
-additional checks (e.g., checking the server name against trusted block 
-lists) are the responsibility of the application protocol or the client 
+additional checks (e.g., checking the server name against trusted block
+lists) are the responsibility of the application protocol or the client
 itself.
 
 
