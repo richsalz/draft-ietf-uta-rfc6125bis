@@ -16,24 +16,22 @@ procedures for representing and verifying the identity of application services
 in such interactions. 
        This document obsoletes RFC 6125. 
     " name="description">
-<meta content="xml2rfc 3.16.0" name="generator">
+<meta content="xml2rfc 3.17.5" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-uta-rfc6125bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.16.0
-    Python 3.10.10
-    appdirs 1.4.4
-    ConfigArgParse 1.5.3
-    google-i18n-address 2.5.2
-    html5lib 1.1
+  xml2rfc 3.17.5
+    Python 3.10.12
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
-    lxml 4.9.2
-    MarkupSafe 2.1.1
+    lxml 4.9.3
+    platformdirs 3.10.0
     pycountry 22.3.5
-    PyYAML 6.0
-    requests 2.28.1
-    setuptools 65.6.0
+    PyYAML 6.0.1
+    requests 2.31.0
+    setuptools 68.0.0
     six 1.16.0
     wcwidth 0.2.6
 -->
@@ -617,6 +615,7 @@ sub, sup {
   clear: left;
   float: left;
   text-align: right;
+  margin-right: 1ch;
 }
 #identifiers dd {
   margin: 0;
@@ -668,7 +667,8 @@ sub, sup {
 .references dt {
   text-align: right;
   font-weight: bold;
-  min-width: 7em;
+  min-width: 10ch;
+  margin-right: 1.5ch;
 }
 .references dt:target::before {
   content: "⇒";
@@ -676,7 +676,7 @@ sub, sup {
   margin: 0 10px 0 -25px;
 }
 .references dd {
-  margin-left: 8em !important;
+  margin-left: 12ch !important;
   overflow: auto;
 }
 
@@ -1054,11 +1054,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Service Identity</td>
-<td class="right">March 2023</td>
+<td class="right">August 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Saint-Andre &amp; Salz</td>
-<td class="center">Expires 14 September 2023</td>
+<td class="center">Expires 5 February 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1074,12 +1074,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc6125" class="eref">6125</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-13" class="published">13 March 2023</time>
+<time datetime="2023-08-04" class="published">4 August 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-14">14 September 2023</time></dd>
+<dd class="expires"><time datetime="2024-02-05">5 February 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1134,7 @@ in such interactions.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 February 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1263,6 +1263,9 @@ in such interactions.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.6">
                 <p id="section-toc.1-1.7.2.6.1"><a href="#section-7.6" class="auto internal xref">7.6</a>.  <a href="#name-multiple-reference-identifi" class="internal xref">Multiple Reference Identifiers</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.7">
+                <p id="section-toc.1-1.7.2.7.1"><a href="#section-7.7" class="auto internal xref">7.7</a>.  <a href="#name-certificate-trust" class="internal xref">Certificate Trust</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
@@ -1365,7 +1368,7 @@ uniformResourceIdentifier, iPAddress, and the otherName form SRVName.<a href="#s
 </li>
           <li class="normal" id="section-1.3-3.3">Wildcard support is now the default in certificates.
 Constrain wildcard certificates so that the wildcard can only
-be the complete left-most component of a domain name.<a href="#section-1.3-3.3" class="pilcrow">¶</a>
+be the complete left-most label of a domain name.<a href="#section-1.3-3.3" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-1.3-3.4">Do not include or check strings that look like domain names
 in the subject's Common Name.<a href="#section-1.3-3.4" class="pilcrow">¶</a>
@@ -1421,9 +1424,8 @@ described above.<a href="#section-1.4.2-2.1" class="pilcrow">¶</a>
             <li class="normal" id="section-1.4.2-2.2">Keys or certificates employed outside the context of PKIX-based systems.<a href="#section-1.4.2-2.2" class="pilcrow">¶</a>
 </li>
             <li class="normal" id="section-1.4.2-2.3">Client or end-user identities.
-Certificates representing client identities other than as
-described above, such as rfc822Name, are beyond the scope
-of this document.<a href="#section-1.4.2-2.3" class="pilcrow">¶</a>
+Other than as described above, certificates representing client identities
+(e.g., rfc822Name) are beyond the scope of this document.<a href="#section-1.4.2-2.3" class="pilcrow">¶</a>
 </li>
             <li class="normal" id="section-1.4.2-2.4">Identification of servers using other than a domain name, IP address, or SRV service name.
 This document discusses Uniform Resource Identifiers <span>[<a href="#URI" class="cite xref">URI</a>]</span> only to the
@@ -1449,10 +1451,11 @@ included in a certificate (e.g., organization name).<a href="#section-1.4.2-2.5.
 </li>
             <li class="normal" id="section-1.4.2-2.6">Resolution of DNS domain names.
 Although the process whereby a client resolves the DNS domain name of an
-application service can involve several steps, for our purposes we care
-only about the fact that the client needs to verify the identity of the
-entity with which it communicates as a result of the resolution process.
-Thus, the resolution process itself is out of scope for this specification.<a href="#section-1.4.2-2.6" class="pilcrow">¶</a>
+application service can involve several steps, for the purposes of this
+specification the only relevant consideration is that the client needs to
+verify the identity of the entity with which it will communicate once the
+resolution process is complete.  Thus, the resolution process itself is
+out of scope for this specification.<a href="#section-1.4.2-2.6" class="pilcrow">¶</a>
 </li>
             <li class="normal" id="section-1.4.2-2.7">User interface issues.
 In general, such issues are properly the responsibility of client
@@ -1575,8 +1578,9 @@ service to present in the certificate. This is typically input by
 a human user, configured into a client, or provided by reference such as
 a URL. The combination of a source domain and, optionally, an application
 service type enables a client to construct one or more reference
-identifiers. This specification covers FQDNs only and provides no support
-for bare hostnames or any other name that does not include all labels.<a href="#section-1.5-2.24.1" class="pilcrow">¶</a></p>
+identifiers. This specification covers FQDNs. Use of any names that
+are not fully qualified is out of scope and may result in unexpected
+or undefined behavior.<a href="#section-1.5-2.24.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.5-2.25">subjectAltName entry:</dt>
@@ -1627,8 +1631,8 @@ appear in all capitals, as shown here.<a href="#section-1.5-5" class="pilcrow">�
 <p id="section-2-1">This document assumes that an application service is identified by a DNS domain
 name (e.g., <code>example.com</code>), an IP address (IPv4 or IPv6), or by an identifier
 that contains additional supplementary information.  Supplementary information
-is limited to the application service type as expressed in SRV (e.g., "the IMAP
-server at example.net") or a URI.<a href="#section-2-1" class="pilcrow">¶</a></p>
+is limited to the application service type as expressed in a DNS SRV record
+(e.g., "the IMAP server at example.net" for "_imap.example.net") or a URI.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">In a DNS-ID - and in the DNS domain name portion of an SRV-ID or URI-ID - any
 characters outside the <span>[<a href="#US-ASCII" class="cite xref">US-ASCII</a>]</span> range are prohibited and internationalized
 domain labels are represented as A-labels <span>[<a href="#IDNA-DEFS" class="cite xref">IDNA-DEFS</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
@@ -1677,6 +1681,16 @@ suffers from ambiguities in interpretation.<a href="#section-2-9" class="pilcrow
 identify a service.<a href="#section-2-10" class="pilcrow">¶</a></p>
 <p id="section-2-11">An IP address that is the result of a DNS query is not direct. Use of IP-IDs
 that are not direct is out of scope for this document.<a href="#section-2-11" class="pilcrow">¶</a></p>
+<p id="section-2-12">The IETF continues to define methods for looking up information needed
+to make connections to network services. One recent example is service
+binding via the "SVCB" and "HTTPS" DNS resource record (RR) types. This
+document does not define any identity representation or verification procedures
+that are specific to SVCB-compatible records, because the use of such records during
+connection establishment does not currently alter any of the PKIX validation
+requirements specified herein or in any other relevant specification. For example, 
+the PKIX validation rules for <span>[<a href="#HTTP-OVER-TLS" class="cite xref">HTTP-OVER-TLS</a>]</span> and <span>[<a href="#DNS-OVER-TLS" class="cite xref">DNS-OVER-TLS</a>]</span> do not change
+when the client uses <span>[<a href="#SVCB-FOR-HTTPS" class="cite xref">SVCB-FOR-HTTPS</a>]</span> or <span>[<a href="#SVCB-FOR-DNS" class="cite xref">SVCB-FOR-DNS</a>]</span>. However, it is possible
+that future SVCB mapping documents could specify altered PKIX rules for new use cases.<a href="#section-2-12" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="design">
@@ -1705,14 +1719,11 @@ defined in this document are not supported.<a href="#section-3-4" class="pilcrow
 <p id="section-3-5">A protocol can allow the use of an IP address in place of a DNS name.  This
 might use the same field without distinguishing the type of identifier, as for
 example in the "host" components of a URI.  In this case, applications need to be aware that the textual
-representation of an IPv4 address can appear to be a valid DNS name, even though it is not; the two
+representation of an IPv4 address is a valid DNS name. The two
 types can be distinguished by first testing if the identifier is a valid IPv4
 address, as is done by the "first-match-wins" algorithm in <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.
 Note also that by policy, Top-Level Domains (<span>[<a href="#DNS-TERMS" class="cite xref">DNS-TERMS</a>]</span>) do not
-start with a digit (see Section 2.2.1.3.2 of <span>[<a href="#ICANN-AGB" class="cite xref">ICANN-AGB</a>]</span>); historically
-this rule was also intended to apply to all labels in a domain name (see
-<span><a href="https://rfc-editor.org/rfc/rfc1035#section-2.3.1" class="relref">Section 2.3.1</a> of [<a href="#DNS-NAMES" class="cite xref">DNS-NAMES</a>]</span>), although that is not always the case
-in practice.<a href="#section-3-5" class="pilcrow">¶</a></p>
+start with a digit (see Section 2.2.1.3.2 of <span>[<a href="#ICANN-AGB" class="cite xref">ICANN-AGB</a>]</span>).<a href="#section-3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="represent">
@@ -1783,8 +1794,9 @@ of scope for this specification.<a href="#section-4.1-2.6" class="pilcrow">¶</a
 DNS SRV lookups.  Because HTTP does not specify the use of URIs in server
 certificates, a certificate for this service might include only a DNS-ID of
 <code>www.example.com</code>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">Consider the same website, which is reachable by a fixed IP address of
-<code>2001:db8::5c</code>.  The certificate might include this value in an IP-ID to allow
+<p id="section-4.2-2">Consider another website, which is reachable by a fixed IP address of
+<code>2001:db8::5c</code>.  If the two sites refer to the same web service, then
+the certificate might also include this value in an IP-ID to allow
 clients to use the fixed IP address as a reference identity.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.2-3">Consider an IMAP-accessible email server at the host <code>mail.example.net</code>
 servicing email addresses of the form <code>user@example.net</code> and discoverable via
@@ -1851,8 +1863,8 @@ types of <code>imap</code>, <code>imaps</code>, <code>pop3</code>, <code>pop3s</
 <p id="section-6-1">At a high level, the client verifies the application service's
 identity by performing the following actions:<a href="#section-6-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-6-2">
-<li id="section-6-2.1">The client constructs a list of acceptable reference identifiers
-based on the source domain and, optionally, the type of service to
+<li id="section-6-2.1">The client constructs a list of reference identifiers it would find acceptable
+based on the source domain and, if applicable, the type of service to
 which the client is connecting.<a href="#section-6-2.1" class="pilcrow">¶</a>
 </li>
         <li id="section-6-2.2">The server provides its identifiers in the form of a PKIX
@@ -1910,7 +1922,7 @@ service.<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
 look like but are not reference identifiers. For example, DNS resolution that
 starts at a DNS-ID reference identifier might produce intermediate domain names
 that need to be further resolved. Any intermediate values are not reference
-identifiers and <span class="bcp14">MUST NOT</span> be treated as such, except as defined by the application.
+identifiers and <span class="bcp14">MUST NOT</span> be treated as such.
 In the DNS case, not treating intermediate domain names as reference identifiers
 removes DNS and DNS resolution from the attack surface. However, an application
 might define a process for authenticating these intermediate identifiers in a way
@@ -1964,7 +1976,9 @@ intended to be comprehensive.<a href="#section-6.1.2-1" class="pilcrow">¶</a></
 a DNS-ID of <code>www.example.com</code>.<a href="#section-6.1.2-2.1" class="pilcrow">¶</a>
 </li>
             <li id="section-6.1.2-2.2">A web browser connecting to <code>https://192.0.2.107/</code> would have a single
-IP-ID reference identifier of <code>192.0.2.107</code>.<a href="#section-6.1.2-2.2" class="pilcrow">¶</a>
+IP-ID reference identifier of <code>192.0.2.107</code>. Likewise, if connecting
+to <code>https://[2001:db8::abcd]</code> , it would have a single IP-ID
+reference identifier of <code>2001:db8::abcd</code>.<a href="#section-6.1.2-2.2" class="pilcrow">¶</a>
 </li>
             <li id="section-6.1.2-2.3">A mail user agent that is connecting via IMAPS to the email service at
 <code>example.net</code> (resolved as <code>mail.example.net</code>) might have three reference
@@ -2108,7 +2122,8 @@ presented identifiers, not wildcard characters in reference identifiers or in
 DNS domain names more generally.  Therefore the use of wildcard characters
 as described herein is not to be confused with DNS wildcard
 matching, where the "*" label always matches at least one whole label and
-sometimes more; see <span>[<a href="#DNS-CONCEPTS" class="cite xref">DNS-CONCEPTS</a>], <a href="https://rfc-editor.org/rfc/rfc1034#section-4.3.3" class="relref">Section 4.3.3</a></span> and <span>[<a href="#DNS-WILDCARDS" class="cite xref">DNS-WILDCARDS</a>]</span>.<a href="#section-6.3-7" class="pilcrow">¶</a></p>
+sometimes more; see <span>[<a href="#DNS-CONCEPTS" class="cite xref">DNS-CONCEPTS</a>], <a href="https://rfc-editor.org/rfc/rfc1034#section-4.3.3" class="relref">Section 4.3.3</a></span> and <span>[<a href="#DNS-WILDCARDS" class="cite xref">DNS-WILDCARDS</a>]</span>.
+In particular, it also deviates from <span>[<a href="#DNS-WILDCARDS" class="cite xref">DNS-WILDCARDS</a>], <a href="https://rfc-editor.org/rfc/rfc4592#section-2.1.3" class="relref">Section 2.1.3</a></span>.<a href="#section-6.3-7" class="pilcrow">¶</a></p>
 <p id="section-6.3-8">For information regarding the security characteristics of wildcard
 certificates, see <a href="#security-wildcards" class="auto internal xref">Section 7.1</a>.<a href="#section-6.3-8" class="pilcrow">¶</a></p>
 </section>
@@ -2119,16 +2134,14 @@ certificates, see <a href="#security-wildcards" class="auto internal xref">Secti
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-matching-an-ip-address-port" class="section-name selfRef">Matching an IP Address Portion</a>
         </h3>
 <p id="section-6.4-1">An IP-ID matches based on an octet-for-octet comparison of the bytes of the
-reference identity with the bytes contained in the iPAddress subjectAltName.
-Because the iPAddress field does not include the IP version, a helpful
-heuristic for implementors is to distinguish IPv4 addresses from IPv6 addresses
-by their length.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+reference identity with the bytes contained in the iPAddress subjectAltName.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.4-2">For an IP address that appears in a URI-ID, the "host" component of both the
 reference identity and the presented identifier must match.  These are parsed as either
-an "IP-literal" (following <span>[<a href="#IPv6" class="cite xref">IPv6</a>]</span>) or an "IPv4address" (following <span>[<a href="#IPv4" class="cite xref">IPv4</a>]</span>).
+an "IPv6address" (following <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-3.2.2" class="relref">Section 3.2.2</a></span>) or an "IPv4address" (following <span>[<a href="#IPv4" class="cite xref">IPv4</a>]</span>).
 If the resulting octets are equal, the IP address matches.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 <p id="section-6.4-3">This document does not specify how an SRV-ID reference identity can include an
-IP address.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
+IP address, as <span>[<a href="#SRVNAME" class="cite xref">SRVNAME</a>]</span> only defines string names, not octet identifiers
+such as an IP address.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="verify-app">
@@ -2175,8 +2188,8 @@ reference identifiers, then the client <span class="bcp14">MUST</span> proceed a
 <p id="section-6.6-3">If the client is an automated application,
 then it <span class="bcp14">SHOULD</span> terminate the communication attempt with a bad
 certificate error and log the error appropriately.  The application <span class="bcp14">MAY</span>
-provide a configuration setting to disable this behavior, but it <span class="bcp14">MUST</span> enable
-it by default.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
+provide a configuration setting to disable this behavior, but it <span class="bcp14">MUST NOT</span>
+disable this security control by default.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
 <p id="section-6.6-4">If the client is one that is directly controlled by a human
 user, then it <span class="bcp14">SHOULD</span> inform the user of the identity mismatch and
 automatically terminate the communication attempt with a bad certificate
@@ -2286,6 +2299,7 @@ that is conditional on the type of identifier.  This component misclassifies an
 IP address as an FQDN.  A different component correctly classifies the
 identifier but might incorrectly assume that rules regarding IP addresses have
 been enforced.  Consistent classification of identifiers avoids this problem.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
+<p id="section-7.4-3">See also <a href="#design" class="auto internal xref">Section 3</a>, particularly the last paragraph.<a href="#section-7.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-multi">
@@ -2309,7 +2323,7 @@ names that could be affected by a compromise of any other server named in
 the set: the strength of any server in the set of names is determined by the
 weakest of those servers that offer the names.<a href="#section-7.5-2" class="pilcrow">¶</a></p>
 <p id="section-7.5-3">Methods for mitigating this risk includes: limiting the number of names that
-any server can speak for, following the guidelines for use of <span>[<a href="#ALPN" class="cite xref">ALPN</a>]</span>
+any server can represent, following the guidelines for use of <span>[<a href="#ALPN" class="cite xref">ALPN</a>]</span>
 described in Section 3.8 of <span>[<a href="#TLS-REQS" class="cite xref">TLS-REQS</a>]</span>), and ensuring that all servers in
 the set have a strong minimum configuration as described in Section 3.9 of
 <span>[<a href="#TLS-REQS" class="cite xref">TLS-REQS</a>]</span>.<a href="#section-7.5-3" class="pilcrow">¶</a></p>
@@ -2340,6 +2354,20 @@ identities are also constrained, such as requiring a uniformResourceIndicator
 name constraint for URI-IDs.<a href="#section-7.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="certificate-trust">
+<section id="section-7.7">
+        <h3 id="name-certificate-trust">
+<a href="#section-7.7" class="section-number selfRef">7.7. </a><a href="#name-certificate-trust" class="section-name selfRef">Certificate Trust</a>
+        </h3>
+<p id="section-7.7-1">This document assumes that, if a client trusts a given CA, it trusts all
+certificates issued by that CA.  The certificate checking process does not
+include additional checks for bad behavior by the hosts identified with
+such certificates, for instance rogue servers or buggy applications.  Any
+additional checks (e.g., checking the server name against trusted block
+lists) are the responsibility of the application protocol or the client
+itself.<a href="#section-7.7-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="iana-considerations">
@@ -2362,10 +2390,6 @@ name constraint for URI-IDs.<a href="#section-7.6-2" class="pilcrow">¶</a></p>
 <dt id="DNS-CONCEPTS">[DNS-CONCEPTS]</dt>
         <dd>
 <span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - concepts and facilities"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1034</span>, <span class="seriesInfo">DOI 10.17487/RFC1034</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc1034">https://www.rfc-editor.org/rfc/rfc1034</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="DNS-NAMES">[DNS-NAMES]</dt>
-        <dd>
-<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - implementation and specification"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1035</span>, <span class="seriesInfo">DOI 10.17487/RFC1035</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc1035">https://www.rfc-editor.org/rfc/rfc1035</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="DNS-SRV">[DNS-SRV]</dt>
         <dd>
@@ -2402,6 +2426,10 @@ name constraint for URI-IDs.<a href="#section-7.6-2" class="pilcrow">¶</a></p>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3986">[RFC3986]</dt>
+        <dd>
+<span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3986">https://www.rfc-editor.org/rfc/rfc3986</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
@@ -2454,6 +2482,10 @@ name constraint for URI-IDs.<a href="#section-7.6-2" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Eastlake 3rd, D.</span>, <span class="refTitle">"Domain Name System (DNS) Case Insensitivity Clarification"</span>, <span class="seriesInfo">RFC 4343</span>, <span class="seriesInfo">DOI 10.17487/RFC4343</span>, <time datetime="2006-01" class="refDate">January 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4343">https://www.rfc-editor.org/rfc/rfc4343</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="DNS-OVER-TLS">[DNS-OVER-TLS]</dt>
+        <dd>
+<span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Zhu, L.</span>, <span class="refAuthor">Heidemann, J.</span>, <span class="refAuthor">Mankin, A.</span>, <span class="refAuthor">Wessels, D.</span>, and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Specification for DNS over Transport Layer Security (TLS)"</span>, <span class="seriesInfo">RFC 7858</span>, <span class="seriesInfo">DOI 10.17487/RFC7858</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7858">https://www.rfc-editor.org/rfc/rfc7858</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="DNS-TERMS">[DNS-TERMS]</dt>
         <dd>
 <span class="refAuthor">Hoffman, P.</span>, <span class="refAuthor">Sullivan, A.</span>, and <span class="refAuthor">K. Fujiwara</span>, <span class="refTitle">"DNS Terminology"</span>, <span class="seriesInfo">BCP 219</span>, <span class="seriesInfo">RFC 8499</span>, <span class="seriesInfo">DOI 10.17487/RFC8499</span>, <time datetime="2019-01" class="refDate">January 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8499">https://www.rfc-editor.org/rfc/rfc8499</a>&gt;</span>. </dd>
@@ -2469,6 +2501,10 @@ name constraint for URI-IDs.<a href="#section-7.6-2" class="pilcrow">¶</a></p>
 <dt id="HTTP">[HTTP]</dt>
         <dd>
 <span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="HTTP-OVER-TLS">[HTTP-OVER-TLS]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"HTTP Over TLS"</span>, <span class="seriesInfo">RFC 2818</span>, <span class="seriesInfo">DOI 10.17487/RFC2818</span>, <time datetime="2000-05" class="refDate">May 2000</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2818">https://www.rfc-editor.org/rfc/rfc2818</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="HTTPSbytes">[HTTPSbytes]</dt>
         <dd>
@@ -2522,13 +2558,21 @@ name constraint for URI-IDs.<a href="#section-7.6-2" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Fenton, J.</span>, <span class="refTitle">"SMTP Require TLS Option"</span>, <span class="seriesInfo">RFC 8689</span>, <span class="seriesInfo">DOI 10.17487/RFC8689</span>, <time datetime="2019-11" class="refDate">November 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8689">https://www.rfc-editor.org/rfc/rfc8689</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="SVCB-FOR-DNS">[SVCB-FOR-DNS]</dt>
+        <dd>
+<span class="refAuthor">Schwartz, B. M.</span>, <span class="refTitle">"Service Binding Mapping for DNS Servers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-add-svcb-dns-09</span>, <time datetime="2023-06-26" class="refDate">26 June 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-add-svcb-dns-09">https://datatracker.ietf.org/doc/html/draft-ietf-add-svcb-dns-09</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="SVCB-FOR-HTTPS">[SVCB-FOR-HTTPS]</dt>
+        <dd>
+<span class="refAuthor">Schwartz, B. M.</span>, <span class="refAuthor">Bishop, M.</span>, and <span class="refAuthor">E. Nygren</span>, <span class="refTitle">"Service binding and parameter specification via the DNS (DNS SVCB and HTTPS RRs)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-dnsop-svcb-https-12</span>, <time datetime="2023-03-11" class="refDate">11 March 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-dnsop-svcb-https-12">https://datatracker.ietf.org/doc/html/draft-ietf-dnsop-svcb-https-12</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="TLS">[TLS]</dt>
         <dd>
 <span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TLS-SUBCERTS">[TLS-SUBCERTS]</dt>
         <dd>
-<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Iyengar, S.</span>, <span class="refAuthor">Sullivan, N.</span>, and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"Delegated Credentials for (D)TLS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-subcerts-15</span>, <time datetime="2022-06-30" class="refDate">30 June 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-subcerts-15">https://datatracker.ietf.org/doc/html/draft-ietf-tls-subcerts-15</a>&gt;</span>. </dd>
+<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Iyengar, S.</span>, <span class="refAuthor">Sullivan, N.</span>, and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"Delegated Credentials for TLS and DTLS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-subcerts-15</span>, <time datetime="2022-06-30" class="refDate">30 June 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-subcerts-15">https://datatracker.ietf.org/doc/html/draft-ietf-tls-subcerts-15</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="URL">[URL]</dt>
         <dd>
@@ -2583,7 +2627,7 @@ on the decade of experience and changes since it was published.
 The major changes, in no particular order, include:<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-2.1">The only legal place for a certificate wildcard is as the complete left-most
-component in a domain name.<a href="#appendix-A-2.1" class="pilcrow">¶</a>
+label in a domain name.<a href="#appendix-A-2.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="appendix-A-2.2">The server identity can only be expressed in the subjectAltNames
 extension; it is no longer valid to use the commonName RDN,
@@ -2607,6 +2651,8 @@ sample text in Appendix A have been removed.<a href="#appendix-A-2.5" class="pil
 has been added.<a href="#appendix-A-2.8" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="appendix-A-2.9">IP-ID reference identifiers are added.  This builds on the definition in <span><a href="https://rfc-editor.org/rfc/rfc9110#section-4.3.5" class="relref">Section 4.3.5</a> of [<a href="#HTTP" class="cite xref">HTTP</a>]</span>.<a href="#appendix-A-2.9" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="appendix-A-2.10">Shortened the document title because the previous title was difficult to cite.<a href="#appendix-A-2.10" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
