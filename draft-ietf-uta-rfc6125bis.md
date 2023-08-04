@@ -174,7 +174,7 @@ informative:
     - org: International Telecommunications Union
     date: 2005
     seriesinfo:
-      ITU-T: X.509
+      ITU-T: X.520
   X.690:
     title: >
       Information Technology - ASN.1 encoding rules:
