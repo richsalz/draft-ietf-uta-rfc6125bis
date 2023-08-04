@@ -386,10 +386,6 @@ delegated domain:
   with delegation in the DNS, by which a separate zone is created in the name space
   beneath the apex of a given domain; see for instance {{DNS-TERMS}}.
 
-derived domain:
-: A domain name or host name that a client has derived from the source domain
-  in an automated fashion (e.g., by means of an MX or SRV lookup).
-
 identifier:
 : A particular instance of an identifier type that is either presented by a
   server in a certificate or referenced by a client for matching purposes.
