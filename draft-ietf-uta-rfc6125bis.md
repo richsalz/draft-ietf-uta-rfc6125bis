@@ -649,11 +649,11 @@ certificate for this service might include SRV-IDs of `_imap.example.net` and
 and `mail.example.net`.
 
 Consider a SIP-accessible voice-over-IP (VoIP) server at the host
-`voice.example.com` servicing SIP addresses of the form
-`user@voice.example.com` and identified by a URI of \<sip:voice.example.com>.
+`voice.example.edu` servicing SIP addresses of the form
+`user@voice.example.edu` and identified by a URI of \<sip:voice.example.edu>.
 A certificate for this service would include a URI-ID of
-`sip:voice.example.com` (see {{SIP-CERTS}}) along with a DNS-ID of
-`voice.example.com`.
+`sip:voice.example.edu` (see {{SIP-CERTS}}) along with a DNS-ID of
+`voice.example.edu`.
 
 Consider an XMPP-compatible instant messaging (IM) server at the host
 `im.example.org` servicing IM addresses of the form `user@im.example.org` and
@@ -825,8 +825,8 @@ intended to be comprehensive.
    identifiers for the service.
 
 4. A voice-over-IP (VoIP) user agent that is connecting via SIP to the voice
-   service at `voice.example.com` might have only one reference identifier:
-   a URI-ID of `sip:voice.example.com` (see {{SIP-CERTS}}).
+   service at `voice.example.edu` might have only one reference identifier:
+   a URI-ID of `sip:voice.example.edu` (see {{SIP-CERTS}}).
 
 5. An instant messaging (IM) client that is connecting via XMPP to the IM
    service at `im.example.org` might have three reference identifiers: an
@@ -843,7 +843,7 @@ identifier(s) would be rejected; for instance:
 
 * With regard to the third example, a URI-ID of "sip:www.example.com"
   would be rejected because the DNS domain name portion does not match
-  "voice.example.com" and a DNS-ID of "voice.example.com" would be
+  "voice.example.edu" and a DNS-ID of "voice.example.edu" would be
   rejected because it lacks the appropriate application service type
   portion (i.e., it does not specify a "sip:" URI).
 
@@ -886,8 +886,8 @@ optionally an application service type as follows:
   of a URI-ID by some lenient clients.  This document does not describe how a
   URI that contains no "host" component can be matched.  Note that extraction of the
   "reg-name" might necessitate normalization of the URI (as explained in
-  {{Section 6 of URI}}).  For example, a URI-ID of `sip:voice.example.com` would be split
-  into a DNS domain name portion of `voice.example.com` and an application
+  {{Section 6 of URI}}).  For example, a URI-ID of `sip:voice.example.edu` would be split
+  into a DNS domain name portion of `voice.example.edu` and an application
   service type of `sip` (associated with an application protocol of SIP as
   explained in {{SIP-CERTS}}).
 
