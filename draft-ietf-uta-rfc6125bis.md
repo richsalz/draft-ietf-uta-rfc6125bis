@@ -841,7 +841,7 @@ identifier(s) would be rejected; for instance:
   be rejected because the DNS domain name portion does not match
   "www.example.com".
 
-* With regard to the third example, a URI-ID of "sip:www.example.com"
+* With regard to the third example, a URI-ID of "sip:www.example.edu"
   would be rejected because the DNS domain name portion does not match
   "voice.example.edu" and a DNS-ID of "voice.example.edu" would be
   rejected because it lacks the appropriate application service type
