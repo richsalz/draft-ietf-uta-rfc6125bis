@@ -60,7 +60,7 @@ informative:
   SIP-SIPS: RFC5630
   SMTP-TLS: RFC8689
   TLS: RFC8446
-  TLS-SUBCERTS: I-D.ietf-tls-subcerts
+  TLS-SUBCERTS: RFC9345
   SVCB-FOR-DNS: I-D.ietf-add-svcb-dns
   SVCB-FOR-HTTPS: I-D.ietf-dnsop-svcb-https
   VERIFY: RFC6125
@@ -114,7 +114,7 @@ informative:
     - org: "ICANN"
     date: 2012-06-04
   Defeating-SSL:
-    target: http://www.blackhat.com/presentations/bh-dc-09/Marlinspike/BlackHat-DC-09-Marlinspike-Defeating-SSL.pdf
+    target: https://www.blackhat.com/presentations/bh-dc-09/Marlinspike/BlackHat-DC-09-Marlinspike-Defeating-SSL.pdf
     title: New Tricks for Defeating SSL in Practice
     author:
     - ins: M. Marlinspike
@@ -612,7 +612,7 @@ document.
    of the service.  The application protocol specification
    MUST specify which URI schemes are acceptable in URI-IDs contained in PKIX
    certificates used for the application protocol (e.g., `sip` but not `sips`
-   or `tel` for SIP as described in {{SIP-SIPS}}). Typically this
+   or `tel` for SIP as described in {{SIP-SIPS}}). Typically, this
    identifier type would supplement the DNS-ID, unless the certificate
    is meant to be scoped to only the protocol in question.
 
@@ -679,7 +679,7 @@ defined application service type.
 
 If the certificate might be used for any type of application service, then
 the service provider SHOULD request a certificate that includes
-only DNS-IDs or IP-IDs. Again, because of multi-protocol attacks this practice is
+only DNS-IDs or IP-IDs. Again, because of multiprotocol attacks this practice is
 discouraged; this can be mitigated by deploying only one service on
 a host.
 
@@ -898,8 +898,9 @@ service type as well; see {{verify-app}}.
 
 This section describes how the client must determine if the presented DNS
 name matches the reference DNS name.  The rules differ depending on whether
-the domain to be checked is a traditional domain name or an
-internationalized domain name, as defined in {{names}}.  For clients
+the domain to be checked is an
+internationalized domain name, as defined in {{names}}, or not.
+For clients
 that support presented identifiers containing the wildcard character "\*", this section
 also specifies a supplemental rule for such "wildcard certificates".
 This section uses the description of labels and domain names in
@@ -939,7 +940,7 @@ be ignored.
 A wildcard in a presented identifier can only match exactly one label in a
 reference identifier.  This specification covers only wildcard characters in
 presented identifiers, not wildcard characters in reference identifiers or in
-DNS domain names more generally.  Therefore the use of wildcard characters
+DNS domain names more generally.  Therefore, the use of wildcard characters
 as described herein is not to be confused with DNS wildcard
 matching, where the "\*" label always matches at least one whole label and
 sometimes more; see {{DNS-CONCEPTS, Section 4.3.3}} and {{DNS-WILDCARDS}}.
