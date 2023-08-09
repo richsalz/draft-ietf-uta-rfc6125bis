@@ -265,11 +265,11 @@ This document takes the lessons learned since then and codifies them.
 The following is a summary of the rules, which are described at greater
 length in the remainder of this document:
 
-* Only check DNS domain names via the subjectAlternativeName
+* Only check DNS domain names via the subjectAltName
   extension designed for that purpose: dNSName.
 
 * Allow use of even more specific
-  subjectAlternativeName extensions where appropriate such as
+  subjectAltName extensions where appropriate such as
   uniformResourceIdentifier, iPAddress, and the otherName form SRVName.
 
 * Wildcard support is now the default in certificates.
@@ -449,7 +449,7 @@ subjectName:
 : The name of a PKIX certificate's subject, encoded in a certificate's
   subject field (see {{PKIX, Section 4.1.2.6}}).
 
-TLS uses the words client and server, where the client is the entity
+TLS uses the words "client" and "server," where the client is the entity
 that initiates the connection.  In many cases, this is consistent with common practice,
 such as a browser connecting to a Web origin.
 For the sake of clarity, and to follow the usage in {{TLS}} and related
@@ -571,7 +571,7 @@ example in the "host" components of a URI.  In this case, applications need to b
 representation of an IPv4 address is a valid DNS name. The two
 types can be distinguished by first testing if the identifier is a valid IPv4
 address, as is done by the "first-match-wins" algorithm in {{Section 3.2.2 of URI}}.
-Note also that by policy, Top-Level Domains ({{DNS-TERMS}}) do not
+Note also that by current policy, Top-Level Domains ({{DNS-TERMS}}) do not
 start with a digit (see Section 2.2.1.3.2 of {{ICANN-AGB}}).
 
 # Representing Server Identity {#represent}
@@ -752,15 +752,15 @@ then the client might end up communicating with an unexpected application
 service.
 
 During the course of processing, a client might be exposed to identifiers that
-look like but are not reference identifiers. For example, DNS resolution that
+look like, but are not, reference identifiers. For example, DNS resolution that
 starts at a DNS-ID reference identifier might produce intermediate domain names
-that need to be further resolved. Any intermediate values are not reference
+that need to be further resolved. Unless an application defines a process
+for authenticating intermediate identifiers in a way that then allows
+them to be used as a reference identifier (see for example {{SMTP-TLS}}),
+any intermediate values are not reference
 identifiers and MUST NOT be treated as such.
 In the DNS case, not treating intermediate domain names as reference identifiers
-removes DNS and DNS resolution from the attack surface. However, an application
-might define a process for authenticating these intermediate identifiers in a way
-that then allows them to be used as a reference identifier; see for example
-{{SMTP-TLS}}.
+removes DNS and DNS resolution from the attack surface.
 
 As one example of the process of generating a reference identifier, from user
 input of the URI \<sip:alice@college.example> a client could derive the application
