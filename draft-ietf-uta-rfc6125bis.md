@@ -224,7 +224,7 @@ communicates with an application service.  When a client communicates with an
 application service using {{TLS}}, {{DTLS}}, or a protocol built on those
 ({{QUIC}} being a notable example),
 it has some notion of the server's
-identity (e.g., "the website at example.com") while attempting to establish
+identity (e.g., "the website at bigcompany.example") while attempting to establish
 secure communication.  Likewise, during TLS negotiation, the server presents
 its notion of the service's identity in the form of a public-key certificate
 that was issued by a certificate authority (CA) in the context of the
@@ -380,9 +380,9 @@ delegated domain:
 : A domain name or host name that is explicitly configured at the application layer for communicating
   with the source domain (e.g., by the human user controlling an application client,
   by a trusted administrator who sets policy for such clients, or by means of
-  automated configuration in the client itself).  For example, an IMAP server at mail.example.net
-  could be a delegated domain for a source domain of example.net associated with an email address of
-  user@example.net.  This kind of application-layer delegation is not to be confused
+  automated configuration in the client itself).  For example, an IMAP server at mail.isp.example
+  could be a delegated domain for a source domain of isp.example associated with an email address of
+  user@isp.example.  This kind of application-layer delegation is not to be confused
   with delegation in the DNS, by which a separate zone is created in the name space
   beneath the apex of a given domain; see for instance {{DNS-TERMS}}.
 
@@ -470,10 +470,10 @@ and "verify".
 # Identifying Application Services {#names}
 
 This document assumes that an application service is identified by a DNS domain
-name (e.g., `example.com`), an IP address (IPv4 or IPv6), or by an identifier
+name (e.g., `bigcompany.example`), an IP address (IPv4 or IPv6), or by an identifier
 that contains additional supplementary information.  Supplementary information
 is limited to the application service type as expressed in a DNS SRV record
-(e.g., "the IMAP server at example.net" for "\_imap.example.net") or a URI.
+(e.g., "the IMAP server at isp.example" for "\_imap.isp.example") or a URI.
 
 In a DNS-ID - and in the DNS domain name portion of an SRV-ID or URI-ID - any
 characters outside the {{US-ASCII}} range are prohibited and internationalized
@@ -495,7 +495,7 @@ verification as discussed in this document.
 From the perspective of the application service, some identifiers are
 *unrestricted* because they can be used in any type of service, such as a
 single certificate being used for both the HTTP and IMAP services at the host
-"example.com".  Other identifiers are *restricted* because they can only be used for
+"bigcompany.example".  Other identifiers are *restricted* because they can only be used for
 one type of service, such as a special-purpose certificate that can only be
 used for an IMAP service.  This distinction matters most for certificate
 issuance.
@@ -627,36 +627,36 @@ document.
 
 ## Examples {#represent-examples}
 
-Consider a simple website at `www.example.com`, which is not discoverable via
+Consider a simple website at `www.bigcompany.example`, which is not discoverable via
 DNS SRV lookups.  Because HTTP does not specify the use of URIs in server
 certificates, a certificate for this service might include only a DNS-ID of
-`www.example.com`.
+`www.bigcompany.example`.
 
 Consider another website, which is reachable by a fixed IP address of
 `2001:db8::5c`.  If the two sites refer to the same web service, then
 the certificate might also include this value in an IP-ID to allow
 clients to use the fixed IP address as a reference identity.
 
-Consider an IMAP-accessible email server at the host `mail.example.net`
-servicing email addresses of the form `user@example.net` and discoverable via
-DNS SRV lookups on the application service name of `example.net`.  A
-certificate for this service might include SRV-IDs of `_imap.example.net` and
-`_imaps.example.net` (see {{EMAIL-SRV}}) along with DNS-IDs of `example.net`
-and `mail.example.net`.
+Consider an IMAP-accessible email server at the host `mail.isp.example`
+servicing email addresses of the form `user@isp.example` and discoverable via
+DNS SRV lookups on the application service name of `isp.example`.  A
+certificate for this service might include SRV-IDs of `_imap.isp.example` and
+`_imaps.isp.example` (see {{EMAIL-SRV}}) along with DNS-IDs of `isp.example`
+and `mail.isp.example`.
 
 Consider a SIP-accessible voice-over-IP (VoIP) server at the host
-`voice.example.edu` servicing SIP addresses of the form
-`user@voice.example.edu` and identified by a URI of \<sip:voice.example.edu>.
+`voice.college.example` servicing SIP addresses of the form
+`user@voice.college.example` and identified by a URI of \<sip:voice.college.example>.
 A certificate for this service would include a URI-ID of
-`sip:voice.example.edu` (see {{SIP-CERTS}}) along with a DNS-ID of
-`voice.example.edu`.
+`sip:voice.college.example` (see {{SIP-CERTS}}) along with a DNS-ID of
+`voice.college.example`.
 
 Consider an XMPP-compatible instant messaging (IM) server at the host
-`im.example.org` servicing IM addresses of the form `user@im.example.org` and
-discoverable via DNS SRV lookups on the `im.example.org` domain.  A
+`messenger.example` servicing IM addresses of the form `user@messenger.example` and
+discoverable via DNS SRV lookups on the `messenger.example` domain.  A
 certificate for this service might include SRV-IDs of
-`_xmpp-client.im.example.org` and `_xmpp-server.im.example.org` (see
-{{XMPP}}), a DNS-ID of `im.example.org`.
+`_xmpp-client.messenger.example` and `_xmpp-server.messenger.example` (see
+{{XMPP}}), as well as a DNS-ID of `messenger.example`.
 
 # Requesting Server Certificates {#request}
 
@@ -763,8 +763,8 @@ that then allows them to be used as a reference identifier; see for example
 {{SMTP-TLS}}.
 
 As one example of the process of generating a reference identifier, from user
-input of the URI \<sip:alice@example.net> a client could derive the application
-service type `sip` from the URI scheme and parse the domain name `example.net`
+input of the URI \<sip:alice@college.example> a client could derive the application
+service type `sip` from the URI scheme and parse the domain name `college.example`
 from the host component.
 
 Using the combination of FQDN(s) or IP address(es), plus optionally an application service type, the client
@@ -802,8 +802,8 @@ The following examples are for illustrative purposes only and are not
 intended to be comprehensive.
 
 1. A web browser that is connecting via HTTPS to the website at
-   `https://www.example.com/` would have a single reference identifier:
-   a DNS-ID of `www.example.com`.
+   `https://www.bigcompany.example/` would have a single reference identifier:
+   a DNS-ID of `www.bigcompany.example`.
 
 2. A web browser connecting to `https://192.0.2.107/` would have a single
    IP-ID reference identifier of `192.0.2.107`. Likewise, if connecting
@@ -811,35 +811,35 @@ intended to be comprehensive.
    reference identifier of `2001:db8::abcd`.
 
 3. A mail user agent that is connecting via IMAPS to the email service at
-   `example.net` (resolved as `mail.example.net`) might have three reference
-   identifiers: an SRV-ID of `_imaps.example.net` (see {{EMAIL-SRV}}), and
-   DNS-IDs of `example.net` and `mail.example.net`.  An email user agent that
+   `isp.example` (resolved as `mail.isp.example`) might have three reference
+   identifiers: an SRV-ID of `_imaps.isp.example` (see {{EMAIL-SRV}}), and
+   DNS-IDs of `isp.example` and `mail.isp.example`.  An email user agent that
    does not support {{EMAIL-SRV}} would probably be explicitly configured to
-   connect to `mail.example.net`, whereas an SRV-aware user agent would derive
-   `example.net` from an email address of the form `user@example.net` but might
-   also accept `mail.example.net` as the DNS domain name portion of reference
+   connect to `mail.isp.example`, whereas an SRV-aware user agent would derive
+   `isp.example` from an email address of the form `user@isp.example` but might
+   also accept `mail.isp.example` as the DNS domain name portion of reference
    identifiers for the service.
 
 4. A voice-over-IP (VoIP) user agent that is connecting via SIP to the voice
-   service at `voice.example.edu` might have only one reference identifier:
-   a URI-ID of `sip:voice.example.edu` (see {{SIP-CERTS}}).
+   service at `voice.college.example` might have only one reference identifier:
+   a URI-ID of `sip:voice.college.example` (see {{SIP-CERTS}}).
 
 5. An instant messaging (IM) client that is connecting via XMPP to the IM
-   service at `im.example.org` might have three reference identifiers: an
-   SRV-ID of `_xmpp-client.im.example.org` (see {{XMPP}}), a DNS-ID of
-   `im.example.org`, and an XMPP-specific `XmppAddr` of `im.example.org`
+   service at `messenger.example` might have three reference identifiers: an
+   SRV-ID of `_xmpp-client.messenger.example` (see {{XMPP}}), a DNS-ID of
+   `messenger.example`, and an XMPP-specific `XmppAddr` of `messenger.example`
    (see {{XMPP}}).
 
 In all these cases, presented identifiers that do not match the reference
 identifier(s) would be rejected; for instance:
 
-* With regard to the first example a DNS-ID of "web.example.com" would
+* With regard to the first example a DNS-ID of "web.bigcompany.example" would
   be rejected because the DNS domain name portion does not match
-  "www.example.com".
+  "www.bigcompany.example".
 
-* With regard to the third example, a URI-ID of "sip:www.example.edu"
+* With regard to the third example, a URI-ID of "sip:www.college.example"
   would be rejected because the DNS domain name portion does not match
-  "voice.example.edu" and a DNS-ID of "voice.example.edu" would be
+  "voice.college.example" and a DNS-ID of "voice.college.example" would be
   rejected because it lacks the appropriate application service type
   portion (i.e., it does not specify a "sip:" URI).
 
@@ -868,8 +868,8 @@ optionally an application service type as follows:
 
 * For an SRV-ID reference identifier, the DNS domain name portion is
   the Name and the application service type portion is the Service.  For
-  example, an SRV-ID of `_imaps.example.net` has a DNS domain name portion
-  of `example.net` and an application service type portion of
+  example, an SRV-ID of `_imaps.isp.example` has a DNS domain name portion
+  of `isp.example` and an application service type portion of
   `imaps`, which maps to the IMAP application protocol as explained in
   {{EMAIL-SRV}}.
 
@@ -882,8 +882,8 @@ optionally an application service type as follows:
   of a URI-ID by some lenient clients.  This document does not describe how a
   URI that contains no "host" component can be matched.  Note that extraction of the
   "reg-name" might necessitate normalization of the URI (as explained in
-  {{Section 6 of URI}}).  For example, a URI-ID of `sip:voice.example.edu` would be split
-  into a DNS domain name portion of `voice.example.edu` and an application
+  {{Section 6 of URI}}).  For example, a URI-ID of `sip:voice.college.example` would be split
+  into a DNS domain name portion of `voice.college.example` and an application
   service type of `sip` (associated with an application protocol of SIP as
   explained in {{SIP-CERTS}}).
 
@@ -912,7 +912,7 @@ described in {{Section 3.5 of DNS-CONCEPTS}}),
 then matching of the reference identifier against the presented
 identifier MUST be performed by comparing the set of domain name labels using
 a case-insensitive ASCII comparison, as clarified by {{DNS-CASE}}.  For
-example, `WWW.Example.Com` would be lower-cased to `www.example.com` for
+example, `WWW.BigCompany.Example` would be lower-cased to `www.bigcompany.example` for
 comparison purposes.  Each label MUST match in order for the names to be
 considered to match, except as supplemented by the rule about checking of
 wildcard labels in presented identifiers given below.
@@ -971,14 +971,14 @@ the identifier is an SRV-ID or a URI-ID.
 These identifiers provide an application service type portion to be checked,
 but that portion is combined only with the DNS domain name portion of the
 SRV-ID or URI-ID itself.  For example, if a client's list of reference
-identifiers includes an SRV-ID of `_xmpp-client.im.example.org` and a DNS-ID
-of `apps.example.net`, the client MUST check both the combination of an
+identifiers includes an SRV-ID of `_xmpp-client.messenger.example` and a DNS-ID
+of `app.example`, the client MUST check both the combination of an
 application service type of `xmpp-client` and a DNS domain name of
-`im.example.org` and, separately,
-a DNS domain name of `apps.example.net`.  However, the
+`messenger.example` and, separately,
+a DNS domain name of `app.example`.  However, the
 client MUST NOT check the combination of an application service type of
-`xmpp-client` and a DNS domain name of `apps.example.net` because it does not
-have an SRV-ID of `_xmpp-client.apps.example.net` in its list of reference
+`xmpp-client` and a DNS domain name of `app.example` because it does not
+have an SRV-ID of `_xmpp-client.app.example` in its list of reference
 identifiers.
 
 If the identifier is an SRV-ID, then the application service name MUST
@@ -1038,7 +1038,7 @@ or buggy hosts. See for example {{Defeating-SSL}} (beginning at slide 91) and
 {{HTTPSbytes}} (slides 38-40).
 
 As specified in {{verify-domain}}, restricting the presented identifiers in certificates to only one
-wildcard character (e.g., "\*.example.com" but not "\*.\*.example.com") and
+wildcard character (e.g., "\*.bigcompany.example" but not "\*.\*.bigcompany.example") and
 restricting the use of wildcards to only the left-most domain label can
 help to mitigate certain aspects of the attack described in {{Defeating-SSL}}.
 
