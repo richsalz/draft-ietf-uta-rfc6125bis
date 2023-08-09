@@ -752,7 +752,7 @@ then the client might end up communicating with an unexpected application
 service.
 
 During the course of processing, a client might be exposed to identifiers that
-look like, but are not reference identifiers. For example, DNS resolution that
+look like, but are not, reference identifiers. For example, DNS resolution that
 starts at a DNS-ID reference identifier might produce intermediate domain names
 that need to be further resolved. Unless an application defines a process
 for authenticating intermediate identifiers in a way that then allows
