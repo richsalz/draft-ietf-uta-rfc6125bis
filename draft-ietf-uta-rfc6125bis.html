@@ -1314,7 +1314,7 @@ communicates with an application service.  When a client communicates with an
 application service using <span>[<a href="#TLS" class="cite xref">TLS</a>]</span>, <span>[<a href="#DTLS" class="cite xref">DTLS</a>]</span>, or a protocol built on those
 (<span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span> being a notable example),
 it has some notion of the server's
-identity (e.g., "the website at example.com") while attempting to establish
+identity (e.g., "the website at bigcompany.example") while attempting to establish
 secure communication.  Likewise, during TLS negotiation, the server presents
 its notion of the service's identity in the form of a public-key certificate
 that was issued by a certificate authority (CA) in the context of the
@@ -1359,11 +1359,11 @@ practice from many IETF standards and tried to generalize best practices
 The following is a summary of the rules, which are described at greater
 length in the remainder of this document:<a href="#section-1.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1.3-3.1">Only check DNS domain names via the subjectAlternativeName
+<li class="normal" id="section-1.3-3.1">Only check DNS domain names via the subjectAltName
 extension designed for that purpose: dNSName.<a href="#section-1.3-3.1" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-1.3-3.2">Allow use of even more specific
-subjectAlternativeName extensions where appropriate such as
+subjectAltName extensions where appropriate such as
 uniformResourceIdentifier, iPAddress, and the otherName form SRVName.<a href="#section-1.3-3.2" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-1.3-3.3">Wildcard support is now the default in certificates.
@@ -1502,9 +1502,9 @@ identifier.<a href="#section-1.5-2.6.1" class="pilcrow">¶</a></p>
             <p id="section-1.5-2.8.1">A domain name or host name that is explicitly configured at the application layer for communicating
 with the source domain (e.g., by the human user controlling an application client,
 by a trusted administrator who sets policy for such clients, or by means of
-automated configuration in the client itself).  For example, an IMAP server at mail.example.net
-could be a delegated domain for a source domain of example.net associated with an email address of
-user@example.net.  This kind of application-layer delegation is not to be confused
+automated configuration in the client itself).  For example, an IMAP server at mail.isp.example
+could be a delegated domain for a source domain of isp.example associated with an email address of
+user@isp.example.  This kind of application-layer delegation is not to be confused
 with delegation in the DNS, by which a separate zone is created in the name space
 beneath the apex of a given domain; see for instance <span>[<a href="#DNS-TERMS" class="cite xref">DNS-TERMS</a>]</span>.<a href="#section-1.5-2.8.1" class="pilcrow">¶</a></p>
 </dd>
@@ -1595,7 +1595,7 @@ subject field (see <span>[<a href="#PKIX" class="cite xref">PKIX</a>], <a href="
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-1.5-3">TLS uses the words client and server, where the client is the entity
+<p id="section-1.5-3">TLS uses the words "client" and "server," where the client is the entity
 that initiates the connection.  In many cases, this is consistent with common practice,
 such as a browser connecting to a Web origin.
 For the sake of clarity, and to follow the usage in <span>[<a href="#TLS" class="cite xref">TLS</a>]</span> and related
@@ -1623,10 +1623,10 @@ appear in all capitals, as shown here.<a href="#section-1.5-5" class="pilcrow">�
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-identifying-application-ser" class="section-name selfRef">Identifying Application Services</a>
       </h2>
 <p id="section-2-1">This document assumes that an application service is identified by a DNS domain
-name (e.g., <code>example.com</code>), an IP address (IPv4 or IPv6), or by an identifier
+name (e.g., <code>bigcompany.example</code>), an IP address (IPv4 or IPv6), or by an identifier
 that contains additional supplementary information.  Supplementary information
 is limited to the application service type as expressed in a DNS SRV record
-(e.g., "the IMAP server at example.net" for "_imap.example.net") or a URI.<a href="#section-2-1" class="pilcrow">¶</a></p>
+(e.g., "the IMAP server at isp.example" for "_imap.isp.example") or a URI.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">In a DNS-ID - and in the DNS domain name portion of an SRV-ID or URI-ID - any
 characters outside the <span>[<a href="#US-ASCII" class="cite xref">US-ASCII</a>]</span> range are prohibited and internationalized
 domain labels are represented as A-labels <span>[<a href="#IDNA-DEFS" class="cite xref">IDNA-DEFS</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
@@ -1644,7 +1644,7 @@ verification as discussed in this document.<a href="#section-2-4" class="pilcrow
 <p id="section-2-5">From the perspective of the application service, some identifiers are
 <em>unrestricted</em> because they can be used in any type of service, such as a
 single certificate being used for both the HTTP and IMAP services at the host
-"example.com".  Other identifiers are <em>restricted</em> because they can only be used for
+"bigcompany.example".  Other identifiers are <em>restricted</em> because they can only be used for
 one type of service, such as a special-purpose certificate that can only be
 used for an IMAP service.  This distinction matters most for certificate
 issuance.<a href="#section-2-5" class="pilcrow">¶</a></p>
@@ -1716,7 +1716,7 @@ example in the "host" components of a URI.  In this case, applications need to b
 representation of an IPv4 address is a valid DNS name. The two
 types can be distinguished by first testing if the identifier is a valid IPv4
 address, as is done by the "first-match-wins" algorithm in <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.
-Note also that by policy, Top-Level Domains (<span>[<a href="#DNS-TERMS" class="cite xref">DNS-TERMS</a>]</span>) do not
+Note also that by current policy, Top-Level Domains (<span>[<a href="#DNS-TERMS" class="cite xref">DNS-TERMS</a>]</span>) do not
 start with a digit (see Section 2.2.1.3.2 of <span>[<a href="#ICANN-AGB" class="cite xref">ICANN-AGB</a>]</span>).<a href="#section-3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1784,32 +1784,32 @@ of scope for this specification.<a href="#section-4.1-2.6" class="pilcrow">¶</a
         <h3 id="name-examples">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
         </h3>
-<p id="section-4.2-1">Consider a simple website at <code>www.example.com</code>, which is not discoverable via
+<p id="section-4.2-1">Consider a simple website at <code>www.bigcompany.example</code>, which is not discoverable via
 DNS SRV lookups.  Because HTTP does not specify the use of URIs in server
 certificates, a certificate for this service might include only a DNS-ID of
-<code>www.example.com</code>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<code>www.bigcompany.example</code>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">Consider another website, which is reachable by a fixed IP address of
 <code>2001:db8::5c</code>.  If the two sites refer to the same web service, then
 the certificate might also include this value in an IP-ID to allow
 clients to use the fixed IP address as a reference identity.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">Consider an IMAP-accessible email server at the host <code>mail.example.net</code>
-servicing email addresses of the form <code>user@example.net</code> and discoverable via
-DNS SRV lookups on the application service name of <code>example.net</code>.  A
-certificate for this service might include SRV-IDs of <code>_imap.example.net</code> and
-<code>_imaps.example.net</code> (see <span>[<a href="#EMAIL-SRV" class="cite xref">EMAIL-SRV</a>]</span>) along with DNS-IDs of <code>example.net</code>
-and <code>mail.example.net</code>.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-3">Consider an IMAP-accessible email server at the host <code>mail.isp.example</code>
+servicing email addresses of the form <code>user@isp.example</code> and discoverable via
+DNS SRV lookups on the application service name of <code>isp.example</code>.  A
+certificate for this service might include SRV-IDs of <code>_imap.isp.example</code> and
+<code>_imaps.isp.example</code> (see <span>[<a href="#EMAIL-SRV" class="cite xref">EMAIL-SRV</a>]</span>) along with DNS-IDs of <code>isp.example</code>
+and <code>mail.isp.example</code>.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.2-4">Consider a SIP-accessible voice-over-IP (VoIP) server at the host
-<code>voice.example.edu</code> servicing SIP addresses of the form
-<code>user@voice.example.edu</code> and identified by a URI of &lt;sip:voice.example.edu&gt;.
+<code>voice.college.example</code> servicing SIP addresses of the form
+<code>user@voice.college.example</code> and identified by a URI of &lt;sip:voice.college.example&gt;.
 A certificate for this service would include a URI-ID of
-<code>sip:voice.example.edu</code> (see <span>[<a href="#SIP-CERTS" class="cite xref">SIP-CERTS</a>]</span>) along with a DNS-ID of
-<code>voice.example.edu</code>.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+<code>sip:voice.college.example</code> (see <span>[<a href="#SIP-CERTS" class="cite xref">SIP-CERTS</a>]</span>) along with a DNS-ID of
+<code>voice.college.example</code>.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
 <p id="section-4.2-5">Consider an XMPP-compatible instant messaging (IM) server at the host
-<code>im.example.org</code> servicing IM addresses of the form <code>user@im.example.org</code> and
-discoverable via DNS SRV lookups on the <code>im.example.org</code> domain.  A
+<code>messenger.example</code> servicing IM addresses of the form <code>user@messenger.example</code> and
+discoverable via DNS SRV lookups on the <code>messenger.example</code> domain.  A
 certificate for this service might include SRV-IDs of
-<code>_xmpp-client.im.example.org</code> and <code>_xmpp-server.im.example.org</code> (see
-<span>[<a href="#XMPP" class="cite xref">XMPP</a>]</span>), a DNS-ID of <code>im.example.org</code>.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
+<code>_xmpp-client.messenger.example</code> and <code>_xmpp-server.messenger.example</code> (see
+<span>[<a href="#XMPP" class="cite xref">XMPP</a>]</span>), as well as a DNS-ID of <code>messenger.example</code>.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1913,18 +1913,18 @@ clicked a hyperlink provided by a malicious entity in a phishing attack),
 then the client might end up communicating with an unexpected application
 service.<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-6.1.1-5">During the course of processing, a client might be exposed to identifiers that
-look like but are not reference identifiers. For example, DNS resolution that
+look like, but are not, reference identifiers. For example, DNS resolution that
 starts at a DNS-ID reference identifier might produce intermediate domain names
-that need to be further resolved. Any intermediate values are not reference
+that need to be further resolved. Unless an application defines a process
+for authenticating intermediate identifiers in a way that then allows
+them to be used as a reference identifier (see for example <span>[<a href="#SMTP-TLS" class="cite xref">SMTP-TLS</a>]</span>),
+any intermediate values are not reference
 identifiers and <span class="bcp14">MUST NOT</span> be treated as such.
 In the DNS case, not treating intermediate domain names as reference identifiers
-removes DNS and DNS resolution from the attack surface. However, an application
-might define a process for authenticating these intermediate identifiers in a way
-that then allows them to be used as a reference identifier; see for example
-<span>[<a href="#SMTP-TLS" class="cite xref">SMTP-TLS</a>]</span>.<a href="#section-6.1.1-5" class="pilcrow">¶</a></p>
+removes DNS and DNS resolution from the attack surface.<a href="#section-6.1.1-5" class="pilcrow">¶</a></p>
 <p id="section-6.1.1-6">As one example of the process of generating a reference identifier, from user
-input of the URI &lt;sip:alice@example.net&gt; a client could derive the application
-service type <code>sip</code> from the URI scheme and parse the domain name <code>example.net</code>
+input of the URI &lt;sip:alice@college.example&gt; a client could derive the application
+service type <code>sip</code> from the URI scheme and parse the domain name <code>college.example</code>
 from the host component.<a href="#section-6.1.1-6" class="pilcrow">¶</a></p>
 <p id="section-6.1.1-7">Using the combination of FQDN(s) or IP address(es), plus optionally an application service type, the client
 <span class="bcp14">MUST</span> construct its list of reference identifiers in accordance with the
@@ -1966,8 +1966,8 @@ SRV-IDs, DNS-IDs, and IP-IDs in its list of reference identifiers.<a href="#sect
 intended to be comprehensive.<a href="#section-6.1.2-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-6.1.2-2">
 <li id="section-6.1.2-2.1">A web browser that is connecting via HTTPS to the website at
-<code>https://www.example.com/</code> would have a single reference identifier:
-a DNS-ID of <code>www.example.com</code>.<a href="#section-6.1.2-2.1" class="pilcrow">¶</a>
+<code>https://www.bigcompany.example/</code> would have a single reference identifier:
+a DNS-ID of <code>www.bigcompany.example</code>.<a href="#section-6.1.2-2.1" class="pilcrow">¶</a>
 </li>
             <li id="section-6.1.2-2.2">A web browser connecting to <code>https://192.0.2.107/</code> would have a single
 IP-ID reference identifier of <code>192.0.2.107</code>. Likewise, if connecting
@@ -1975,36 +1975,36 @@ to <code>https://[2001:db8::abcd]</code> , it would have a single IP-ID
 reference identifier of <code>2001:db8::abcd</code>.<a href="#section-6.1.2-2.2" class="pilcrow">¶</a>
 </li>
             <li id="section-6.1.2-2.3">A mail user agent that is connecting via IMAPS to the email service at
-<code>example.net</code> (resolved as <code>mail.example.net</code>) might have three reference
-identifiers: an SRV-ID of <code>_imaps.example.net</code> (see <span>[<a href="#EMAIL-SRV" class="cite xref">EMAIL-SRV</a>]</span>), and
-DNS-IDs of <code>example.net</code> and <code>mail.example.net</code>.  An email user agent that
+<code>isp.example</code> (resolved as <code>mail.isp.example</code>) might have three reference
+identifiers: an SRV-ID of <code>_imaps.isp.example</code> (see <span>[<a href="#EMAIL-SRV" class="cite xref">EMAIL-SRV</a>]</span>), and
+DNS-IDs of <code>isp.example</code> and <code>mail.isp.example</code>.  An email user agent that
 does not support <span>[<a href="#EMAIL-SRV" class="cite xref">EMAIL-SRV</a>]</span> would probably be explicitly configured to
-connect to <code>mail.example.net</code>, whereas an SRV-aware user agent would derive
-<code>example.net</code> from an email address of the form <code>user@example.net</code> but might
-also accept <code>mail.example.net</code> as the DNS domain name portion of reference
+connect to <code>mail.isp.example</code>, whereas an SRV-aware user agent would derive
+<code>isp.example</code> from an email address of the form <code>user@isp.example</code> but might
+also accept <code>mail.isp.example</code> as the DNS domain name portion of reference
 identifiers for the service.<a href="#section-6.1.2-2.3" class="pilcrow">¶</a>
 </li>
             <li id="section-6.1.2-2.4">A voice-over-IP (VoIP) user agent that is connecting via SIP to the voice
-service at <code>voice.example.edu</code> might have only one reference identifier:
-a URI-ID of <code>sip:voice.example.edu</code> (see <span>[<a href="#SIP-CERTS" class="cite xref">SIP-CERTS</a>]</span>).<a href="#section-6.1.2-2.4" class="pilcrow">¶</a>
+service at <code>voice.college.example</code> might have only one reference identifier:
+a URI-ID of <code>sip:voice.college.example</code> (see <span>[<a href="#SIP-CERTS" class="cite xref">SIP-CERTS</a>]</span>).<a href="#section-6.1.2-2.4" class="pilcrow">¶</a>
 </li>
             <li id="section-6.1.2-2.5">An instant messaging (IM) client that is connecting via XMPP to the IM
-service at <code>im.example.org</code> might have three reference identifiers: an
-SRV-ID of <code>_xmpp-client.im.example.org</code> (see <span>[<a href="#XMPP" class="cite xref">XMPP</a>]</span>), a DNS-ID of
-<code>im.example.org</code>, and an XMPP-specific <code>XmppAddr</code> of <code>im.example.org</code>
+service at <code>messenger.example</code> might have three reference identifiers: an
+SRV-ID of <code>_xmpp-client.messenger.example</code> (see <span>[<a href="#XMPP" class="cite xref">XMPP</a>]</span>), a DNS-ID of
+<code>messenger.example</code>, and an XMPP-specific <code>XmppAddr</code> of <code>messenger.example</code>
 (see <span>[<a href="#XMPP" class="cite xref">XMPP</a>]</span>).<a href="#section-6.1.2-2.5" class="pilcrow">¶</a>
 </li>
           </ol>
 <p id="section-6.1.2-3">In all these cases, presented identifiers that do not match the reference
 identifier(s) would be rejected; for instance:<a href="#section-6.1.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.1.2-4.1">With regard to the first example a DNS-ID of "web.example.com" would
+<li class="normal" id="section-6.1.2-4.1">With regard to the first example a DNS-ID of "web.bigcompany.example" would
 be rejected because the DNS domain name portion does not match
-"www.example.com".<a href="#section-6.1.2-4.1" class="pilcrow">¶</a>
+"www.bigcompany.example".<a href="#section-6.1.2-4.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-6.1.2-4.2">With regard to the third example, a URI-ID of "sip:www.example.edu"
+            <li class="normal" id="section-6.1.2-4.2">With regard to the third example, a URI-ID of "sip:www.college.example"
 would be rejected because the DNS domain name portion does not match
-"voice.example.edu" and a DNS-ID of "voice.example.edu" would be
+"voice.college.example" and a DNS-ID of "voice.college.example" would be
 rejected because it lacks the appropriate application service type
 portion (i.e., it does not specify a "sip:" URI).<a href="#section-6.1.2-4.2" class="pilcrow">¶</a>
 </li>
@@ -2040,8 +2040,8 @@ iPAddress entry in subjectAltName, with no partial (e.g., network-level) matchin
 </li>
           <li class="normal" id="section-6.2-3.3">For an SRV-ID reference identifier, the DNS domain name portion is
 the Name and the application service type portion is the Service.  For
-example, an SRV-ID of <code>_imaps.example.net</code> has a DNS domain name portion
-of <code>example.net</code> and an application service type portion of
+example, an SRV-ID of <code>_imaps.isp.example</code> has a DNS domain name portion
+of <code>isp.example</code> and an application service type portion of
 <code>imaps</code>, which maps to the IMAP application protocol as explained in
 <span>[<a href="#EMAIL-SRV" class="cite xref">EMAIL-SRV</a>]</span>.<a href="#section-6.2-3.3" class="pilcrow">¶</a>
 </li>
@@ -2054,8 +2054,8 @@ A URI that contains an IP address might be matched against an IP-ID in place
 of a URI-ID by some lenient clients.  This document does not describe how a
 URI that contains no "host" component can be matched.  Note that extraction of the
 "reg-name" might necessitate normalization of the URI (as explained in
-<span><a href="https://rfc-editor.org/rfc/rfc3986#section-6" class="relref">Section 6</a> of [<a href="#URI" class="cite xref">URI</a>]</span>).  For example, a URI-ID of <code>sip:voice.example.edu</code> would be split
-into a DNS domain name portion of <code>voice.example.edu</code> and an application
+<span><a href="https://rfc-editor.org/rfc/rfc3986#section-6" class="relref">Section 6</a> of [<a href="#URI" class="cite xref">URI</a>]</span>).  For example, a URI-ID of <code>sip:voice.college.example</code> would be split
+into a DNS domain name portion of <code>voice.college.example</code> and an application
 service type of <code>sip</code> (associated with an application protocol of SIP as
 explained in <span>[<a href="#SIP-CERTS" class="cite xref">SIP-CERTS</a>]</span>).<a href="#section-6.2-3.4" class="pilcrow">¶</a>
 </li>
@@ -2088,7 +2088,7 @@ described in <span><a href="https://rfc-editor.org/rfc/rfc1034#section-3.5" clas
 then matching of the reference identifier against the presented
 identifier <span class="bcp14">MUST</span> be performed by comparing the set of domain name labels using
 a case-insensitive ASCII comparison, as clarified by <span>[<a href="#DNS-CASE" class="cite xref">DNS-CASE</a>]</span>.  For
-example, <code>WWW.Example.Com</code> would be lower-cased to <code>www.example.com</code> for
+example, <code>WWW.BigCompany.Example</code> would be lower-cased to <code>www.bigcompany.example</code> for
 comparison purposes.  Each label <span class="bcp14">MUST</span> match in order for the names to be
 considered to match, except as supplemented by the rule about checking of
 wildcard labels in presented identifiers given below.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
@@ -2149,14 +2149,14 @@ the identifier is an SRV-ID or a URI-ID.<a href="#section-6.5-1" class="pilcrow"
 <p id="section-6.5-2">These identifiers provide an application service type portion to be checked,
 but that portion is combined only with the DNS domain name portion of the
 SRV-ID or URI-ID itself.  For example, if a client's list of reference
-identifiers includes an SRV-ID of <code>_xmpp-client.im.example.org</code> and a DNS-ID
-of <code>apps.example.net</code>, the client <span class="bcp14">MUST</span> check both the combination of an
+identifiers includes an SRV-ID of <code>_xmpp-client.messenger.example</code> and a DNS-ID
+of <code>app.example</code>, the client <span class="bcp14">MUST</span> check both the combination of an
 application service type of <code>xmpp-client</code> and a DNS domain name of
-<code>im.example.org</code> and, separately,
-a DNS domain name of <code>apps.example.net</code>.  However, the
+<code>messenger.example</code> and, separately,
+a DNS domain name of <code>app.example</code>.  However, the
 client <span class="bcp14">MUST NOT</span> check the combination of an application service type of
-<code>xmpp-client</code> and a DNS domain name of <code>apps.example.net</code> because it does not
-have an SRV-ID of <code>_xmpp-client.apps.example.net</code> in its list of reference
+<code>xmpp-client</code> and a DNS domain name of <code>app.example</code> because it does not
+have an SRV-ID of <code>_xmpp-client.app.example</code> in its list of reference
 identifiers.<a href="#section-6.5-2" class="pilcrow">¶</a></p>
 <p id="section-6.5-3">If the identifier is an SRV-ID, then the application service name <span class="bcp14">MUST</span>
 be matched in a case-insensitive manner, in accordance with <span>[<a href="#DNS-SRV" class="cite xref">DNS-SRV</a>]</span>.
@@ -2222,7 +2222,7 @@ convenient for administrators but also poses the risk of vouching for rogue
 or buggy hosts. See for example <span>[<a href="#Defeating-SSL" class="cite xref">Defeating-SSL</a>]</span> (beginning at slide 91) and
 <span>[<a href="#HTTPSbytes" class="cite xref">HTTPSbytes</a>]</span> (slides 38-40).<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1-2">As specified in <a href="#verify-domain" class="auto internal xref">Section 6.3</a>, restricting the presented identifiers in certificates to only one
-wildcard character (e.g., "*.example.com" but not "*.*.example.com") and
+wildcard character (e.g., "*.bigcompany.example" but not "*.*.bigcompany.example") and
 restricting the use of wildcards to only the left-most domain label can
 help to mitigate certain aspects of the attack described in <span>[<a href="#Defeating-SSL" class="cite xref">Defeating-SSL</a>]</span>.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
 <p id="section-7.1-3">That same attack also relies on the initial use of a cleartext HTTP connection,
