@@ -6,7 +6,7 @@ Network Working Group                                     P. Saint-Andre
 Internet-Draft                                               independent
 Obsoletes: 6125 (if approved)                                    R. Salz
 Intended status: Standards Track                     Akamai Technologies
-Expires: 5 February 2024                                   4 August 2023
+Expires: 10 February 2024                                  9 August 2023
 
 
                         Service Identity in TLS
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 February 2024.
+   This Internet-Draft will expire on 10 February 2024.
 
 Copyright Notice
 
@@ -282,10 +282,6 @@ Table of Contents
       application-layer delegation is not to be confused with delegation
       in the DNS, by which a separate zone is created in the name space
       beneath the apex of a given domain; see for instance [DNS-TERMS].
-
-   derived domain:  A domain name or host name that a client has derived
-      from the source domain in an automated fashion (e.g., by means of
-      an MX or SRV lookup).
 
    identifier:  A particular instance of an identifier type that is
       either presented by a server in a certificate or referenced by a
@@ -526,7 +522,7 @@ Table of Contents
        protocol specification MUST specify which URI schemes are
        acceptable in URI-IDs contained in PKIX certificates used for the
        application protocol (e.g., sip but not sips or tel for SIP as
-       described in [SIP-SIPS]).  Typically this identifier type would
+       described in [SIP-SIPS]).  Typically, this identifier type would
        supplement the DNS-ID, unless the certificate is meant to be
        scoped to only the protocol in question.
 
@@ -594,9 +590,9 @@ Table of Contents
 
    If the certificate might be used for any type of application service,
    then the service provider SHOULD request a certificate that includes
-   only DNS-IDs or IP-IDs.  Again, because of multi-protocol attacks
-   this practice is discouraged; this can be mitigated by deploying only
-   one service on a host.
+   only DNS-IDs or IP-IDs.  Again, because of multiprotocol attacks this
+   practice is discouraged; this can be mitigated by deploying only one
+   service on a host.
 
    If a service provider offers multiple application service types and
    wishes to limit the applicability of certificates using SRV-IDs or
@@ -825,12 +821,12 @@ Table of Contents
 
    This section describes how the client must determine if the presented
    DNS name matches the reference DNS name.  The rules differ depending
-   on whether the domain to be checked is a traditional domain name or
-   an internationalized domain name, as defined in Section 2.  For
-   clients that support presented identifiers containing the wildcard
-   character "*", this section also specifies a supplemental rule for
-   such "wildcard certificates".  This section uses the description of
-   labels and domain names in [DNS-CONCEPTS].
+   on whether the domain to be checked is an internationalized domain
+   name, as defined in Section 2, or not.  For clients that support
+   presented identifiers containing the wildcard character "*", this
+   section also specifies a supplemental rule for such "wildcard
+   certificates".  This section uses the description of labels and
+   domain names in [DNS-CONCEPTS].
 
    If the DNS domain name portion of a reference identifier is a
    "traditional domain name" (i.e., a FQDN that conforms to "preferred
@@ -870,7 +866,7 @@ Table of Contents
    in a reference identifier.  This specification covers only wildcard
    characters in presented identifiers, not wildcard characters in
    reference identifiers or in DNS domain names more generally.
-   Therefore the use of wildcard characters as described herein is not
+   Therefore, the use of wildcard characters as described herein is not
    to be confused with DNS wildcard matching, where the "*" label always
    matches at least one whole label and sometimes more; see
    [DNS-CONCEPTS], Section 4.3.3 and [DNS-WILDCARDS].  In particular, it
@@ -1225,7 +1221,7 @@ Table of Contents
    [Defeating-SSL]
               Marlinspike, M., "New Tricks for Defeating SSL in
               Practice", BlackHat DC, February 2009,
-              <http://www.blackhat.com/presentations/bh-dc-
+              <https://www.blackhat.com/presentations/bh-dc-
               09/Marlinspike/BlackHat-DC-09-Marlinspike-Defeating-
               SSL.pdf>.
 
@@ -1348,10 +1344,9 @@ Table of Contents
 
    [TLS-SUBCERTS]
               Barnes, R., Iyengar, S., Sullivan, N., and E. Rescorla,
-              "Delegated Credentials for TLS and DTLS", Work in
-              Progress, Internet-Draft, draft-ietf-tls-subcerts-15, 30
-              June 2022, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-tls-subcerts-15>.
+              "Delegated Credentials for TLS and DTLS", RFC 9345,
+              DOI 10.17487/RFC9345, July 2023,
+              <https://www.rfc-editor.org/rfc/rfc9345>.
 
    [URL]      van Kesteren, A., "URL", 2023,
               <https://url.spec.whatwg.org/>.
@@ -1381,7 +1376,7 @@ Table of Contents
    [X.509]    International Telecommunications Union, "Information
               Technology - Open Systems Interconnection - The Directory:
               Public-key and attribute certificate frameworks",
-              ITU-T X.509, 2005.
+              ITU-T X.520, 2005.
 
    [X.690]    International Telecommunications Union, "Information
               Technology - ASN.1 encoding rules: Specification of Basic

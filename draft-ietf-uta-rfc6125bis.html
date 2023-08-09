@@ -1058,7 +1058,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Saint-Andre &amp; Salz</td>
-<td class="center">Expires 5 February 2024</td>
+<td class="center">Expires 10 February 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1074,12 +1074,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc6125" class="eref">6125</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-08-04" class="published">4 August 2023</time>
+<time datetime="2023-08-09" class="published">9 August 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-02-05">5 February 2024</time></dd>
+<dd class="expires"><time datetime="2024-02-10">10 February 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1134,7 @@ in such interactions.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 February 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 February 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1509,95 +1509,89 @@ with delegation in the DNS, by which a separate zone is created in the name spac
 beneath the apex of a given domain; see for instance <span>[<a href="#DNS-TERMS" class="cite xref">DNS-TERMS</a>]</span>.<a href="#section-1.5-2.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.5-2.9">derived domain:</dt>
+<dt id="section-1.5-2.9">identifier:</dt>
           <dd style="margin-left: 1.5em" id="section-1.5-2.10">
-            <p id="section-1.5-2.10.1">A domain name or host name that a client has derived from the source domain
-in an automated fashion (e.g., by means of an MX or SRV lookup).<a href="#section-1.5-2.10.1" class="pilcrow">¶</a></p>
+            <p id="section-1.5-2.10.1">A particular instance of an identifier type that is either presented by a
+server in a certificate or referenced by a client for matching purposes.<a href="#section-1.5-2.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.5-2.11">identifier:</dt>
+<dt id="section-1.5-2.11">identifier type:</dt>
           <dd style="margin-left: 1.5em" id="section-1.5-2.12">
-            <p id="section-1.5-2.12.1">A particular instance of an identifier type that is either presented by a
-server in a certificate or referenced by a client for matching purposes.<a href="#section-1.5-2.12.1" class="pilcrow">¶</a></p>
-</dd>
-          <dd class="break"></dd>
-<dt id="section-1.5-2.13">identifier type:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.5-2.14">
-            <p id="section-1.5-2.14.1">A formally defined category of identifier that can be included in a
+            <p id="section-1.5-2.12.1">A formally defined category of identifier that can be included in a
 certificate and therefore that can also be used for matching purposes. For
 conciseness and convenience, we define the following identifier types of
-interest:<a href="#section-1.5-2.14.1" class="pilcrow">¶</a></p>
+interest:<a href="#section-1.5-2.12.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1.5-2.14.2.1">DNS-ID: a subjectAltName entry of type dNSName as defined in <span>[<a href="#PKIX" class="cite xref">PKIX</a>]</span>.<a href="#section-1.5-2.14.2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-1.5-2.12.2.1">DNS-ID: a subjectAltName entry of type dNSName as defined in <span>[<a href="#PKIX" class="cite xref">PKIX</a>]</span>.<a href="#section-1.5-2.12.2.1" class="pilcrow">¶</a>
 </li>
-              <li class="normal" id="section-1.5-2.14.2.2">IP-ID: a subjectAltName entry of type iPAddress as defined in <span>[<a href="#PKIX" class="cite xref">PKIX</a>]</span>.<a href="#section-1.5-2.14.2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-1.5-2.12.2.2">IP-ID: a subjectAltName entry of type iPAddress as defined in <span>[<a href="#PKIX" class="cite xref">PKIX</a>]</span>.<a href="#section-1.5-2.12.2.2" class="pilcrow">¶</a>
 </li>
-              <li class="normal" id="section-1.5-2.14.2.3">SRV-ID: a subjectAltName entry of type otherName whose name form is
-SRVName, as defined in <span>[<a href="#SRVNAME" class="cite xref">SRVNAME</a>]</span>.<a href="#section-1.5-2.14.2.3" class="pilcrow">¶</a>
+              <li class="normal" id="section-1.5-2.12.2.3">SRV-ID: a subjectAltName entry of type otherName whose name form is
+SRVName, as defined in <span>[<a href="#SRVNAME" class="cite xref">SRVNAME</a>]</span>.<a href="#section-1.5-2.12.2.3" class="pilcrow">¶</a>
 </li>
-              <li class="normal" id="section-1.5-2.14.2.4">URI-ID: a subjectAltName entry of type uniformResourceIdentifier
-as defined in <span>[<a href="#PKIX" class="cite xref">PKIX</a>]</span>. See further discussion in <a href="#security-uri" class="auto internal xref">Section 7.2</a>.<a href="#section-1.5-2.14.2.4" class="pilcrow">¶</a>
+              <li class="normal" id="section-1.5-2.12.2.4">URI-ID: a subjectAltName entry of type uniformResourceIdentifier
+as defined in <span>[<a href="#PKIX" class="cite xref">PKIX</a>]</span>. See further discussion in <a href="#security-uri" class="auto internal xref">Section 7.2</a>.<a href="#section-1.5-2.12.2.4" class="pilcrow">¶</a>
 </li>
             </ul>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.5-2.15">PKIX:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.5-2.16">
-            <p id="section-1.5-2.16.1">The short name for the Internet Public Key Infrastructure using X.509
+<dt id="section-1.5-2.13">PKIX:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.5-2.14">
+            <p id="section-1.5-2.14.1">The short name for the Internet Public Key Infrastructure using X.509
 defined in <span>[<a href="#PKIX" class="cite xref">PKIX</a>]</span>.  That document provides a profile of the X.509v3
 certificate specifications and X.509v2 certificate revocation list (CRL)
-specifications for use on the Internet.<a href="#section-1.5-2.16.1" class="pilcrow">¶</a></p>
+specifications for use on the Internet.<a href="#section-1.5-2.14.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.5-2.17">presented identifier:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.5-2.18">
-            <p id="section-1.5-2.18.1">An identifier presented by a server to a client within a PKIX certificate
+<dt id="section-1.5-2.15">presented identifier:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.5-2.16">
+            <p id="section-1.5-2.16.1">An identifier presented by a server to a client within a PKIX certificate
 when the client attempts to establish secure communication with the server.
 The certificate can include one or more presented identifiers of different
 types, and if the server hosts more than one domain then the certificate
-might present distinct identifiers for each domain.<a href="#section-1.5-2.18.1" class="pilcrow">¶</a></p>
+might present distinct identifiers for each domain.<a href="#section-1.5-2.16.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.5-2.19">reference identifier:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.5-2.20">
-            <p id="section-1.5-2.20.1">An identifier used by the client when examining presented identifiers.
+<dt id="section-1.5-2.17">reference identifier:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.5-2.18">
+            <p id="section-1.5-2.18.1">An identifier used by the client when examining presented identifiers.
 It is constructed from the source domain, and optionally an application
-service type.<a href="#section-1.5-2.20.1" class="pilcrow">¶</a></p>
+service type.<a href="#section-1.5-2.18.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.5-2.21">Relative Distinguished Name (RDN):</dt>
+<dt id="section-1.5-2.19">Relative Distinguished Name (RDN):</dt>
+          <dd style="margin-left: 1.5em" id="section-1.5-2.20">
+            <p id="section-1.5-2.20.1">An ASN.1-based construction which itself is a building-block component of
+Distinguished Names. See <span>[<a href="#LDAP-DN" class="cite xref">LDAP-DN</a>], <a href="https://rfc-editor.org/rfc/rfc4514#section-2" class="relref">Section 2</a></span>.<a href="#section-1.5-2.20.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.5-2.21">source domain:</dt>
           <dd style="margin-left: 1.5em" id="section-1.5-2.22">
-            <p id="section-1.5-2.22.1">An ASN.1-based construction which itself is a building-block component of
-Distinguished Names. See <span>[<a href="#LDAP-DN" class="cite xref">LDAP-DN</a>], <a href="https://rfc-editor.org/rfc/rfc4514#section-2" class="relref">Section 2</a></span>.<a href="#section-1.5-2.22.1" class="pilcrow">¶</a></p>
-</dd>
-          <dd class="break"></dd>
-<dt id="section-1.5-2.23">source domain:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.5-2.24">
-            <p id="section-1.5-2.24.1">The fully qualified domain name (FQDN) that a client expects an application
+            <p id="section-1.5-2.22.1">The fully qualified domain name (FQDN) that a client expects an application
 service to present in the certificate. This is typically input by
 a human user, configured into a client, or provided by reference such as
 a URL. The combination of a source domain and, optionally, an application
 service type enables a client to construct one or more reference
 identifiers. This specification covers FQDNs. Use of any names that
 are not fully qualified is out of scope and may result in unexpected
-or undefined behavior.<a href="#section-1.5-2.24.1" class="pilcrow">¶</a></p>
+or undefined behavior.<a href="#section-1.5-2.22.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.5-2.25">subjectAltName entry:</dt>
+<dt id="section-1.5-2.23">subjectAltName entry:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.5-2.24">
+            <p id="section-1.5-2.24.1">An identifier placed in a subjectAltName extension.<a href="#section-1.5-2.24.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.5-2.25">subjectAltName extension:</dt>
           <dd style="margin-left: 1.5em" id="section-1.5-2.26">
-            <p id="section-1.5-2.26.1">An identifier placed in a subjectAltName extension.<a href="#section-1.5-2.26.1" class="pilcrow">¶</a></p>
+            <p id="section-1.5-2.26.1">A standard PKIX extension enabling identifiers of various types to be
+bound to the certificate subject.<a href="#section-1.5-2.26.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.5-2.27">subjectAltName extension:</dt>
+<dt id="section-1.5-2.27">subjectName:</dt>
           <dd style="margin-left: 1.5em" id="section-1.5-2.28">
-            <p id="section-1.5-2.28.1">A standard PKIX extension enabling identifiers of various types to be
-bound to the certificate subject.<a href="#section-1.5-2.28.1" class="pilcrow">¶</a></p>
-</dd>
-          <dd class="break"></dd>
-<dt id="section-1.5-2.29">subjectName:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.5-2.30">
-            <p id="section-1.5-2.30.1">The name of a PKIX certificate's subject, encoded in a certificate's
-subject field (see <span>[<a href="#PKIX" class="cite xref">PKIX</a>], <a href="https://rfc-editor.org/rfc/rfc5280#section-4.1.2.6" class="relref">Section 4.1.2.6</a></span>).<a href="#section-1.5-2.30.1" class="pilcrow">¶</a></p>
+            <p id="section-1.5-2.28.1">The name of a PKIX certificate's subject, encoded in a certificate's
+subject field (see <span>[<a href="#PKIX" class="cite xref">PKIX</a>], <a href="https://rfc-editor.org/rfc/rfc5280#section-4.1.2.6" class="relref">Section 4.1.2.6</a></span>).<a href="#section-1.5-2.28.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1687,7 +1681,7 @@ binding via the "SVCB" and "HTTPS" DNS resource record (RR) types. This
 document does not define any identity representation or verification procedures
 that are specific to SVCB-compatible records, because the use of such records during
 connection establishment does not currently alter any of the PKIX validation
-requirements specified herein or in any other relevant specification. For example, 
+requirements specified herein or in any other relevant specification. For example,
 the PKIX validation rules for <span>[<a href="#HTTP-OVER-TLS" class="cite xref">HTTP-OVER-TLS</a>]</span> and <span>[<a href="#DNS-OVER-TLS" class="cite xref">DNS-OVER-TLS</a>]</span> do not change
 when the client uses <span>[<a href="#SVCB-FOR-HTTPS" class="cite xref">SVCB-FOR-HTTPS</a>]</span> or <span>[<a href="#SVCB-FOR-DNS" class="cite xref">SVCB-FOR-DNS</a>]</span>. However, it is possible
 that future SVCB mapping documents could specify altered PKIX rules for new use cases.<a href="#section-2-12" class="pilcrow">¶</a></p>
@@ -1769,7 +1763,7 @@ and the "host" component <span class="bcp14">MUST</span> be the FQDN
 of the service.  The application protocol specification
 <span class="bcp14">MUST</span> specify which URI schemes are acceptable in URI-IDs contained in PKIX
 certificates used for the application protocol (e.g., <code>sip</code> but not <code>sips</code>
-or <code>tel</code> for SIP as described in <span>[<a href="#SIP-SIPS" class="cite xref">SIP-SIPS</a>]</span>). Typically this
+or <code>tel</code> for SIP as described in <span>[<a href="#SIP-SIPS" class="cite xref">SIP-SIPS</a>]</span>). Typically, this
 identifier type would supplement the DNS-ID, unless the certificate
 is meant to be scoped to only the protocol in question.<a href="#section-4.1-2.4" class="pilcrow">¶</a>
 </li>
@@ -1841,7 +1835,7 @@ URI-ID values that limit the deployment scope of the certificate to only the
 defined application service type.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <p id="section-5-4">If the certificate might be used for any type of application service, then
 the service provider <span class="bcp14">SHOULD</span> request a certificate that includes
-only DNS-IDs or IP-IDs. Again, because of multi-protocol attacks this practice is
+only DNS-IDs or IP-IDs. Again, because of multiprotocol attacks this practice is
 discouraged; this can be mitigated by deploying only one service on
 a host.<a href="#section-5-4" class="pilcrow">¶</a></p>
 <p id="section-5-5">If a service provider offers multiple application service types and wishes to
@@ -2081,8 +2075,9 @@ service type as well; see <a href="#verify-app" class="auto internal xref">Secti
         </h3>
 <p id="section-6.3-1">This section describes how the client must determine if the presented DNS
 name matches the reference DNS name.  The rules differ depending on whether
-the domain to be checked is a traditional domain name or an
-internationalized domain name, as defined in <a href="#names" class="auto internal xref">Section 2</a>.  For clients
+the domain to be checked is an
+internationalized domain name, as defined in <a href="#names" class="auto internal xref">Section 2</a>, or not.
+For clients
 that support presented identifiers containing the wildcard character "*", this section
 also specifies a supplemental rule for such "wildcard certificates".
 This section uses the description of labels and domain names in
@@ -2119,7 +2114,7 @@ be ignored.<a href="#section-6.3-6" class="pilcrow">¶</a></p>
 <p id="section-6.3-7">A wildcard in a presented identifier can only match exactly one label in a
 reference identifier.  This specification covers only wildcard characters in
 presented identifiers, not wildcard characters in reference identifiers or in
-DNS domain names more generally.  Therefore the use of wildcard characters
+DNS domain names more generally.  Therefore, the use of wildcard characters
 as described herein is not to be confused with DNS wildcard
 matching, where the "*" label always matches at least one whole label and
 sometimes more; see <span>[<a href="#DNS-CONCEPTS" class="cite xref">DNS-CONCEPTS</a>], <a href="https://rfc-editor.org/rfc/rfc1034#section-4.3.3" class="relref">Section 4.3.3</a></span> and <span>[<a href="#DNS-WILDCARDS" class="cite xref">DNS-WILDCARDS</a>]</span>.
@@ -2476,7 +2471,7 @@ itself.<a href="#section-7.7-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="Defeating-SSL">[Defeating-SSL]</dt>
         <dd>
-<span class="refAuthor">Marlinspike, M.</span>, <span class="refTitle">"New Tricks for Defeating SSL in Practice"</span>, <span class="seriesInfo">BlackHat DC</span>, <time datetime="2009-02" class="refDate">February 2009</time>, <span>&lt;<a href="http://www.blackhat.com/presentations/bh-dc-09/Marlinspike/BlackHat-DC-09-Marlinspike-Defeating-SSL.pdf">http://www.blackhat.com/presentations/bh-dc-09/Marlinspike/BlackHat-DC-09-Marlinspike-Defeating-SSL.pdf</a>&gt;</span>. </dd>
+<span class="refAuthor">Marlinspike, M.</span>, <span class="refTitle">"New Tricks for Defeating SSL in Practice"</span>, <span class="seriesInfo">BlackHat DC</span>, <time datetime="2009-02" class="refDate">February 2009</time>, <span>&lt;<a href="https://www.blackhat.com/presentations/bh-dc-09/Marlinspike/BlackHat-DC-09-Marlinspike-Defeating-SSL.pdf">https://www.blackhat.com/presentations/bh-dc-09/Marlinspike/BlackHat-DC-09-Marlinspike-Defeating-SSL.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="DNS-CASE">[DNS-CASE]</dt>
         <dd>
@@ -2572,7 +2567,7 @@ itself.<a href="#section-7.7-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="TLS-SUBCERTS">[TLS-SUBCERTS]</dt>
         <dd>
-<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Iyengar, S.</span>, <span class="refAuthor">Sullivan, N.</span>, and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"Delegated Credentials for TLS and DTLS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-subcerts-15</span>, <time datetime="2022-06-30" class="refDate">30 June 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-subcerts-15">https://datatracker.ietf.org/doc/html/draft-ietf-tls-subcerts-15</a>&gt;</span>. </dd>
+<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Iyengar, S.</span>, <span class="refAuthor">Sullivan, N.</span>, and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"Delegated Credentials for TLS and DTLS"</span>, <span class="seriesInfo">RFC 9345</span>, <span class="seriesInfo">DOI 10.17487/RFC9345</span>, <time datetime="2023-07" class="refDate">July 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9345">https://www.rfc-editor.org/rfc/rfc9345</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="URL">[URL]</dt>
         <dd>
@@ -2600,7 +2595,7 @@ itself.<a href="#section-7.7-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="X.509">[X.509]</dt>
         <dd>
-<span class="refAuthor">International Telecommunications Union</span>, <span class="refTitle">"Information Technology - Open Systems Interconnection - The Directory: Public-key and attribute certificate frameworks"</span>, <span class="seriesInfo">ITU-T X.509</span>, <time datetime="2005" class="refDate">2005</time>. </dd>
+<span class="refAuthor">International Telecommunications Union</span>, <span class="refTitle">"Information Technology - Open Systems Interconnection - The Directory: Public-key and attribute certificate frameworks"</span>, <span class="seriesInfo">ITU-T X.520</span>, <time datetime="2005" class="refDate">2005</time>. </dd>
 <dd class="break"></dd>
 <dt id="X.690">[X.690]</dt>
         <dd>
