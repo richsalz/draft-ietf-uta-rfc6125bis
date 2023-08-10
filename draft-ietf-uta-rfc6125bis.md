@@ -46,7 +46,6 @@ informative:
   DANE: RFC6698
   DNS-CASE: RFC4343
   DNS-OVER-TLS: RFC7858
-  DNS-TERMS: RFC8499
   DTLS: RFC9147
   EMAIL-SRV: RFC6186
   HTTP: RFC9110
@@ -369,16 +368,6 @@ application service type:
   particular kind of application service at a domain.  This often appears as
   a URI scheme {{URI}}, DNS SRV Service {{DNS-SRV}}, or an ALPN {{ALPN}}
   identifier.
-
-delegated domain:
-: A domain name or host name that is explicitly configured at the application layer for communicating
-  with the source domain (e.g., by the human user controlling an application client,
-  by a trusted administrator who sets policy for such clients, or by means of
-  automated configuration in the client itself).  For example, an IMAP server at mail.isp.example
-  could be a delegated domain for a source domain of isp.example associated with an email address of
-  user@isp.example.  This kind of application-layer delegation is not to be confused
-  with delegation in the DNS, by which a separate zone is created in the name space
-  beneath the apex of a given domain; see for instance {{DNS-TERMS}}.
 
 identifier:
 : A particular instance of an identifier type that is either presented by a
