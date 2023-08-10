@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-08-06T01:00:24.736089+00:00",
+  "timestamp": "2023-08-10T01:06:28.993679+00:00",
   "repo": "richsalz/draft-ietf-uta-rfc6125bis",
   "labels": [
     {
@@ -1165,15 +1165,15 @@
       "id": "I_kwDOFrdhtM5tevCK",
       "title": "Lars's Feedback",
       "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/104",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "richsalz",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Lars Eggert has entered the following ballot position for\r\ndraft-ietf-uta-rfc6125bis-14: Discuss\r\n\r\nWhen responding, please keep the subject line intact and reply to all\r\nemail addresses included in the To and CC lines. (Feel free to cut this\r\nintroductory paragraph, however.)\r\n\r\n\r\nPlease refer to https://urldefense.com/v3/__https://www.ietf.org/about/groups/iesg/statements/handling-ballot-positions/__;!!GjvTz_vk!Vit0YEVafKcpWsWbgd21mvFM66UC5HmMCKEYoPinyYlFR07SOF0rCUr83MYYcONKCIEn7uqdkd83$  \r\nfor more information about how to handle DISCUSS and COMMENT positions.\r\n\r\n\r\nThe document, along with other ballot positions, can be found here:\r\nhttps://urldefense.com/v3/__https://datatracker.ietf.org/doc/draft-ietf-uta-rfc6125bis/__;!!GjvTz_vk!Vit0YEVafKcpWsWbgd21mvFM66UC5HmMCKEYoPinyYlFR07SOF0rCUr83MYYcONKCIEn7v4MXsmZ$\r\n\r\n\r\n\r\n----------------------------------------------------------------------\r\nDISCUSS:\r\n----------------------------------------------------------------------\r\n\r\n# GEN AD review of draft-ietf-uta-rfc6125bis-14\r\n\r\nCC @larseggert\r\n\r\nThanks to Maria Ines Robles for the General Area Review Team (Gen-ART) review\r\n(https://urldefense.com/v3/__https://mailarchive.ietf.org/arch/msg/gen-art/kKymWzL6jRgmCfLhf0A8IJATMMQ__;!!GjvTz_vk!Vit0YEVafKcpWsWbgd21mvFM66UC5HmMCKEYoPinyYlFR07SOF0rCUr83MYYcONKCIEn7ojHWKPN$ ).\r\n\r\n## Discuss\r\n\r\n### Section 4.2, paragraph 4\r\n```\r\n     Consider a SIP-accessible voice-over-IP (VoIP) server at the host\r\n     voice.example.edu servicing SIP addresses of the form\r\n     [user@voice.example.edu](mailto:user@voice.example.edu) and identified by a URI of\r\n     <sip:voice.example.edu>.  A certificate for this service would\r\n     include a URI-ID of sip:voice.example.edu (see [SIP-CERTS]) along\r\n     with a DNS-ID of voice.example.edu.\r\n```\r\nThis has got to be the most pedantic Discuss ever, but\r\nAFAICT \"example.edu\" is not in fact a valid example domain, i.e.,\r\nit's missing from\r\nhttps://urldefense.com/v3/__https://www.iana.org/assignments/special-use-domain-names/special-use-domain-names.xhtml__;!!GjvTz_vk!Vit0YEVafKcpWsWbgd21mvFM66UC5HmMCKEYoPinyYlFR07SOF0rCUr83MYYcONKCIEn7h3lbvvu$\r\n\r\n\r\n----------------------------------------------------------------------\r\nCOMMENT:\r\n----------------------------------------------------------------------\r\n\r\n## Comments\r\n\r\n### Inclusive language\r\n\r\nFound terminology that should be reviewed for inclusivity; see\r\nhttps://urldefense.com/v3/__https://www.rfc-editor.org/part2/*inclusive_language__;Iw!!GjvTz_vk!Vit0YEVafKcpWsWbgd21mvFM66UC5HmMCKEYoPinyYlFR07SOF0rCUr83MYYcONKCIEn7vzAs3Qk$  for background and more\r\nguidance:\r\n\r\n* Term `traditional`; alternatives might be `classic`, `classical`, `common`,\r\n   `conventional`, `customary`, `fixed`, `habitual`, `historic`,\r\n   `long-established`, `popular`, `prescribed`, `regular`, `rooted`,\r\n   `time-honored`, `universal`, `widely used`, `widespread`\r\n\r\n## Nits\r\n\r\nAll comments below are about very minor potential issues that you may choose to\r\naddress in some way - or ignore - as you see fit. Some were flagged by\r\nautomated tools (via https://urldefense.com/v3/__https://github.com/larseggert/ietf-reviewtool__;!!GjvTz_vk!Vit0YEVafKcpWsWbgd21mvFM66UC5HmMCKEYoPinyYlFR07SOF0rCUr83MYYcONKCIEn7lmUgeZH$ ), so there\r\nwill likely be some false positives. There is no need to let me know what you\r\ndid with these suggestions.\r\n\r\n### Outdated references\r\n\r\nDocument references `draft-ietf-tls-subcerts`, but that has been published as\r\n`RFC9345`.\r\n\r\n### URLs\r\n\r\nThese URLs in the document can probably be converted to HTTPS:\r\n\r\n*\r\nhttps://urldefense.com/v3/__http://www.blackhat.com/presentations/bh-dc-09/Marlinspike/BlackHat-DC-09-Marlinspike-Defeating-SSL.pdf__;!!GjvTz_vk!Vit0YEVafKcpWsWbgd21mvFM66UC5HmMCKEYoPinyYlFR07SOF0rCUr83MYYcONKCIEn7ssUdH9o$\r\n\r\n### Grammar/style\r\n\r\n#### Section 4.1, paragraph 1\r\n```\r\nSIP as described in [SIP-SIPS]). Typically this identifier type would supple\r\n                                 ^^^^^^^^^\r\n```\r\nA comma may be missing after the conjunctive/linking adverb \"Typically\".\r\n\r\n#### Section 4.2, paragraph 4\r\n```\r\ns or IP-IDs. Again, because of multi-protocol attacks this practice is discou\r\n                               ^^^^^^^^^^^^^^\r\n```\r\nThis word is normally spelled as one.\r\n\r\n#### Section 6.2, paragraph 7\r\n```\r\nDNS domain names more generally. Therefore the use of wildcard characters as\r\n                                  ^^^^^^^^^\r\n```\r\nA comma may be missing after the conjunctive/linking adverb \"Therefore\".\r\n\r\n## Notes\r\n\r\nThis review is in the [\"IETF Comments\" Markdown format][ICMF], You can use the\r\n[`ietf-comments` tool][ICT] to automatically convert this review into\r\nindividual GitHub issues. Review generated by the [`ietf-reviewtool`][IRT].\r\n\r\n[ICMF]: https://urldefense.com/v3/__https://github.com/mnot/ietf-comments/blob/main/format.md__;!!GjvTz_vk!Vit0YEVafKcpWsWbgd21mvFM66UC5HmMCKEYoPinyYlFR07SOF0rCUr83MYYcONKCIEn7qw6u-pu$\r\n[ICT]: https://urldefense.com/v3/__https://github.com/mnot/ietf-comments__;!!GjvTz_vk!Vit0YEVafKcpWsWbgd21mvFM66UC5HmMCKEYoPinyYlFR07SOF0rCUr83MYYcONKCIEn7irKxvr-$\r\n[IRT]: https://urldefense.com/v3/__https://github.com/larseggert/ietf-reviewtool__;!!GjvTz_vk!Vit0YEVafKcpWsWbgd21mvFM66UC5HmMCKEYoPinyYlFR07SOF0rCUr83MYYcONKCIEn7lmUgeZH$",
       "createdAt": "2023-08-04T13:44:35Z",
-      "updatedAt": "2023-08-04T18:14:54Z",
-      "closedAt": null,
+      "updatedAt": "2023-08-08T22:40:19Z",
+      "closedAt": "2023-08-08T22:40:19Z",
       "comments": [
         {
           "author": "stpeter",
@@ -1202,8 +1202,61 @@
           "body": "In RFC 6125 we wanted to show that the web, email, messaging, and voice services were each under the administrative control of different entities. If the use of `example.edu` makes people lose sleep, we could of course use company.example for web, ISP.example for email, app.example for messaging, and university.example for voice.",
           "createdAt": "2023-08-04T18:14:54Z",
           "updatedAt": "2023-08-04T18:14:54Z"
+        },
+        {
+          "author": "stpeter",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@richsalz What do you think about using foo.example domains instead of example.foo domains? I am not wedded to the latter style, and I'm thinking the former might be clearer for the reader.",
+          "createdAt": "2023-08-08T17:33:13Z",
+          "updatedAt": "2023-08-08T17:33:13Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "no preference at all, happy to go with what you prefer.",
+          "createdAt": "2023-08-08T17:34:01Z",
+          "updatedAt": "2023-08-08T17:34:01Z"
+        },
+        {
+          "author": "stpeter",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think I'd like to make this change. I'll create a separate issue for it and then submit a PR against that issue.",
+          "createdAt": "2023-08-08T17:41:04Z",
+          "updatedAt": "2023-08-08T17:41:04Z"
         }
       ]
+    },
+    {
+      "number": 107,
+      "id": "I_kwDOFrdhtM5tzbmK",
+      "title": "Change example domains to more descriptive names",
+      "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/107",
+      "state": "CLOSED",
+      "author": "stpeter",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As discussed at https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/104 I would like to change example.* domains to more descriptive foo.example domains.",
+      "createdAt": "2023-08-08T22:39:30Z",
+      "updatedAt": "2023-08-09T18:32:43Z",
+      "closedAt": "2023-08-09T18:32:43Z",
+      "comments": []
+    },
+    {
+      "number": 109,
+      "id": "I_kwDOFrdhtM5t5baO",
+      "title": "Warren Kumari's feedback",
+      "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/109",
+      "state": "CLOSED",
+      "author": "richsalz",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "\r\n\r\n----------------------------------------------------------------------\r\nCOMMENT:\r\n----------------------------------------------------------------------\r\n\r\nI almost balloted DISCUSS, simply to seize Lars' \"most pedantic Discuss ever\"\r\ncrown, but I decided that the entertainment potential wasn't really worth it:\r\n\"I think that the convention / standard terminology is \"subject alternative\r\nname\" or \"subjectAltName\", not \"subjectAlternativeName\".\"\r\n\r\nInstead, because the document is so very readable, I'm balloting Yes.\r\n\r\nNits:\r\n\"TLS uses the words client and server, where the client is the entity that\r\ninitiates the connection.\" - this might be better as 'TLS uses the words\r\n\"client\" and \"server\", where the client is the entity that initiates the\r\nconnection.'\r\n\r\n\"During the course of processing, a client might be exposed to identifiers that\r\nlook like but are not reference identifiers.\" - \"...look like, but are not...\"\r\n\r\n\"Any intermediate values are not reference identifiers and MUST NOT be treated\r\nas such. [...] However, an application might define a process for\r\nauthenticating these intermediate identifiers in a way that then allows them to\r\nbe used as a reference identifier; see for example [SMTP-TLS].\" -  erm... I\r\nknow what you are trying to say here (at least I think that I do), but, as\r\nwritten this seems logically inconsistant.  Perhaps something like: \"Unless an\r\napplication defines a process for authenticating intermediate identifiers in a\r\nway that then allows them to be used as a reference identifier (see for example\r\n[SMTP-TLS]), any intermediate values are not reference identifiers and MUST NOT\r\nbe treated as such.\"... or something...\r\n\r\nQuestion:\r\n\"Note also that by policy, Top-Level Domains ([DNS-TERMS]) do not start with a\r\ndigit (see Section 2.2.1.3.2 of [ICANN-AGB]); ...\" - yup, that does indeed seem\r\nto be the current policy, but another round of new TLDs seems imminent and it\r\nisn't clear (to me at least) that this will always be true. Should the document\r\nnote that this is not set in stone?\r\n\r\nNotes:\r\nI agree with Eric's comments / suggestions re: support of the new SVCB\r\n(draft-ietf-dnsop-svcb-https) mechanism. Unless there is a really good reason\r\nto not mention it, it seems like it should be discussed.\r\n\r\nI'd also like to thank the DNSDIR ( Petr \u0160pa\u010dek -\r\nhttps://datatracker.ietf.org/doc/review-ietf-uta-rfc6125bis-12-dnsdir-lc-spacek-2023-06-21/) and OPSDIR ( Quin Wu -\r\nhttps://datatracker.ietf.org/doc/review-ietf-uta-rfc6125bis-08-opsdir-early-wu-2022-12-16/) for their helpful reviews, and to the authors for working with them to address the comments.\r\n\r\n\r\n\r\n",
+      "createdAt": "2023-08-09T18:11:26Z",
+      "updatedAt": "2023-08-09T18:35:02Z",
+      "closedAt": "2023-08-09T18:35:02Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -5553,7 +5606,7 @@
       "labels": [],
       "body": "Fixes https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/83",
       "createdAt": "2023-01-22T21:10:25Z",
-      "updatedAt": "2023-01-25T03:04:50Z",
+      "updatedAt": "2023-08-09T20:02:27Z",
       "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
       "baseRefName": "main",
       "baseRefOid": "72bb54409c2cea3d5c30268ca5998b38c0492dcc",
@@ -5805,7 +5858,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2023-03-01T00:48:25Z",
-      "updatedAt": "2023-03-02T15:55:49Z",
+      "updatedAt": "2023-08-09T20:02:28Z",
       "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
       "baseRefName": "main",
       "baseRefOid": "ebbe1263598e09e9760994c99e44c9a0df3b1d32",
@@ -6139,7 +6192,7 @@
       "labels": [],
       "body": "Fixes https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/99",
       "createdAt": "2023-08-02T17:06:10Z",
-      "updatedAt": "2023-08-02T17:35:13Z",
+      "updatedAt": "2023-08-09T20:02:22Z",
       "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
       "baseRefName": "main",
       "baseRefOid": "ad5e30a4e0f1b44356a3ccbc664ccd84194280a3",
@@ -6181,7 +6234,7 @@
       "labels": [],
       "body": "Fixes https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/98",
       "createdAt": "2023-08-02T22:43:12Z",
-      "updatedAt": "2023-08-03T22:21:11Z",
+      "updatedAt": "2023-08-09T20:02:20Z",
       "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
       "baseRefName": "main",
       "baseRefOid": "eaf568b62b13d3fb26231831cbc103909190a1ce",
@@ -6350,7 +6403,7 @@
       "labels": [],
       "body": "IPv6, address literals and examples.\r\nAlso fix some trailing whitespace lint\r\n\r\nFixes: #101",
       "createdAt": "2023-08-03T20:15:34Z",
-      "updatedAt": "2023-08-03T22:20:50Z",
+      "updatedAt": "2023-08-09T20:02:16Z",
       "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
       "baseRefName": "main",
       "baseRefOid": "eaf568b62b13d3fb26231831cbc103909190a1ce",
@@ -6406,24 +6459,26 @@
       "id": "PR_kwDOFrdhtM5XM020",
       "title": "Lars's feedback",
       "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/pull/105",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "richsalz",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "This addresses feedback from Lars Eggert.\r\n\r\n*DO NOT MERGE*  There is still one open item, about the use of \"traditional DNS names\" (not-international).\r\nEdit: *OKAY TO MERGE* once we're satisfied.\r\n\r\nFixes #104",
       "createdAt": "2023-08-04T13:59:24Z",
-      "updatedAt": "2023-08-04T17:07:06Z",
+      "updatedAt": "2023-08-09T17:39:11Z",
       "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
       "baseRefName": "main",
       "baseRefOid": "a635655c687c3b2bc085c28827d0ec12d1afd183",
       "headRepository": "richsalz/draft-ietf-uta-rfc6125bis",
       "headRefName": "lars",
-      "headRefOid": "0bbfc87b5a71ae1a79baf6e95bdee8a929c8fb25",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "7688b520b0ac3a7c28c7a6db656492d51ee36003",
+      "closedAt": "2023-08-08T22:40:18Z",
+      "mergedAt": "2023-08-08T22:40:18Z",
+      "mergedBy": "stpeter",
+      "mergeCommit": {
+        "oid": "d3a16b9c8056794ee36e66b6629700533b4467c2"
+      },
       "comments": [
         {
           "author": "richsalz",
@@ -6433,31 +6488,54 @@
           "updatedAt": "2023-08-04T14:09:46Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOFrdhtM5dcuho",
+          "commit": {
+            "abbreviatedOid": "0bbfc87"
+          },
+          "author": "stpeter",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-08-08T17:28:48Z",
+          "updatedAt": "2023-08-08T17:28:48Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\r\n* With regard to the third example, a URI-ID of \"sip:www.example.edu\"\r\n```",
+              "createdAt": "2023-08-08T17:28:48Z",
+              "updatedAt": "2023-08-08T17:28:48Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 106,
       "id": "PR_kwDOFrdhtM5XOfMK",
       "title": "Nits",
       "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/pull/106",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "richsalz",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "This PR tries to address all the open errata, https://www.rfc-editor.org/errata/rfc6125\r\n\r\nThe top commit (\"if ..., then\" rewrite) might be controversial and I am willing to withdraw it. But it does read better to me.",
       "createdAt": "2023-08-04T20:17:24Z",
-      "updatedAt": "2023-08-05T15:20:51Z",
+      "updatedAt": "2023-08-08T17:38:21Z",
       "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
       "baseRefName": "main",
-      "baseRefOid": "a635655c687c3b2bc085c28827d0ec12d1afd183",
+      "baseRefOid": "48518d49ed0c3aef3859bb416f32d421dfd6bdd7",
       "headRepository": "richsalz/draft-ietf-uta-rfc6125bis",
       "headRefName": "nits",
-      "headRefOid": "20ad64836a7c4a3869deed824673d2f45a59502a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "715e8c652e2bcdd6aef171605845e539968aa8d0",
+      "closedAt": "2023-08-08T17:27:09Z",
+      "mergedAt": "2023-08-08T17:27:09Z",
+      "mergedBy": "stpeter",
+      "mergeCommit": {
+        "oid": "a0874e631b4a7567716efccda6df323ed2c20a80"
+      },
       "comments": [
         {
           "author": "stpeter",
@@ -6474,7 +6552,133 @@
           "updatedAt": "2023-08-05T15:20:51Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOFrdhtM5dcBbZ",
+          "commit": {
+            "abbreviatedOid": "715e8c6"
+          },
+          "author": "stpeter",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-08-08T15:54:33Z",
+          "updatedAt": "2023-08-08T15:54:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 108,
+      "id": "PR_kwDOFrdhtM5Xe3ta",
+      "title": "use .example domains",
+      "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/pull/108",
+      "state": "MERGED",
+      "author": "stpeter",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes https://github.com/richsalz/draft-ietf-uta-rfc6125bis/issues/107",
+      "createdAt": "2023-08-08T23:06:54Z",
+      "updatedAt": "2023-08-09T20:02:19Z",
+      "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
+      "baseRefName": "main",
+      "baseRefOid": "d3a16b9c8056794ee36e66b6629700533b4467c2",
+      "headRepository": "richsalz/draft-ietf-uta-rfc6125bis",
+      "headRefName": "issue107",
+      "headRefOid": "90a5ad404ecb22d8b5bce5c77dd6a6920dad0039",
+      "closedAt": "2023-08-09T18:32:42Z",
+      "mergedAt": "2023-08-09T18:32:42Z",
+      "mergedBy": "stpeter",
+      "mergeCommit": {
+        "oid": "3c1a2f4565e27ddf1f56614c393b14716422b097"
+      },
+      "comments": [
+        {
+          "author": "stpeter",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Let's check this carefully before merging it! (I noticed a few errors in the original text along the way...)",
+          "createdAt": "2023-08-08T23:07:39Z",
+          "updatedAt": "2023-08-08T23:07:39Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFrdhtM5djADj",
+          "commit": {
+            "abbreviatedOid": "90a5ad4"
+          },
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-08-09T12:38:41Z",
+          "updatedAt": "2023-08-09T12:38:41Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOFrdhtM5djAoP",
+          "commit": {
+            "abbreviatedOid": "90a5ad4"
+          },
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-08-09T12:39:55Z",
+          "updatedAt": "2023-08-09T12:39:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 110,
+      "id": "PR_kwDOFrdhtM5XkH86",
+      "title": "Address Warren's feedback.",
+      "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/pull/110",
+      "state": "MERGED",
+      "author": "richsalz",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes: #109",
+      "createdAt": "2023-08-09T18:12:24Z",
+      "updatedAt": "2023-08-09T19:00:43Z",
+      "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
+      "baseRefName": "main",
+      "baseRefOid": "d3a16b9c8056794ee36e66b6629700533b4467c2",
+      "headRepository": "richsalz/draft-ietf-uta-rfc6125bis",
+      "headRefName": "warren",
+      "headRefOid": "2369a844fa3b356eb2a9030dc849f52470f1b9dd",
+      "closedAt": "2023-08-09T18:35:00Z",
+      "mergedAt": "2023-08-09T18:35:00Z",
+      "mergedBy": "stpeter",
+      "mergeCommit": {
+        "oid": "7049b476d1a1caf33a20ec7609d1a479a37f3665"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFrdhtM5dmP6w",
+          "commit": {
+            "abbreviatedOid": "6478f20"
+          },
+          "author": "stpeter",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-08-09T18:33:45Z",
+          "updatedAt": "2023-08-09T18:33:46Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "```suggestion\r\nlook like, but are not, reference identifiers. For example, DNS resolution that\r\n```",
+              "createdAt": "2023-08-09T18:33:45Z",
+              "updatedAt": "2023-08-09T18:33:46Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
