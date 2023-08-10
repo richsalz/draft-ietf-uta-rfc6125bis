@@ -38,7 +38,7 @@ normative:
   PKIX: RFC5280
   SRVNAME: RFC4985
   URI: RFC3986
-  TLS-REQS: RFC9325
+  TLS-REC: RFC9325
 informative:
   ABNF: RFC5234
   ACME: RFC8555
@@ -1111,11 +1111,9 @@ names that could be affected by a compromise of any other server named in
 the set: the strength of any server in the set of names is determined by the
 weakest of those servers that offer the names.
 
-Methods for mitigating this risk includes: limiting the number of names that
-any server can represent, following the guidelines for use of {{ALPN}}
-described in Section 3.8 of {{TLS-REQS}}), and ensuring that all servers in
-the set have a strong minimum configuration as described in Section 3.9 of
-{{TLS-REQS}}.
+The way to mitigate this risk is to limit the number of names that
+any server can speak for, and to ensure that all servers in the set
+have a strong minimum configuration as described in Section 3.9 of {{TLS-REC}}.
 
 ## Multiple Reference Identifiers
 
@@ -1208,17 +1206,32 @@ to Markdown so that we could more easily use Martin Thomson's `i-d-template`
 software.
 
 In addition to discussion on the mailing list, the following people
-provided especially helpful feedback:
+provided official reviews or especially significant feedback:
+Corey Bonnell,
+Roman Danyliw,
 Viktor Dukhovni,
+Lars Eggert,
+Patrik Fältström,
 Jim Fenton,
 Olle Johansson,
 John Klensin,
+Murray Kucherawy,
+Warren Kumari,
 John Mattson,
 Alexey Melnikov,
+Derrell Piper,
+Ines Robles,
+Rob Sayre,
 Yaron Sheffer,
 Ryan Sleevi,
 Brian Smith,
+Petr Špaček,
+Orie Steele,
+Martin Thomson,
+Joe Touch,
+Éric Vyncke,
+Paul Wouters,
 and
-Martin Thomson.
+Qin Wu.
 
-A few descriptive sentences were borrowed from {{TLS-REQS}}.
+A few descriptive sentences were borrowed from {{TLS-REC}}.
