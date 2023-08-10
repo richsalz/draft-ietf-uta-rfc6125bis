@@ -107,12 +107,6 @@ informative:
     date: 2010-11
     seriesinfo:
       BlackHat: Abu Dhabi
-  ICANN-AGB:
-    target: https://newgtlds.icann.org/en/applicants/agb
-    title: "gTLD Applicant Guidebook"
-    author:
-    - org: "ICANN"
-    date: 2012-06-04
   Defeating-SSL:
     target: https://www.blackhat.com/presentations/bh-dc-09/Marlinspike/BlackHat-DC-09-Marlinspike-Defeating-SSL.pdf
     title: New Tricks for Defeating SSL in Practice
@@ -571,8 +565,6 @@ example in the "host" components of a URI.  In this case, applications need to b
 representation of an IPv4 address is a valid DNS name. The two
 types can be distinguished by first testing if the identifier is a valid IPv4
 address, as is done by the "first-match-wins" algorithm in {{Section 3.2.2 of URI}}.
-Note also that by current policy, Top-Level Domains ({{DNS-TERMS}}) do not
-start with a digit (see Section 2.2.1.3.2 of {{ICANN-AGB}}).
 
 # Representing Server Identity {#represent}
 
