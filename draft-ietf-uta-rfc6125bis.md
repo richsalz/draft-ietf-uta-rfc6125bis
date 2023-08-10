@@ -38,7 +38,7 @@ normative:
   PKIX: RFC5280
   SRVNAME: RFC4985
   URI: RFC3986
-  RFC9325: RFC9325
+  TLS-REC: RFC9325
 informative:
   ABNF: RFC5234
   ACME: RFC8555
@@ -1044,7 +1044,7 @@ weakest of those servers that offer the names.
 
 The way to mitigate this risk is to limit the number of names that
 any server can speak for, and to ensure that all servers in the set
-have a strong minimum configuration as described in {{RFC9325}}.
+have a strong minimum configuration as described in {{TLS-REC}}.
 
 ## Multiple Reference Identifiers
 
@@ -1151,4 +1151,4 @@ Paul Wouters,
 and
 Qin Wu.
 
-A few descriptive sentences were borrowed from {{RFC9325}}.
+A few descriptive sentences were borrowed from {{TLS-REC}}.
