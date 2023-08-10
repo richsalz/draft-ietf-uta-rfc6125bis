@@ -38,7 +38,7 @@ normative:
   PKIX: RFC5280
   SRVNAME: RFC4985
   URI: RFC3986
-  RFC7525bis: I-D.ietf-uta-rfc7525bis
+  RFC9325: RFC9325
 informative:
   ABNF: RFC5234
   ACME: RFC8555
@@ -1044,7 +1044,7 @@ weakest of those servers that offer the names.
 
 The way to mitigate this risk is to limit the number of names that
 any server can speak for, and to ensure that all servers in the set
-have a strong minimum configuration as described in {{RFC7525bis}}.
+have a strong minimum configuration as described in {{RFC9325}}.
 
 ## Multiple Reference Identifiers
 
@@ -1124,22 +1124,31 @@ to Markdown so that we could more easily use Martin Thomson's `i-d-template`
 software.
 
 In addition to discussion on the mailing list, the following people
-provided official reviews or especially helpful feedback:
+provided official reviews or especially significant feedback:
+Corey Bonnell,
+Roman Danyliw,
 Viktor Dukhovni,
+Lars Eggert,
 Patrik Fältström,
 Jim Fenton,
 Olle Johansson,
 John Klensin,
+Murray Kucherawy,
+Warren Kumari,
 John Mattson,
 Alexey Melnikov,
+Derrell Piper,
 Ines Robles,
+Rob Sayre,
 Yaron Sheffer,
 Ryan Sleevi,
 Brian Smith,
 Petr Špaček,
 Martin Thomson,
+Joe Touch,
+Éric Vyncke,
 Paul Wouters,
 and
 Qin Wu.
 
-A few descriptive sentences were borrowed from {{RFC7525bis}}.
+A few descriptive sentences were borrowed from {{RFC9325}}.
