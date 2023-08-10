@@ -6,7 +6,7 @@ Network Working Group                                     P. Saint-Andre
 Internet-Draft                                               independent
 Obsoletes: 6125 (if approved)                                    R. Salz
 Intended status: Standards Track                     Akamai Technologies
-Expires: 31 December 2023                                   29 June 2023
+Expires: 11 February 2024                                 10 August 2023
 
 
                         Service Identity in TLS
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 December 2023.
+   This Internet-Draft will expire on 11 February 2024.
 
 Copyright Notice
 
@@ -996,7 +996,7 @@ Table of Contents
 
    The way to mitigate this risk is to limit the number of names that
    any server can speak for, and to ensure that all servers in the set
-   have a strong minimum configuration as described in [RFC7525bis].
+   have a strong minimum configuration as described in [RFC9325].
 
 7.5.  Multiple Reference Identifiers
 
@@ -1081,18 +1081,15 @@ Table of Contents
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
-   [RFC7525bis]
-              Sheffer, Y., Saint-Andre, P., and T. Fossati,
-              "Recommendations for Secure Use of Transport Layer
-              Security (TLS) and Datagram Transport Layer Security
-              (DTLS)", Work in Progress, Internet-Draft, draft-ietf-uta-
-              rfc7525bis-11, 16 August 2022,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-uta-
-              rfc7525bis-11>.
-
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC9325]  Sheffer, Y., Saint-Andre, P., and T. Fossati,
+              "Recommendations for Secure Use of Transport Layer
+              Security (TLS) and Datagram Transport Layer Security
+              (DTLS)", BCP 195, RFC 9325, DOI 10.17487/RFC9325, November
+              2022, <https://www.rfc-editor.org/rfc/rfc9325>.
 
    [SRVNAME]  Santesson, S., "Internet X.509 Public Key Infrastructure
               Subject Alternative Name for Expression of Service Name",
@@ -1232,10 +1229,10 @@ Table of Contents
 
    [TLS-SUBCERTS]
               Barnes, R., Iyengar, S., Sullivan, N., and E. Rescorla,
-              "Delegated Credentials for (D)TLS", Work in Progress,
-              Internet-Draft, draft-ietf-tls-subcerts-15, 30 June 2022,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
-              subcerts-15>.
+              "Delegated Credentials for TLS and DTLS", Work in
+              Progress, Internet-Draft, draft-ietf-tls-subcerts-15, 30
+              June 2022, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-tls-subcerts-15>.
 
    [US-ASCII] American National Standards Institute, "Coded Character
               Set - 7-bit American Standard Code for Information
@@ -1318,13 +1315,15 @@ Acknowledgements
    could more easily use Martin Thomson's i-d-template software.
 
    In addition to discussion on the mailing list, the following people
-   provided official reviews or especially helpful feedback: Viktor
-   Dukhovni, Patrik Fältström, Jim Fenton, Olle Johansson, John Klensin,
-   John Mattson, Alexey Melnikov, Ines Robles, Yaron Sheffer, Ryan
-   Sleevi, Brian Smith, Petr Špaček, Martin Thomson, Paul Wouters, and
-   Qin Wu.
+   provided official reviews or especially significant feedback: Corey
+   Bonnell, Roman Danyliw, Viktor Dukhovni, Lars Eggert, Patrik
+   Fältström, Jim Fenton, Olle Johansson, John Klensin, Murray
+   Kucherawy, Warren Kumari, John Mattson, Alexey Melnikov, Derrell
+   Piper, Ines Robles, Rob Sayre, Yaron Sheffer, Ryan Sleevi, Brian
+   Smith, Petr Špaček, Martin Thomson, Joe Touch, Éric Vyncke, Paul
+   Wouters, and Qin Wu.
 
-   A few descriptive sentences were borrowed from [RFC7525bis].
+   A few descriptive sentences were borrowed from [RFC9325].
 
 Authors' Addresses
 
