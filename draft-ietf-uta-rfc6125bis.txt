@@ -6,7 +6,7 @@ Network Working Group                                     P. Saint-Andre
 Internet-Draft                                               independent
 Obsoletes: 6125 (if approved)                                    R. Salz
 Intended status: Standards Track                     Akamai Technologies
-Expires: 10 February 2024                                  9 August 2023
+Expires: 12 February 2024                                 11 August 2023
 
 
                         Service Identity in TLS
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 February 2024.
+   This Internet-Draft will expire on 12 February 2024.
 
 Copyright Notice
 
@@ -271,18 +271,6 @@ Table of Contents
       at a domain.  This often appears as a URI scheme [URI], DNS SRV
       Service [DNS-SRV], or an ALPN [ALPN] identifier.
 
-   delegated domain:  A domain name or host name that is explicitly
-      configured at the application layer for communicating with the
-      source domain (e.g., by the human user controlling an application
-      client, by a trusted administrator who sets policy for such
-      clients, or by means of automated configuration in the client
-      itself).  For example, an IMAP server at mail.isp.example could be
-      a delegated domain for a source domain of isp.example associated
-      with an email address of user@isp.example.  This kind of
-      application-layer delegation is not to be confused with delegation
-      in the DNS, by which a separate zone is created in the name space
-      beneath the apex of a given domain; see for instance [DNS-TERMS].
-
    identifier:  A particular instance of an identifier type that is
       either presented by a server in a certificate or referenced by a
       client for matching purposes.
@@ -481,9 +469,7 @@ Table of Contents
    representation of an IPv4 address is a valid DNS name.  The two types
    can be distinguished by first testing if the identifier is a valid
    IPv4 address, as is done by the "first-match-wins" algorithm in
-   Section 3.2.2 of [URI].  Note also that by current policy, Top-Level
-   Domains ([DNS-TERMS]) do not start with a digit (see
-   Section 2.2.1.3.2 of [ICANN-AGB]).
+   Section 3.2.2 of [URI].
 
 4.  Representing Server Identity
 
@@ -980,7 +966,7 @@ Table of Contents
    connection, which is hijacked by an active on-path attacker and
    subsequently upgraded to HTTPS.  In order to mitigate such an attack,
    administrators and software developers are advised to follow the
-   strict TLS guidelines provided in [TLS-REQS], Section 3.2.
+   strict TLS guidelines provided in [TLS-REC], Section 3.2.
 
    Because the attack described in [HTTPSbytes] relies on an underlying
    cross-site scripting (XSS) attack, web browsers and applications are
@@ -1068,11 +1054,10 @@ Table of Contents
    any server in the set of names is determined by the weakest of those
    servers that offer the names.
 
-   Methods for mitigating this risk includes: limiting the number of
-   names that any server can represent, following the guidelines for use
-   of [ALPN] described in Section 3.8 of [TLS-REQS]), and ensuring that
-   all servers in the set have a strong minimum configuration as
-   described in Section 3.9 of [TLS-REQS].
+   The way to mitigate this risk is to limit the number of names that
+   any server can speak for, and to ensure that all servers in the set
+   have a strong minimum configuration as described in Section 3.9 of
+   [TLS-REC].
 
 7.6.  Multiple Reference Identifiers
 
@@ -1181,7 +1166,7 @@ Table of Contents
               RFC 4985, DOI 10.17487/RFC4985, August 2007,
               <https://www.rfc-editor.org/rfc/rfc4985>.
 
-   [TLS-REQS] Sheffer, Y., Saint-Andre, P., and T. Fossati,
+   [TLS-REC]  Sheffer, Y., Saint-Andre, P., and T. Fossati,
               "Recommendations for Secure Use of Transport Layer
               Security (TLS) and Datagram Transport Layer Security
               (DTLS)", BCP 195, RFC 9325, DOI 10.17487/RFC9325, November
@@ -1238,11 +1223,6 @@ Table of Contents
               Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May
               2016, <https://www.rfc-editor.org/rfc/rfc7858>.
 
-   [DNS-TERMS]
-              Hoffman, P., Sullivan, A., and K. Fujiwara, "DNS
-              Terminology", BCP 219, RFC 8499, DOI 10.17487/RFC8499,
-              January 2019, <https://www.rfc-editor.org/rfc/rfc8499>.
-
    [DTLS]     Rescorla, E., Tschofenig, H., and N. Modadugu, "The
               Datagram Transport Layer Security (DTLS) Protocol Version
               1.3", RFC 9147, DOI 10.17487/RFC9147, April 2022,
@@ -1269,10 +1249,6 @@ Table of Contents
               Dhabi, November 2010, <https://media.blackhat.com/bh-ad-
               10/Hansen/Blackhat-AD-2010-Hansen-Sokol-HTTPS-Can-Byte-Me-
               slides.pdf>.
-
-   [ICANN-AGB]
-              ICANN, "gTLD Applicant Guidebook", 4 June 2012,
-              <https://newgtlds.icann.org/en/applicants/agb>.
 
    [NAPTR]    Mealling, M., "Dynamic Delegation Discovery System (DDDS)
               Part Three: The Domain Name System (DNS) Database",
@@ -1444,11 +1420,15 @@ Acknowledgements
    could more easily use Martin Thomson's i-d-template software.
 
    In addition to discussion on the mailing list, the following people
-   provided especially helpful feedback: Viktor Dukhovni, Jim Fenton,
-   Olle Johansson, John Klensin, John Mattson, Alexey Melnikov, Yaron
-   Sheffer, Ryan Sleevi, Brian Smith, and Martin Thomson.
+   provided official reviews or especially significant feedback: Corey
+   Bonnell, Roman Danyliw, Viktor Dukhovni, Lars Eggert, Patrik
+   Fältström, Jim Fenton, Olle Johansson, John Klensin, Murray
+   Kucherawy, Warren Kumari, John Mattson, Alexey Melnikov, Derrell
+   Piper, Ines Robles, Rob Sayre, Yaron Sheffer, Ryan Sleevi, Brian
+   Smith, Petr Špaček, Orie Steele, Martin Thomson, Joe Touch, Éric
+   Vyncke, Paul Wouters, and Qin Wu.
 
-   A few descriptive sentences were borrowed from [TLS-REQS].
+   A few descriptive sentences were borrowed from [TLS-REC].
 
 Authors' Addresses
 
