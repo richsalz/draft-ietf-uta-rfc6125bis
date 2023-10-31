@@ -22,6 +22,8 @@ Original:
 Current:
    Service Identity in TLS
 -->
+<!--[RSALZ] This is fine
+-->
 
 <!--[rfced] We capitalized "independent" for Peter's organization,
 which matches use in RFC 9325. If the original form is preferred
@@ -38,6 +40,8 @@ Current:
    Independent
    United States of America
    Email: stpeter@stpeter.im
+-->
+<!--[RSALZ] This is fine
 -->
   <front>
     <title abbrev="Service Identity in TLS">Service Identity in TLS</title>
@@ -66,6 +70,7 @@ Current:
 
 <!-- [rfced] Please insert any keywords (beyond those that appear in
 the title) for use on https://www.rfc-editor.org/search. -->
+    TLS, server, X509, identity, naming, verifying, representing
 
     <abstract>
 <t>Many application technologies enable secure communication between two entities
@@ -121,7 +126,9 @@ Perhaps:
     This document obsoletes RFC 6125 [VERIFY]. Changes from RFC 6125 
     [VERIFY] are described under Appendix A.
 -->	
-        <t>This document obsoletes <xref target="RFC6125"/>. Changes from <xref target="RFC6125"/> are described under <xref target="changes"/>.</t>
+<!--[RSALZ] Use the last one ("perhaps")
+-->
+        <t>This document obsoletes RFC 6125 <xref target="RFC6125"/>. Changes from <xref target="RFC6125"/> are described under <xref target="changes"/>.</t>
       </section>
       <section anchor="applicability">
         <name>Applicability</name>
@@ -211,6 +218,9 @@ Perhaps:
    Other aspects of a service such as a specific resource (the URI 
    "path" component) or parameters (the URI "query" components) are 
    the responsibility of specific protocols or URI schemes.
+-->
+<!--[RSALZ] I think leave it singlar, as the teminology is one component,
+that has multipart parts (the parameters)
 -->
 
 Other aspects of a service
@@ -374,6 +384,13 @@ underscore before and after.
 Please review carefully and let us know if the output is acceptable or if any
 updates are needed.
 -->    
+<!--[RSALZ] All uses of <tt> are intended to indicate "computer literal"
+output. The <em> markers, only used below, are intended to indicate a
+literal English word.  If we consider the HTML/PDF more important, than
+the way the doc uses those tags is okay. If we consider the TXT more
+important, than it is not optimal. I *think* the current uses are fine,
+but will not argue strongly if you prefer to change things.
+-->
       <name>Identifying Application Services</name>
       <t>This document assumes that an application service is identified by a DNS domain
 name (e.g., <tt>bigcompany.example</tt>), an IP address (IPv4 or IPv6), or an identifier
@@ -453,6 +470,13 @@ Perhaps:
    For example, the PKIX validation rules described in [HTTP] and 
    [DNS-OVER-TLS] are the same as described in [SVCB-FOR-HTTPS] and 
    [SVCB-FOR-DNS].
+-->
+<!--[RSALZ] Yes, the HTTP-OVER_TLS/RFC 9110 changes are correct.
+When the doc talks about a client "using" the SVCB records, it
+refers to a specific DNS query that providers more than just the
+"classic" IP address information. The intent of the text in this
+document is saying "perhaps a future SVCB field/entry/type (whatever)
+will say "do not use the rules defined here, do ...tbd... instead
 -->
 
 For example,
@@ -560,6 +584,9 @@ Some examples:
    www.bigcompany.example
    https://www.bigcompany.example/
 -->
+<!--[RSALZ]
+StPeter, help me :)
+-->
 	
         <t>Consider a SIP-accessible voice-over-IP (VoIP) server at the host
 <tt>voice.college.example</tt> servicing SIP addresses of the form
@@ -592,6 +619,9 @@ B) Consider an instant messaging (IM) server that is compatible with
    messenger.example that services IM addresses of the form
    user@messenger.example, which are discoverable via DNS SRV lookups 
    on the messenger.example domain. 
+-->
+<!--[RSALZ]
+The service is discoverable, so A.
 -->
 	
         <t>Consider an XMPP-compatible instant messaging (IM) server at the host
@@ -689,6 +719,9 @@ Perhaps:
    taken as input to the reference identifier must be obtained
    in a secure context such as...
 -->
+<!--[RSALZ]
+Yes.  Tempted to make a joke about "ask the protocl what it prefers"
+-->
 
 Similarly, it could
 insist that a domain name or an IP address taken as input to the reference
@@ -733,6 +766,9 @@ B) Using the combination of one or more FQDNs or IP addresses, plus
    optionally an application service type, the client MUST construct 
    its list of reference identifiers in accordance with the following 
    rules:
+-->
+<!--[RSALZ]
+I prefer A.
 -->
 	  
           <t>Using the combination of FQDN(s) or IP address(es), plus optionally an application service type, the client
@@ -844,6 +880,9 @@ Perhaps:
    A wildcard in a presented identifier can only match one label
    in a reference identifier. 
 -->
+<!--[RSALZ]
+Yes, the "perhaps" version is better.
+-->
 	  
           <li>An IP-ID reference identifier <bcp14>MUST</bcp14> be exactly equal to the value of an
 iPAddress entry in subjectAltName, with no partial (e.g., network-level) matching. There is no application service type.</li>
@@ -886,8 +925,12 @@ also specifies a supplemental rule for such "wildcard certificates".
 This section uses the description of labels and domain names in
 	<xref target="RFC1034"/>.</t>
 
-        <t>If the DNS domain name portion of a reference identifier is a "traditional
-domain name" (i.e., an FQDN that conforms to "preferred name syntax" as
+<!--[RSALZ]
+FIXED
+-->
+      <t>If the DNS domain name portion of a reference identifier
+	is not an internationalized domain name
+	(i.e., an FQDN that conforms to "preferred name syntax" as
 described in <xref section="3.5" sectionFormat="of" target="RFC1034"/>),
 then the matching of the reference identifier against the presented
 identifier <bcp14>MUST</bcp14> be performed by comparing the set of domain name labels using
@@ -939,6 +982,9 @@ Perhaps:
    An IP-ID is considered a match based on an octet-for-octet comparison of 
    the bytes of the reference identity with the bytes contained in the 
    iPAddress subjectAltName.
+-->
+<!--[RSALZ]
+Yes, it is considered to be a match.
 -->
 	
         <t>An IP-ID matches based on an octet-for-octet comparison of the bytes of the
@@ -1068,6 +1114,9 @@ Perhaps:
    Specifically, the matching of internationalized domain 
    names is performed on A-labels only (Section 6.3).
 -->
+<!--[RSALZ]
+Yes.
+-->
 	
         <t>This document specifies only matching between reference identifiers and
 presented identifiers, not the visual presentation of domain names. 
@@ -1115,6 +1164,15 @@ Original:
    (ALPN), discussed in [ALPN], provide a way for the application to 
    indicate the desired identifier and protocol to the server, which 
    it can then use to select the most appropriate certificate.
+-->
+<!--[RSALZ]
+SNI should be expanded on first use. The Identification/Indication mixup
+is fixed in the 8446bis draft and uses "Indication" everywhere.
+Uinsg "server_name" is common in both 8446 and the bis draft, so
+how about this:
+  TLS extensions such as the Server Name Identification (SNI), also known
+  as the "server_name" extension discussed in 
+  <xref section="4.4.2.2" sectionFormat="comma" target="RFC8446"/>, and ALPN, as discussed in <xref target="RFC7301"/>, provide a way for the application
 -->
 
 TLS extensions such as SNI, as discussed in <xref section="4.4.2.2" sectionFormat="comma" target="RFC8446"/>, and ALPN, as discussed in <xref target="RFC7301"/>, provide a way for the application
@@ -1269,6 +1327,9 @@ Perhaps:
            Encoding Rules (CER) and Distinguished Encoding Rules
            (DER)", ISO/IEC 8825-1:2021 (E), ITU-T Recommendation 
            X.690, February 2021.
+-->
+<!--[RSALZ]
+Yes, please update all the references.
 -->
 
 
@@ -1578,6 +1639,10 @@ Original:
    In addition to discussion on the mailing list, the following people
    provided official reviews or especially significant feedback:
 -->
+<!--[RSALZ]
+How about change "discussion on the mailing list" to "working group
+discussions"
+-->
 
 <t>In addition to discussion on the mailing list, the following people
 provided official reviews or especially significant feedback:
@@ -1635,6 +1700,9 @@ consistency per RFCs 5280 and 6125:
   Public Key Infrastructure Using X.509 (PKIX) -> 
   Public Key Infrastructure using X.509 (PKIX)
 -->
+<!--[RSALZ]
+Certification authority (CA) is the one to use.
+-->
     
 
 <!-- [rfced] Please review the "Inclusive Language" portion of the online 
@@ -1648,6 +1716,10 @@ publications-author-instructions#table1> indicates that this term is
 potentially biased, it is also ambiguous. "Tradition" is a subjective 
 term, as it is not the same for everyone.
 -->
+<!--[RSALZ]
+I made one change, about "traditional" DNS names above.  Marked with FIXED.
+-->
+        <t>If the DNS domain name portion of a reference identifier is a "traditional
     
   </back>
 </rfc>
