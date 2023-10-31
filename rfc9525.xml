@@ -24,6 +24,7 @@ Current:
 -->
 <!--[RSALZ] This is fine
 -->
+<!--[PSA] Agreed. -->
 
 <!--[rfced] We capitalized "independent" for Peter's organization,
 which matches use in RFC 9325. If the original form is preferred
@@ -43,6 +44,7 @@ Current:
 -->
 <!--[RSALZ] This is fine
 -->
+<!--[PSA] Agreed. -->
   <front>
     <title abbrev="Service Identity in TLS">Service Identity in TLS</title>
     <seriesInfo name="RFC" value="9525"/>
@@ -70,7 +72,8 @@ Current:
 
 <!-- [rfced] Please insert any keywords (beyond those that appear in
 the title) for use on https://www.rfc-editor.org/search. -->
-    TLS, server, X509, identity, naming, verifying, representing
+<!--[PSA] I added a few.  -->
+    TLS, server, X509, identity, naming, verifying, representing, PKIX, certificates, validation
 
     <abstract>
 <t>Many application technologies enable secure communication between two entities
@@ -128,6 +131,7 @@ Perhaps:
 -->	
 <!--[RSALZ] Use the last one ("perhaps")
 -->
+<!--[PSA] Agreed. -->
         <t>This document obsoletes RFC 6125 <xref target="RFC6125"/>. Changes from <xref target="RFC6125"/> are described under <xref target="changes"/>.</t>
       </section>
       <section anchor="applicability">
@@ -222,6 +226,7 @@ Perhaps:
 <!--[RSALZ] I think leave it singlar, as the teminology is one component,
 that has multipart parts (the parameters)
 -->
+<!--[PSA] Agreed. -->
 
 Other aspects of a service
 such as a specific resource (the URI "path" component) or parameters (the URI
@@ -391,6 +396,7 @@ the way the doc uses those tags is okay. If we consider the TXT more
 important, than it is not optimal. I *think* the current uses are fine,
 but will not argue strongly if you prefer to change things.
 -->
+<!--[PSA] The current / standard rendering works for me. -->
       <name>Identifying Application Services</name>
       <t>This document assumes that an application service is identified by a DNS domain
 name (e.g., <tt>bigcompany.example</tt>), an IP address (IPv4 or IPv6), or an identifier
@@ -477,6 +483,17 @@ refers to a specific DNS query that providers more than just the
 "classic" IP address information. The intent of the text in this
 document is saying "perhaps a future SVCB field/entry/type (whatever)
 will say "do not use the rules defined here, do ...tbd... instead
+-->
+<!--[PSA] 
+    The original wording seems fine to me, but to further clarify, we
+    could say:
+
+Modified:
+   For example, the PKIX validation rules for [HTTP] and
+   [DNS-OVER-TLS] do not change when the client uses the DNS resource
+   records defined in [SVCB-FOR-HTTPS] or [SVCB-FOR-DNS] to look up
+   connection information.
+
 -->
 
 For example,
@@ -587,6 +604,7 @@ Some examples:
 <!--[RSALZ]
 StPeter, help me :)
 -->
+<!--[PSA] All in brackets, please. -->
 	
         <t>Consider a SIP-accessible voice-over-IP (VoIP) server at the host
 <tt>voice.college.example</tt> servicing SIP addresses of the form
@@ -623,6 +641,7 @@ B) Consider an instant messaging (IM) server that is compatible with
 <!--[RSALZ]
 The service is discoverable, so A.
 -->
+<!--[PSA] Agreed. -->
 	
         <t>Consider an XMPP-compatible instant messaging (IM) server at the host
 <tt>messenger.example</tt> servicing IM addresses of the form <tt>user@messenger.example</tt> and
@@ -722,6 +741,7 @@ Perhaps:
 <!--[RSALZ]
 Yes.  Tempted to make a joke about "ask the protocl what it prefers"
 -->
+<!--[PSA] I think 'specify' is good. -->
 
 Similarly, it could
 insist that a domain name or an IP address taken as input to the reference
@@ -770,6 +790,7 @@ B) Using the combination of one or more FQDNs or IP addresses, plus
 <!--[RSALZ]
 I prefer A.
 -->
+<!--[PSA] I prefer B because it reads more smoothly. -->
 	  
           <t>Using the combination of FQDN(s) or IP address(es), plus optionally an application service type, the client
 <bcp14>MUST</bcp14> construct its list of reference identifiers in accordance with the
@@ -883,6 +904,9 @@ Perhaps:
 <!--[RSALZ]
 Yes, the "perhaps" version is better.
 -->
+<!--[PSA] I suggest: 
+   An IP-ID reference identifier MUST exactly match to the value of
+-->
 	  
           <li>An IP-ID reference identifier <bcp14>MUST</bcp14> be exactly equal to the value of an
 iPAddress entry in subjectAltName, with no partial (e.g., network-level) matching. There is no application service type.</li>
@@ -985,6 +1009,9 @@ Perhaps:
 -->
 <!--[RSALZ]
 Yes, it is considered to be a match.
+-->
+<!--[PSA] I suggest: 
+   Matching of an IP-ID is based on an octet-for-octet comparison of 
 -->
 	
         <t>An IP-ID matches based on an octet-for-octet comparison of the bytes of the
@@ -1117,6 +1144,7 @@ Perhaps:
 <!--[RSALZ]
 Yes.
 -->
+<!--[PSA] Agreed. -->
 	
         <t>This document specifies only matching between reference identifiers and
 presented identifiers, not the visual presentation of domain names. 
@@ -1173,6 +1201,10 @@ how about this:
   TLS extensions such as the Server Name Identification (SNI), also known
   as the "server_name" extension discussed in 
   <xref section="4.4.2.2" sectionFormat="comma" target="RFC8446"/>, and ALPN, as discussed in <xref target="RFC7301"/>, provide a way for the application
+-->
+<!--[PSA] 
+    The best reference is Section 3 of RFC 6066. That's what we 
+    cited as [TLS-EXT] in RFC 6125.
 -->
 
 TLS extensions such as SNI, as discussed in <xref section="4.4.2.2" sectionFormat="comma" target="RFC8446"/>, and ALPN, as discussed in <xref target="RFC7301"/>, provide a way for the application
@@ -1331,6 +1363,7 @@ Perhaps:
 <!--[RSALZ]
 Yes, please update all the references.
 -->
+<!--[PSA] Agreed. -->
 
 
 
@@ -1643,6 +1676,7 @@ Original:
 How about change "discussion on the mailing list" to "working group
 discussions"
 -->
+<!--[PSA] Agreed. -->
 
 <t>In addition to discussion on the mailing list, the following people
 provided official reviews or especially significant feedback:
@@ -1703,6 +1737,7 @@ consistency per RFCs 5280 and 6125:
 <!--[RSALZ]
 Certification authority (CA) is the one to use.
 -->
+<!--[PSA] Agreed. -->
     
 
 <!-- [rfced] Please review the "Inclusive Language" portion of the online 
@@ -1715,11 +1750,12 @@ clarity.  While the NIST website
 publications-author-instructions#table1> indicates that this term is 
 potentially biased, it is also ambiguous. "Tradition" is a subjective 
 term, as it is not the same for everyone.
+        <t>If the DNS domain name portion of a reference identifier is a "traditional
 -->
 <!--[RSALZ]
 I made one change, about "traditional" DNS names above.  Marked with FIXED.
 -->
-        <t>If the DNS domain name portion of a reference identifier is a "traditional
+<!--[PSA] WFM. -->
     
   </back>
 </rfc>
