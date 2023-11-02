@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-08-13T00:56:39.544795+00:00",
+  "timestamp": "2023-11-02T00:56:53.895868+00:00",
   "repo": "richsalz/draft-ietf-uta-rfc6125bis",
   "labels": [
     {
@@ -6832,6 +6832,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 115,
+      "id": "PR_kwDOFrdhtM5eQPUg",
+      "title": "AUTH48 edits",
+      "url": "https://github.com/richsalz/draft-ietf-uta-rfc6125bis/pull/115",
+      "state": "OPEN",
+      "author": "stpeter",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Further edits to come, let's not merge until AUTH48 is done.",
+      "createdAt": "2023-10-31T16:33:06Z",
+      "updatedAt": "2023-10-31T17:38:17Z",
+      "baseRepository": "richsalz/draft-ietf-uta-rfc6125bis",
+      "baseRefName": "main",
+      "baseRefOid": "e19b407ed4baacdb331d93b20e3418db50c145b5",
+      "headRepository": "richsalz/draft-ietf-uta-rfc6125bis",
+      "headRefName": "AUTH48",
+      "headRefOid": "eec31aa77625389ffc21330be4d6a4b02585eeb4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
