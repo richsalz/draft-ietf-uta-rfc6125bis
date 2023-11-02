@@ -12,39 +12,6 @@
 
   <!-- xml2rfc v2v3 conversion 3.17.5 -->
 
-<!--[rfced] FYI: We updated the short title (that spans the header of
-the PDF) as follows since there is enough space to fit the full
-title.
-
-Original:
-   Service Identity
-
-Current:
-   Service Identity in TLS
--->
-<!--[RSALZ] This is fine
--->
-<!--[PSA] Agreed. -->
-
-<!--[rfced] We capitalized "independent" for Peter's organization,
-which matches use in RFC 9325. If the original form is preferred
-instead, please let us know.
-
-Original:
-   Peter Saint-Andre
-   independent
-   United States of America
-   Email: stpeter@stpeter.im
-
-Current:
-   Peter Saint-Andre
-   Independent
-   United States of America
-   Email: stpeter@stpeter.im
--->
-<!--[RSALZ] This is fine
--->
-<!--[PSA] Agreed. -->
   <front>
     <title abbrev="Service Identity in TLS">Service Identity in TLS</title>
     <seriesInfo name="RFC" value="9525"/>
@@ -66,14 +33,20 @@ Current:
         <email>rsalz@akamai.com</email>
       </address>
     </author>
-    <date year="2023" month="October"/>
+    <date year="2023" month="November"/>
     <area>art</area>
     <workgroup>uta</workgroup>
 
-<!-- [rfced] Please insert any keywords (beyond those that appear in
-the title) for use on https://www.rfc-editor.org/search. -->
-<!--[PSA] I added a few.  -->
-    TLS, server, X509, identity, naming, verifying, representing, PKIX, certificates, validation
+<keyword>TLS</keyword>
+<keyword>server</keyword>
+<keyword>X509</keyword>
+<keyword>identity</keyword>
+<keyword>naming</keyword>
+<keyword>verifying</keyword>
+<keyword>representing</keyword>
+<keyword>PKIX</keyword>
+<keyword>certificates</keyword>
+<keyword>validation</keyword>
 
     <abstract>
 <t>Many application technologies enable secure communication between two entities
@@ -100,7 +73,7 @@ it has some notion of the server's
 identity (e.g., "the website at bigcompany.example") while attempting to establish
 secure communication.  Likewise, during TLS negotiation, the server presents
 its notion of the service's identity in the form of a public key certificate
-that was issued by a certificate authority (CA) in the context of the
+that was issued by a certification authority (CA) in the context of the
 Internet Public Key Infrastructure using X.509 <xref target="RFC5280"/>.  Informally, we can
 think of these identities as the client's "reference identity" and the
 server's "presented identity"; more formal definitions are given later.  A
@@ -108,31 +81,9 @@ client needs to verify that the server's presented identity matches its
 reference identity so it can deterministically and automatically authenticate the communication.</t>
         <t>This document defines procedures for how clients do this verification.
 It therefore defines requirements on other parties, such as
-the certificate authorities that issue certificates, the service administrators requesting
+the certification authorities that issue certificates, the service administrators requesting
 	them, and the protocol designers defining how things are named.</t>
-
-<!--[rfced] We linked "RFC 6125" in the Introduction by using
-<xref>. The citation name now displays as "[VERIFY]" instead of
-"RFC 6125", which is consistent with use in the rest of the
-document. If you would like to also display "RFC 6125" for
-easy reference as shown below, please let us know.
-
-Original:
-    This document obsoletes RFC 6125. Changes from RFC 6125 are
-    described under Appendix A.
-
-Current:
-    This document obsoletes [VERIFY]. Changes from [VERIFY] are
-    described under Appendix A.
-
-Perhaps:
-    This document obsoletes RFC 6125 [VERIFY]. Changes from RFC 6125 
-    [VERIFY] are described under Appendix A.
--->	
-<!--[RSALZ] Use the last one ("perhaps")
--->
-<!--[PSA] Agreed. -->
-        <t>This document obsoletes RFC 6125 <xref target="RFC6125"/>. Changes from <xref target="RFC6125"/> are described under <xref target="changes"/>.</t>
+        <t>This document obsoletes RFC 6125 <xref target="RFC6125"/>. Changes from RFC 6125 <xref target="RFC6125"/> are described under <xref target="changes"/>.</t>
       </section>
       <section anchor="applicability">
         <name>Applicability</name>
@@ -208,27 +159,7 @@ Other than as described above, certificates representing client identities
 	    (e.g., rfc822Name) are beyond the scope of this document.</li>
             <li>Identification of servers using other than a domain name, an IP address, or an SRV service name.
 This document discusses Uniform Resource Identifiers <xref target="RFC3986"/> only to the
-extent that they are expressed in certificates.
-
-<!--[rfced] In the following, should "component" be plural since it's
-referring to "parameters"?
-
-Original:
-   Other aspects of a service such as a specific resource (the URI 
-   "path" component) or parameters (the URI "query" component) are 
-   the responsibility of specific protocols or URI schemes.
-
-Perhaps:
-   Other aspects of a service such as a specific resource (the URI 
-   "path" component) or parameters (the URI "query" components) are 
-   the responsibility of specific protocols or URI schemes.
--->
-<!--[RSALZ] I think leave it singlar, as the teminology is one component,
-that has multipart parts (the parameters)
--->
-<!--[PSA] Agreed. -->
-
-Other aspects of a service
+extent that they are expressed in certificates. Other aspects of a service
 such as a specific resource (the URI "path" component) or parameters (the URI
 "query" component) are the responsibility of specific protocols or URI
 schemes.</li>
@@ -377,26 +308,6 @@ appear in all capitals, as shown here.</t>
 </section>
     </section>
     <section anchor="names">
-
-<!-- [rfced] In the html and pdf outputs, the text enclosed in <tt> is output in
-fixed-width font. In the txt output, there are no changes to the font,
-and the quotation marks have been removed. 
-
-In the html and pdf outputs, the text enclosed in <em> is output in
-italics. In the txt output, the text enclosed in <em> appears with an
-underscore before and after.
-
-Please review carefully and let us know if the output is acceptable or if any
-updates are needed.
--->    
-<!--[RSALZ] All uses of <tt> are intended to indicate "computer literal"
-output. The <em> markers, only used below, are intended to indicate a
-literal English word.  If we consider the HTML/PDF more important, than
-the way the doc uses those tags is okay. If we consider the TXT more
-important, than it is not optimal. I *think* the current uses are fine,
-but will not argue strongly if you prefer to change things.
--->
-<!--[PSA] The current / standard rendering works for me. -->
       <name>Identifying Application Services</name>
       <t>This document assumes that an application service is identified by a DNS domain
 name (e.g., <tt>bigcompany.example</tt>), an IP address (IPv4 or IPv6), or an identifier
@@ -454,51 +365,9 @@ document does not define any identity representation or verification procedures
 that are specific to SVCB-compatible records, because the use of such records during
 connection establishment does not currently alter any of the PKIX validation
 requirements specified herein or in any other relevant specification.
-
-<!--[rfced] RFC 2818 [HTTP-OVER-TLS] has been obsoleted by RFC 9110
-[HTTP]. Please let us know if we can replace "[HTTP-OVER-TLS]"
-with "[HTTP]" in the following and also remove the
-"[HTTP-OVER-TLS]" entry from the References section since it is
-not cited elsewhere.
-
-In addition, please clarify "when the client uses [SVCB-FOR-HTTPS] or
-[SVCB-FOR-DNS]" - what is the client using or applying the PKIX
-validation rules to in these documents? Or is the intent to state 
-that the PKIX validation rules are the same as described in these 
-documents? Please clarify.
-
-Original:
-   For example, the PKIX validation rules for [HTTP-OVER-TLS] and
-   [DNS-OVER-TLS] do not change when the client uses [SVCB-FOR-HTTPS]
-   or [SVCB-FOR-DNS].
-
-Perhaps:
-   For example, the PKIX validation rules described in [HTTP] and 
-   [DNS-OVER-TLS] are the same as described in [SVCB-FOR-HTTPS] and 
-   [SVCB-FOR-DNS].
--->
-<!--[RSALZ] Yes, the HTTP-OVER_TLS/RFC 9110 changes are correct.
-When the doc talks about a client "using" the SVCB records, it
-refers to a specific DNS query that providers more than just the
-"classic" IP address information. The intent of the text in this
-document is saying "perhaps a future SVCB field/entry/type (whatever)
-will say "do not use the rules defined here, do ...tbd... instead
--->
-<!--[PSA] 
-    The original wording seems fine to me, but to further clarify, we
-    could say:
-
-Modified:
-   For example, the PKIX validation rules for [HTTP] and
-   [DNS-OVER-TLS] do not change when the client uses the DNS resource
-   records defined in [SVCB-FOR-HTTPS] or [SVCB-FOR-DNS] to look up
-   connection information.
-
--->
-
 For example,
-the PKIX validation rules for <xref target="RFC2818"/> and <xref target="RFC7858"/> do not change
-when the client uses <xref target="I-D.ietf-dnsop-svcb-https"/> or <xref target="RFC9461"/>. However, it is possible
+the PKIX validation rules for <xref target="RFC9110"/> and <xref target="RFC7858"/> do not change
+when the client uses the DNS resource records defined in <xref target="I-D.ietf-dnsop-svcb-https"/> or <xref target="RFC9461"/> to look up connection information. However, it is possible
 that future SVCB mapping documents could specify altered PKIX rules for new use cases.</t>
     </section>
     <section anchor="design">
@@ -533,7 +402,7 @@ address, as is done by the "first-match-wins" algorithm in <xref section="3.2.2"
 certificates.</t>
       <section anchor="represent-rules">
         <name>Rules</name>
-        <t>When a certificate authority issues a certificate based on the FQDN
+        <t>When a certification authority issues a certificate based on the FQDN
 at which the application service provider
 will provide the relevant application, the following rules apply to
 the representation of application service identities.
@@ -575,10 +444,10 @@ of scope for this specification.</li>
       </section>
       <section anchor="represent-examples">
         <name>Examples</name>
-        <t>Consider a simple website at <tt>www.bigcompany.example</tt>, which is not discoverable via
+        <t>Consider a simple website at <tt>&lt;www.bigcompany.example&gt;</tt>, which is not discoverable via
 DNS SRV lookups.  Because HTTP does not specify the use of URIs in server
 certificates, a certificate for this service might include only a DNS-ID of
-<tt>www.bigcompany.example</tt>.</t>
+<tt>&lt;www.bigcompany.example&gt;</tt>.</t>
         <t>Consider another website, which is reachable by a fixed IP address of
 <tt>2001:db8::5c</tt>.  If the two sites refer to the same web service, then
 the certificate might also include this value in an IP-ID to allow
@@ -610,41 +479,10 @@ StPeter, help me :)
 <tt>voice.college.example</tt> servicing SIP addresses of the form
 <tt>user@voice.college.example</tt> and identified by a URI of &lt;sip:voice.college.example&gt;.
 A certificate for this service would include a URI-ID of
-<tt>sip:voice.college.example</tt> (see <xref target="RFC5922"/>) along with a DNS-ID of
+<tt>&lt;sip:voice.college.example&gt;</tt> (see <xref target="RFC5922"/>) along with a DNS-ID of
 	<tt>voice.college.example</tt>.</t>
-
-<!--[rfced] May we rephrase this sentence as follows in order to
-expand the first mention of "XMPP"? Also, what is discoverable
-via DNS SRV lookups - is it the server (option A) or the IM
-addresses (option B)?
-
-Original:
-   Consider an XMPP-compatible instant messaging (IM) server at the host
-   messenger.example servicing IM addresses of the form
-   user@messenger.example and discoverable via DNS SRV lookups on the
-   messenger.example domain.  
-
-Perhaps:
-A) Consider an instant messaging (IM) server that is compatible with 
-   the Extensible Messaging and Presence Protocol (XMPP) at the host
-   messenger.example that services IM addresses of the form
-   user@messenger.example and is discoverable via DNS SRV lookups 
-   on the messenger.example domain. 
-or
-
-B) Consider an instant messaging (IM) server that is compatible with 
-   the Extensible Messaging and Presence Protocol (XMPP) at the host
-   messenger.example that services IM addresses of the form
-   user@messenger.example, which are discoverable via DNS SRV lookups 
-   on the messenger.example domain. 
--->
-<!--[RSALZ]
-The service is discoverable, so A.
--->
-<!--[PSA] Agreed. -->
-	
-        <t>Consider an XMPP-compatible instant messaging (IM) server at the host
-<tt>messenger.example</tt> servicing IM addresses of the form <tt>user@messenger.example</tt> and
+        <t>Consider an instant messaging (IM) server that is compatible with the Extensible Messaging and Presence Protocol (XMPP) at the host
+<tt>messenger.example</tt> that services IM addresses of the form <tt>user@messenger.example</tt> and that is
 discoverable via DNS SRV lookups on the <tt>messenger.example</tt> domain.  A
 certificate for this service might include SRV-IDs of
 <tt>_xmpp-client.messenger.example</tt> and <tt>_xmpp-server.messenger.example</tt> (see
@@ -724,27 +562,8 @@ on how reference identifiers are generated, great care should be taken in this
 process. For example, a protocol or application could specify that the application
 service type is obtained through a one-to-one mapping of URI schemes to service
 types or supports only a restricted set of URI schemes.
-
-<!--[rfced] To avoid personification, can the protocol "specify" or
-"require" instead of "insist" in the following context?
-
-Original:
-   Similarly, it could insist that a domain name or IP address
-   taken as input to the reference identifier must be obtained
-   in a secure context such as...
-
-Perhaps:
-   Similarly, it could specify that a domain name or an IP address
-   taken as input to the reference identifier must be obtained
-   in a secure context such as...
--->
-<!--[RSALZ]
-Yes.  Tempted to make a joke about "ask the protocl what it prefers"
--->
-<!--[PSA] I think 'specify' is good. -->
-
 Similarly, it could
-insist that a domain name or an IP address taken as input to the reference
+specify that a domain name or an IP address taken as input to the reference
 identifier must be obtained in a secure context such as a hyperlink embedded in
 a web page that was delivered over an authenticated and encrypted channel
 (for instance, see <xref target="SECURE-CONTEXTS"/> with regard to the web platform).</t>
@@ -766,33 +585,7 @@ removes DNS and DNS resolution from the attack surface.</t>
 input of the URI &lt;sip:alice@college.example&gt;, a client could derive the application
 service type <tt>sip</tt> from the URI scheme and parse the domain name <tt>college.example</tt>
 	  from the "host" component.</t>
-	  
-<!--[rfced] Since nouns with "(s)" are read as singular, please let us
-know if you prefer the text to reflect option A or B below.
-
-Original:
-   Using the combination of FQDN(s) or IP address(es), plus optionally
-   an application service type, the client MUST construct its list of
-   reference identifiers in accordance with the following rules:
-
-Perhaps:
-A) Using the combination of an FQDN(s) or an IP address(es), plus 
-   optionally an application service type, the client MUST construct 
-   its list of reference identifiers in accordance with the following 
-   rules:
-or
-
-B) Using the combination of one or more FQDNs or IP addresses, plus 
-   optionally an application service type, the client MUST construct 
-   its list of reference identifiers in accordance with the following 
-   rules:
--->
-<!--[RSALZ]
-I prefer A.
--->
-<!--[PSA] I prefer B because it reads more smoothly. -->
-	  
-          <t>Using the combination of FQDN(s) or IP address(es), plus optionally an application service type, the client
+          <t>Using the combination of one or more FQDNs or IP addresses, plus optionally an application service type, the client
 <bcp14>MUST</bcp14> construct its list of reference identifiers in accordance with the
 following rules:</t>
           <ul spacing="normal">
@@ -823,8 +616,8 @@ SRV-IDs, DNS-IDs, and IP-IDs in its list of reference identifiers.</t>
           <t>The following examples are for illustrative purposes only and are not
 intended to be comprehensive.</t>
           <ol spacing="normal" type="1"><li>A web browser that is connecting via HTTPS to the website at
-<tt>https://www.bigcompany.example/</tt> would have a single reference identifier:
-a DNS-ID of <tt>www.bigcompany.example</tt>.</li>
+<tt>&lt;https://www.bigcompany.example/&gt;</tt> would have a single reference identifier:
+a DNS-ID of <tt>&lt;www.bigcompany.example&gt;</tt>.</li>
             <li>A web browser connecting to <tt>https://192.0.2.107/</tt> would have a single
 IP-ID reference identifier of <tt>192.0.2.107</tt>. Likewise, if connecting
 to <tt>https://[2001:db8::abcd]</tt>, it would have a single IP-ID
@@ -840,7 +633,7 @@ also accept <tt>mail.isp.example</tt> as the DNS domain name portion of referenc
 identifiers for the service.</li>
             <li>A VoIP user agent that is connecting via SIP to the voice
 service at <tt>voice.college.example</tt> might have only one reference identifier:
-a URI-ID of <tt>sip:voice.college.example</tt> (see <xref target="RFC5922"/>).</li>
+a URI-ID of <tt>&lt;sip:voice.college.example&gt;</tt> (see <xref target="RFC5922"/>).</li>
             <li>An IM client that is connecting via XMPP to the IM
 service at <tt>messenger.example</tt> might have three reference identifiers: an
 SRV-ID of <tt>_xmpp-client.messenger.example</tt> (see <xref target="RFC6120"/>), a DNS-ID of
@@ -852,8 +645,8 @@ identifier(s) would be rejected; for instance:</t>
           <ul spacing="normal">
             <li>With regard to the first example, a DNS-ID of "web.bigcompany.example" would
 be rejected because the DNS domain name portion does not match
-"www.bigcompany.example".</li>
-            <li>With regard to the third example, a URI-ID of "sip:www.college.example"
+&lt;www.bigcompany.example&gt;.</li>
+            <li>With regard to the third example, a URI-ID of &lt;sip:www.college.example&gt;
 would be rejected because the DNS domain name portion does not match
 "voice.college.example", and a DNS-ID of "voice.college.example" would be
 rejected because it lacks the appropriate application service type
@@ -879,36 +672,7 @@ optionally an application service type as follows:</t>
         <ul spacing="normal">
           <li>A DNS-ID reference identifier <bcp14>MUST</bcp14> be used directly as the DNS domain
 	  name, and there is no application service type.</li>
-
-<!--[rfced] To be "equal" means to be of the same amount or number, so
-could "exactly equal" be updated as "equal" to reduce redundancy?
-Note that there are two instances. Please clarify.
-
-Original:
-   An IP-ID reference identifier MUST be exactly equal to the value
-   of a iPAddress entry in subjectAltName, with no partial (e.g.,
-   network-level) matching.  There is no application service type.
-
-   A wildcard in a presented identifier can only match exactly one label
-   in a reference identifier. 
-
-Perhaps:
-   An IP-ID reference identifier MUST be equal to the value of
-   an iPAddress entry in subjectAltName, with no partial (e.g.,
-   network-level) matching.  There is no application service 
-   type.
-
-   A wildcard in a presented identifier can only match one label
-   in a reference identifier. 
--->
-<!--[RSALZ]
-Yes, the "perhaps" version is better.
--->
-<!--[PSA] I suggest: 
-   An IP-ID reference identifier MUST exactly match to the value of
--->
-	  
-          <li>An IP-ID reference identifier <bcp14>MUST</bcp14> be exactly equal to the value of an
+          <li>An IP-ID reference identifier <bcp14>MUST</bcp14> exactly match to the value of an
 iPAddress entry in subjectAltName, with no partial (e.g., network-level) matching. There is no application service type.</li>
           <li>For an SRV-ID reference identifier, the DNS domain name portion is
 the Name and the application service type portion is the Service.  For
@@ -925,7 +689,7 @@ A URI that contains an IP address might be matched against an IP-ID in place
 of a URI-ID by some lenient clients.  This document does not describe how a
 URI that contains no "host" component can be matched.  Note that extraction of the
 "reg-name" might necessitate normalization of the URI (as explained in
-<xref section="6" sectionFormat="of" target="RFC3986"/>).  For example, a URI-ID of <tt>sip:voice.college.example</tt> would be split
+<xref section="6" sectionFormat="of" target="RFC3986"/>).  For example, a URI-ID of <tt>&lt;sip:voice.college.example&gt;</tt> would be split
 into a DNS domain name portion of <tt>voice.college.example</tt> and an application
 service type of <tt>sip</tt> (associated with an application protocol of SIP as
 explained in <xref target="RFC5922"/>).</li>
@@ -948,10 +712,6 @@ that support presented identifiers containing the wildcard character "*", this s
 also specifies a supplemental rule for such "wildcard certificates".
 This section uses the description of labels and domain names in
 	<xref target="RFC1034"/>.</t>
-
-<!--[RSALZ]
-FIXED
--->
       <t>If the DNS domain name portion of a reference identifier
 	is not an internationalized domain name
 	(i.e., an FQDN that conforms to "preferred name syntax" as
@@ -959,7 +719,7 @@ described in <xref section="3.5" sectionFormat="of" target="RFC1034"/>),
 then the matching of the reference identifier against the presented
 identifier <bcp14>MUST</bcp14> be performed by comparing the set of domain name labels using
 a case-insensitive ASCII comparison, as clarified by <xref target="RFC4343"/>.  For
-example, <tt>WWW.BigCompany.Example</tt> would be lower-cased to <tt>www.bigcompany.example</tt> for
+example, <tt>&lt;WWW.BigCompany.Example&gt;</tt> would be lower-cased to <tt>&lt;www.bigcompany.example&gt;</tt> for
 comparison purposes.  Each label <bcp14>MUST</bcp14> match in order for the names to be
 considered a match, except as supplemented by the rule about checking
 wildcard labels in presented identifiers given below.</t>
@@ -979,7 +739,7 @@ these requirements are met:</t>
         </ol>
         <t>If the requirements are not met, the presented identifier is invalid and <bcp14>MUST</bcp14>
 be ignored.</t>
-        <t>A wildcard in a presented identifier can only match exactly one label in a
+        <t>A wildcard in a presented identifier can only match one label in a
 reference identifier.  This specification covers only wildcard characters in
 presented identifiers, not wildcard characters in reference identifiers or in
 DNS domain names more generally.  Therefore, the use of wildcard characters
@@ -992,29 +752,7 @@ certificates, see <xref target="security-wildcards"/>.</t>
       </section>
       <section anchor="verify-ip">
         <name>Matching an IP Address Portion</name>
-
-<!--[rfced] Does an IP-ID perform matches, or is an IP-ID considered
-a match based on certain criteria? Please let us know if/how we
-can clarify this sentence.
-
-Original:
-   An IP-ID matches based on an octet-for-octet comparison of the bytes
-   of the reference identity with the bytes contained in the iPAddress
-   subjectAltName.
-
-Perhaps:
-   An IP-ID is considered a match based on an octet-for-octet comparison of 
-   the bytes of the reference identity with the bytes contained in the 
-   iPAddress subjectAltName.
--->
-<!--[RSALZ]
-Yes, it is considered to be a match.
--->
-<!--[PSA] I suggest: 
-   Matching of an IP-ID is based on an octet-for-octet comparison of 
--->
-	
-        <t>An IP-ID matches based on an octet-for-octet comparison of the bytes of the
+        <t>Matching of an IP-ID is based on an octet-for-octet comparison of the bytes of the
 reference identity with the bytes contained in the iPAddress subjectAltName.</t>
         <t>For an IP address that appears in a URI-ID, the "host" component of both the
 reference identity and the presented identifier must match.  These are parsed as either
@@ -1128,28 +866,10 @@ in certificate matching.</t>
       </section>
       <section anchor="security-idn">
         <name>Internationalized Domain Names</name>
-
-<!--[rfced] Should this reference be to "Section 6.3" instead of
-"Section 6" since "A-labels" are not specifically mentioned in
-Section 6?
-
-Original:
-   More specifically, matching of internationalized domain 
-   names is performed on A-labels only Section 6.
-
-Perhaps:
-   Specifically, the matching of internationalized domain 
-   names is performed on A-labels only (Section 6.3).
--->
-<!--[RSALZ]
-Yes.
--->
-<!--[PSA] Agreed. -->
-	
         <t>This document specifies only matching between reference identifiers and
 presented identifiers, not the visual presentation of domain names. 
 Specifically, the matching of internationalized domain names is performed on
-A-labels only (<xref target="verify"/>). The limited scope of this specification likely
+A-labels only (<xref target="verify-domain"/>). The limited scope of this specification likely
 mitigates potential confusion caused by the use of visually similar characters
 in domain names (for example, as described in <xref section="4.4" sectionFormat="of" target="RFC5890"/>,
 <xref target="UTS-36"/>, and <xref target="UTS-39"/>); in any case, such concerns are a matter for
@@ -1177,37 +897,7 @@ been enforced.  Consistent classification of identifiers avoids this problem.</t
         <t>A given application service might be addressed by multiple DNS domain names
 for a variety of reasons, and a given deployment might service multiple
 domains or protocols.
-
-<!--[rfced] Section 4.4.2.2 of RFC 8446 does not mention "SNI"; is
-another section intended? Note that in Section 4.2.11, "SNI" is
-discussed and expanded as "Server Name Identification (SNI)", but
-in Section 9.2, "Server Name Indication" is included in the list
-of TLS extensions. Given this, please let us know if any updates
-are needed to the section reference and expansion of "SNI" in
-the text below.
-
-Original:
-   TLS Extensions such as TLS Server Name Indication (SNI), discussed 
-   in [TLS], Section 4.4.2.2, and Application Layer Protocol Negotiation 
-   (ALPN), discussed in [ALPN], provide a way for the application to 
-   indicate the desired identifier and protocol to the server, which 
-   it can then use to select the most appropriate certificate.
--->
-<!--[RSALZ]
-SNI should be expanded on first use. The Identification/Indication mixup
-is fixed in the 8446bis draft and uses "Indication" everywhere.
-Uinsg "server_name" is common in both 8446 and the bis draft, so
-how about this:
-  TLS extensions such as the Server Name Identification (SNI), also known
-  as the "server_name" extension discussed in 
-  <xref section="4.4.2.2" sectionFormat="comma" target="RFC8446"/>, and ALPN, as discussed in <xref target="RFC7301"/>, provide a way for the application
--->
-<!--[PSA] 
-    The best reference is Section 3 of RFC 6066. That's what we 
-    cited as [TLS-EXT] in RFC 6125.
--->
-
-TLS extensions such as SNI, as discussed in <xref section="4.4.2.2" sectionFormat="comma" target="RFC8446"/>, and ALPN, as discussed in <xref target="RFC7301"/>, provide a way for the application
+TLS extensions such as the Server Name Indication (SNI), as discussed in <xref section="3" sectionFormat="comma" target="RFC6066"/>, and ALPN, as discussed in <xref target="RFC7301"/>, provide a way for the application
 to indicate the desired identifier and protocol to the server, which it
 can then use to select the most appropriate certificate.</t>
         <t>This specification allows multiple DNS-IDs, IP-IDs, SRV-IDs, or URI-IDs in a
@@ -1282,7 +972,6 @@ itself.</t>
 <displayreference target="RFC9147" to="DTLS"/>
 <displayreference target="RFC6186" to="EMAIL-SRV"/>
 <displayreference target="RFC9110" to="HTTP"/>
-<displayreference target="RFC2818" to="HTTP-OVER-TLS"/>
 <displayreference target="RFC3403" to="NAPTR"/>
 <displayreference target="RFC8915" to="NTS"/>
 <displayreference target="RFC9001" to="QUIC"/>
@@ -1297,76 +986,7 @@ itself.</t>
 <displayreference target="I-D.ietf-dnsop-svcb-https" to="SVCB-FOR-HTTPS"/>
 <displayreference target="RFC6125" to="VERIFY"/>
 <displayreference target="RFC6120" to="XMPP"/>
-
-
-<!--[rfced] References
-
-a) FYI: There was a duplicate reference entry for RFC 3986 with
-one citation name displayed as "[RFC3986]" and the other as
-"[URI]". We kept the "URI" naming scheme. If you prefer to use
-the RFC number instead, please let us know.
-
-b) There is a more recent version of [US-ASCII].  Please
-confirm if the reference entry should be updated to reflect "ANSI
-INCITS 4-1986 (R2007)" (see http://sliderule.mraiow.com/
-w/images/7/73/ASCII.pdf) instead of "ANSI X3.4-1986".
-
-Original:
-   [US-ASCII] American National Standards Institute, 
-              "Coded Character Set - 7-bit American 
-              Standard Code for Information 
-              Interchange", ANSI X3.4, 1986.
-
-Perhaps:
-   [US-ASCII] American National Standards Institute, 
-              "Coded Character Sets - 7-bit American 
-              Standard Code for Information
-              Interchange (7-Bit ASCII)", ANSI INCITS 
-              4-1986 (R2007), June 2007.
-
-c) The 2005 version of reference X.509 has been superseded
-(see https://www.itu.int/rec/T-REC-X.509). Would you like to
-point to the most current version (2019) as follows or keep the
-entry the same?
-
-Current:
- [X.509]  ITU-T, "Information Technology - Open Systems
-          Interconnection - The Directory: Public-key and
-          attribute certificate frameworks", ISO/IEC 9594-8, 
-          ITU-T Recommendation X.509, August 2005.
-
-Perhaps: 
- [X.509]  ITU-T, "Information Technology - Open Systems
-          Interconnection - The Directory: Public-key and 
-          attribute certificate frameworks", ISO/IEC 9594-8, 
-          ITU-T Recommendation X.509, October 2019.
-
-d)  The 2008 version of reference X.690 has been superseded
-(see https://www.itu.int/rec/T-REC-X.690). Would you like to
-point to the most current version (2021) as follows or keep the
-entry the same?
-
-Current:
-  [X.690]  ITU-T, "Information Technology - ASN.1 encoding rules:
-           Specification of Basic Encoding Rules (BER), Canonical
-           Encoding Rules (CER) and Distinguished Encoding Rules
-           (DER)", ISO/IEC 8825-1, ITU-T Recommendation X.690,
-           November 2008.
-
-Perhaps:
-  [X.690]  ITU-T, "Information Technology - ASN.1 encoding rules:
-           Specification of Basic Encoding Rules (BER), Canonical
-           Encoding Rules (CER) and Distinguished Encoding Rules
-           (DER)", ISO/IEC 8825-1:2021 (E), ITU-T Recommendation 
-           X.690, February 2021.
--->
-<!--[RSALZ]
-Yes, please update all the references.
--->
-<!--[PSA] Agreed. -->
-
-
-
+<displayreference target="RFC6066" to ="TLS-EXT"/>
     <references>
       <name>References</name>
       <references>
@@ -1386,12 +1006,11 @@ Yes, please update all the references.
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.0791.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4291.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml"/>
-
-
       </references>
       <references>
         <name>Informative References</name>
 
+<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6066.xml"/>	
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8555.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7301.xml"/>
@@ -1401,7 +1020,6 @@ Yes, please update all the references.
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9147.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6186.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9110.xml"/>
-<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2818.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.3403.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8915.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9001.xml"/>
@@ -1530,9 +1148,9 @@ Yes, please update all the references.
             <author>
               <organization>American National Standards Institute</organization>
             </author>
-            <date year="1986"/>
+            <date year="2007" month="June"/>
           </front>
-          <seriesInfo name="ANSI" value="X3.4-1986"/>
+          <seriesInfo name="ANSI INCITS" value="4-1986 (R2007)"/>
         </reference>
 
         <reference anchor="URL" target="https://url.spec.whatwg.org/">
@@ -1582,7 +1200,7 @@ Yes, please update all the references.
             <author>
               <organization>ITU-T</organization>
             </author>
-            <date month="August" year="2005"/>
+            <date month="October" year="2019"/>
           </front>
 	  <seriesInfo name="ISO/IEC" value="9594-8"/>
           <seriesInfo name="ITU-T Recommendation" value="X.509"/>
@@ -1594,9 +1212,9 @@ Yes, please update all the references.
             <author>
               <organization>ITU-T</organization>
             </author>
-            <date month="November" year="2008"/>
+            <date month="February" year="2021"/>
           </front>
-	  <seriesInfo name="ISO/IEC" value="8825-1"/>
+	  <seriesInfo name="ISO/IEC" value="8825-1:2021 (E)"/>
           <seriesInfo name="ITU-T Recommendation" value="X.690"/>
         </reference>
 
@@ -1661,24 +1279,7 @@ has been added.</li>
 version of this specification <xref target="RFC6125"/>.
 Thanks also to <contact fullname="Carsten Bormann"/> for converting the previous version of this specification to Markdown so that we could more easily use <contact fullname="Martin Thomson's"/> <tt>i-d-template</tt>
 software.</t>
-
-
-<!--[rfced] In the Acknowledgements, we updated "Ines Robles" to
-"Maria Ines Robles". If that is not correct, please let us know.
-
-Also, would you like to add the name of the mailing list here?
-
-Original:
-   In addition to discussion on the mailing list, the following people
-   provided official reviews or especially significant feedback:
--->
-<!--[RSALZ]
-How about change "discussion on the mailing list" to "working group
-discussions"
--->
-<!--[PSA] Agreed. -->
-
-<t>In addition to discussion on the mailing list, the following people
+<t>In addition to discussions within the UTA Working Group, the following people
 provided official reviews or especially significant feedback:
 <contact fullname="Corey Bonnell"/>,
 <contact fullname="Roman Danyliw"/>,
@@ -1713,49 +1314,6 @@ and
       <t><contact fullname="Jeff Hodges"/> coauthored the previous version of this specification <xref target="RFC6125"/>.
 The authors gratefully acknowledge his essential contributions to this work.</t>
       <t><contact fullname="Martin Thomson"/> contributed the text on the handling of IP-IDs.</t>
-    </section>    
-
-<!-- [rfced] Acronym Expansions
-
-a) Throughout the text, the following expansion appears to be used 
-inconsistently. Please review these occurrences and let us know 
-if/how they may be made consistent.  
-
-  certificate authority (CA) (this doc) vs.
-  certification authority (CA) (per RFCs 5280, 6125, and 9345) 
-
-    Note: In addition, we see the following:
-      - "certification authority" in Section 1.4.2
-      - "certificate authority" in Section 4.1
-
-b) FYI: We updated the text to reflect the latter form for 
-consistency per RFCs 5280 and 6125:
-
-  Public Key Infrastructure Using X.509 (PKIX) -> 
-  Public Key Infrastructure using X.509 (PKIX)
--->
-<!--[RSALZ]
-Certification authority (CA) is the one to use.
--->
-<!--[PSA] Agreed. -->
-    
-
-<!-- [rfced] Please review the "Inclusive Language" portion of the online 
-Style Guide <https://www.rfc-editor.org/styleguide/part2/#inclusive_language>
-and let us know if any changes are needed.
-
-For example, please consider whether "tradition" should be updated for
-clarity.  While the NIST website
-<https://www.nist.gov/nist-research-library/nist-technical-series-
-publications-author-instructions#table1> indicates that this term is 
-potentially biased, it is also ambiguous. "Tradition" is a subjective 
-term, as it is not the same for everyone.
-        <t>If the DNS domain name portion of a reference identifier is a "traditional
--->
-<!--[RSALZ]
-I made one change, about "traditional" DNS names above.  Marked with FIXED.
--->
-<!--[PSA] WFM. -->
-    
+    </section>            
   </back>
 </rfc>
