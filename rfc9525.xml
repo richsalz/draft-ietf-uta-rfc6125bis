@@ -79,10 +79,10 @@ think of these identities as the client's "reference identity" and the
 server's "presented identity"; more formal definitions are given later.  A
 client needs to verify that the server's presented identity matches its
 reference identity so it can deterministically and automatically authenticate the communication.</t>
-        <t>This document defines procedures for how clients do this verification.
+        <t>This document defines procedures for how clients perform this verification.
 It therefore defines requirements on other parties, such as
 the certification authorities that issue certificates, the service administrators requesting
-	them, and the protocol designers defining how things are named.</t>
+	them, and the protocol designers defining interactions between clients and servers.</t>
         <t>This document obsoletes RFC 6125 <xref target="RFC6125"/>. Changes from RFC 6125 <xref target="RFC6125"/> are described under <xref target="changes"/>.</t>
       </section>
       <section anchor="applicability">
@@ -251,7 +251,7 @@ might present distinct identifiers for each domain.</t>
           </dd>
           <dt>reference identifier:</dt>
           <dd>
-            <t>An identifier used by the client when examining presented identifiers.
+            <t>An identifier expected by the client when examining presented identifiers.
 It is constructed from the source domain and, optionally, an application
 service type.</t>
           </dd>
@@ -352,12 +352,12 @@ services so that they do not share certificates.
 Protocol specifications <bcp14>MUST</bcp14> specify which identifiers are
 mandatory to implement and <bcp14>SHOULD</bcp14> provide operational guidance when necessary.</t>
       <t>The Common Name RDN <bcp14>MUST NOT</bcp14> be used to identify a service because
-it is not strongly typed (essentially free-form text) and therefore
+it is not strongly typed (it is essentially free-form text) and therefore
 suffers from ambiguities in interpretation.</t>
       <t>For similar reasons, other RDNs within the subjectName <bcp14>MUST NOT</bcp14> be used to
 identify a service.</t>
-      <t>An IP address that is the result of a DNS query is not direct. Use of IP-IDs
-that are not direct is out of scope for this document.</t>
+      <t>An IP address that is the result of a DNS query is indirect. Use of IP-IDs
+that are indirect is out of scope for this document.</t>
       <t>The IETF continues to define methods for looking up information needed
 to make connections to network services. One recent example is service
 binding via the "SVCB" and "HTTPS" DNS resource record (RR) types. This
@@ -373,16 +373,17 @@ that future SVCB mapping documents could specify altered PKIX rules for new use 
     <section anchor="design">
       <name>Designing Application Protocols</name>
       <t>This section defines how protocol designers should reference this document,
-      which would typically be a normative reference in their specification. Its specification
+      which would typically be a normative reference in their specification.</t>
+      <t>A specification
 <bcp14>MAY</bcp14> choose to allow only one of the identifier types defined here.</t>
       <t>If the technology does not use DNS SRV records to resolve the DNS domain
-names of application services, then its specification <bcp14>MUST</bcp14> state that SRV-ID
+names of application services, then the specification <bcp14>MUST</bcp14> state that SRV-ID
 as defined in this document is not supported.  Note that many existing
 application technologies use DNS SRV records to resolve the DNS domain names
 of application services, but they do not rely on representations of those records
 in PKIX certificates by means of SRV-IDs as defined in <xref target="RFC4985"/>.</t>
       <t>If the technology does not use URIs to identify application services, then
-its specification <bcp14>MUST</bcp14> state that URI-ID as defined in this document is not
+the specification <bcp14>MUST</bcp14> state that URI-ID as defined in this document is not
 supported.  Note that many existing application technologies use URIs to
 identify application services, but they do not rely on representation of those
 URIs in PKIX certificates by means of URI-IDs.</t>
@@ -417,13 +418,13 @@ URI-ID so as to scope its use to a particular application type.</li>
 
 <li>If the service using the certificate deploys a technology for which
 the relevant specification stipulates that certificates should
-include identifiers of type SRV-ID (e.g., this is true as described in <xref target="RFC6120"/>),
+include identifiers of type SRV-ID (e.g., this is true of the Extensible Messaging and Presence Protocol (XMPP) as described in <xref target="RFC6120"/>),
 then the certificate <bcp14>SHOULD</bcp14> include an SRV-ID.  This
 identifier type could supplement the DNS-ID, unless the certificate
 is meant to be scoped to only the protocol in question.</li>
           <li>If the service using the certificate deploys a technology for which
 the relevant specification stipulates that certificates should include
-identifiers of type URI-ID (e.g., this is true of <xref target="RFC3261"/> as specified by
+identifiers of type URI-ID (e.g., this is true of the Session Initiation Protocol <xref target="RFC3261"/> as specified by
 <xref target="RFC5922"/>), then the certificate <bcp14>SHOULD</bcp14> include a URI-ID.  The scheme
 <bcp14>MUST</bcp14> be that of the protocol associated with the application service type,
 and the "host" component <bcp14>MUST</bcp14> be the FQDN
@@ -481,7 +482,7 @@ StPeter, help me :)
 A certificate for this service would include a URI-ID of
 <tt>&lt;sip:voice.college.example&gt;</tt> (see <xref target="RFC5922"/>) along with a DNS-ID of
 	<tt>voice.college.example</tt>.</t>
-        <t>Consider an instant messaging (IM) server that is compatible with the Extensible Messaging and Presence Protocol (XMPP) at the host
+        <t>Consider an XMPP-compatible instant messaging (IM) server at the host
 <tt>messenger.example</tt> that services IM addresses of the form <tt>user@messenger.example</tt> and that is
 discoverable via DNS SRV lookups on the <tt>messenger.example</tt> domain.  A
 certificate for this service might include SRV-IDs of
@@ -505,13 +506,13 @@ DNS-ID or IP-ID values that identify that service or,
 if appropriate for the application service type, SRV-ID or
 URI-ID values that limit the deployment scope of the certificate to only the
 defined application service type.</t>
-      <t>If the certificate might be used for any type of application service, then
+      <t>If the certificate might be used for any type of application service, 
 the service provider <bcp14>SHOULD</bcp14> request a certificate that includes
 only DNS-IDs or IP-IDs. Again, because of multiprotocol attacks, this practice is
 discouraged; it can be mitigated by deploying only one service on
 a host.</t>
       <t>If a service provider offers multiple application service types and wishes to
-limit the applicability of certificates using SRV-IDs or URI-IDs, they <bcp14>SHOULD</bcp14>
+limit the applicability of certificates using SRV-IDs or URI-IDs, it <bcp14>SHOULD</bcp14>
 request that multiple certificates rather than a single certificate containing
 multiple SRV-IDs or URI-IDs each identify a different application service
 type. This rule does not apply to application service type "bundles" that
@@ -527,10 +528,10 @@ identity by performing the following actions:</t>
       <ol spacing="normal" type="1"><li>The client constructs a list of reference identifiers it would find acceptable
 based on the source domain and, if applicable, the type of service to
 which the client is connecting.</li>
-        <li>The server provides its identifiers in the form of a PKIX
+        <li>The server provides its presented identifiers in the form of a PKIX
 certificate.</li>
         <li>The client checks each of its reference identifiers against the
-presented identifiers for the purpose of finding a match. When checking a
+server's presented identifiers for the purpose of finding a match. When checking a
 reference identifier against a presented identifier, the client matches the
 source domain of the identifiers and, optionally, their application service
 type.</li>
@@ -547,7 +548,7 @@ this document.</t>
           <name>Rules</name>
           <t>The client <bcp14>MUST</bcp14> construct a list of acceptable reference identifiers
 and <bcp14>MUST</bcp14> do so independently of the identifiers presented by the
-service.</t>
+server.</t>
           <t>The inputs used by the client to construct its list of reference identifiers
 might be a URI that a user has typed into an interface (e.g., an HTTPS URL
 for a website), configured account information (e.g., the domain name of a
@@ -561,7 +562,7 @@ document. Because the security of a system that uses this document will depend
 on how reference identifiers are generated, great care should be taken in this
 process. For example, a protocol or application could specify that the application
 service type is obtained through a one-to-one mapping of URI schemes to service
-types or supports only a restricted set of URI schemes.
+types or that the protocol or application supports only a restricted set of URI schemes.
 Similarly, it could
 specify that a domain name or an IP address taken as input to the reference
 identifier must be obtained in a secure context such as a hyperlink embedded in
@@ -582,7 +583,7 @@ identifiers and <bcp14>MUST NOT</bcp14> be treated as such.
 In the DNS case, not treating intermediate domain names as reference identifiers
 removes DNS and DNS resolution from the attack surface.</t>
           <t>As one example of the process of generating a reference identifier, from the user
-input of the URI &lt;sip:alice@college.example&gt;, a client could derive the application
+input of the URI &lt;sip:alice@voice.college.example&gt;, a client could derive the application
 service type <tt>sip</tt> from the URI scheme and parse the domain name <tt>college.example</tt>
 	  from the "host" component.</t>
           <t>Using the combination of one or more FQDNs or IP addresses, plus optionally an application service type, the client
@@ -617,10 +618,10 @@ SRV-IDs, DNS-IDs, and IP-IDs in its list of reference identifiers.</t>
 intended to be comprehensive.</t>
           <ol spacing="normal" type="1"><li>A web browser that is connecting via HTTPS to the website at
 <tt>&lt;https://www.bigcompany.example/&gt;</tt> would have a single reference identifier:
-a DNS-ID of <tt>&lt;www.bigcompany.example&gt;</tt>.</li>
-            <li>A web browser connecting to <tt>https://192.0.2.107/</tt> would have a single
+a DNS-ID of <tt>www.bigcompany.example</tt>.</li>
+            <li>A web browser connecting to <tt>&lt;https://192.0.2.107/&gt;</tt> would have a single
 IP-ID reference identifier of <tt>192.0.2.107</tt>. Likewise, if connecting
-to <tt>https://[2001:db8::abcd]</tt>, it would have a single IP-ID
+to <tt>&lt;https://[2001:db8::abcd]&gt;</tt>, it would have a single IP-ID
 reference identifier of <tt>2001:db8::abcd</tt>.</li>
             <li>A mail user agent that is connecting via IMAPS to the email service at
 <tt>isp.example</tt> (resolved as <tt>mail.isp.example</tt>) might have three reference
@@ -633,7 +634,7 @@ also accept <tt>mail.isp.example</tt> as the DNS domain name portion of referenc
 identifiers for the service.</li>
             <li>A VoIP user agent that is connecting via SIP to the voice
 service at <tt>voice.college.example</tt> might have only one reference identifier:
-a URI-ID of <tt>&lt;sip:voice.college.example&gt;</tt> (see <xref target="RFC5922"/>).</li>
+a URI-ID of <tt>sip:voice.college.example</tt> (see <xref target="RFC5922"/>).</li>
             <li>An IM client that is connecting via XMPP to the IM
 service at <tt>messenger.example</tt> might have three reference identifiers: an
 SRV-ID of <tt>_xmpp-client.messenger.example</tt> (see <xref target="RFC6120"/>), a DNS-ID of
@@ -643,9 +644,9 @@ SRV-ID of <tt>_xmpp-client.messenger.example</tt> (see <xref target="RFC6120"/>)
           <t>In all these cases, presented identifiers that do not match the reference
 identifier(s) would be rejected; for instance:</t>
           <ul spacing="normal">
-            <li>With regard to the first example, a DNS-ID of "web.bigcompany.example" would
+            <li>With regard to the first example, a DNS-ID of <tt>web.bigcompany.example</tt> would
 be rejected because the DNS domain name portion does not match
-&lt;www.bigcompany.example&gt;.</li>
+<tt>www.bigcompany.example</tt>.</li>
             <li>With regard to the third example, a URI-ID of &lt;sip:www.college.example&gt;
 would be rejected because the DNS domain name portion does not match
 "voice.college.example", and a DNS-ID of "voice.college.example" would be
@@ -672,7 +673,7 @@ optionally an application service type as follows:</t>
         <ul spacing="normal">
           <li>A DNS-ID reference identifier <bcp14>MUST</bcp14> be used directly as the DNS domain
 	  name, and there is no application service type.</li>
-          <li>An IP-ID reference identifier <bcp14>MUST</bcp14> exactly match to the value of an
+          <li>An IP-ID reference identifier <bcp14>MUST</bcp14> exactly match the value of an
 iPAddress entry in subjectAltName, with no partial (e.g., network-level) matching. There is no application service type.</li>
           <li>For an SRV-ID reference identifier, the DNS domain name portion is
 the Name and the application service type portion is the Service.  For
@@ -719,7 +720,7 @@ described in <xref section="3.5" sectionFormat="of" target="RFC1034"/>),
 then the matching of the reference identifier against the presented
 identifier <bcp14>MUST</bcp14> be performed by comparing the set of domain name labels using
 a case-insensitive ASCII comparison, as clarified by <xref target="RFC4343"/>.  For
-example, <tt>&lt;WWW.BigCompany.Example&gt;</tt> would be lower-cased to <tt>&lt;www.bigcompany.example&gt;</tt> for
+example, <tt>WWW.BigCompany.Example</tt> would be lower-cased to <tt>www.bigcompany.example</tt> for
 comparison purposes.  Each label <bcp14>MUST</bcp14> match in order for the names to be
 considered a match, except as supplemented by the rule about checking
 wildcard labels in presented identifiers given below.</t>
@@ -768,11 +769,11 @@ such as an IP address.</t>
 the identifier is an SRV-ID or a URI-ID.</t>
         <t>These identifiers provide an application service type portion to be checked,
 but that portion is combined only with the DNS domain name portion of the
-SRV-ID or URI-ID itself.  For example, if a client's list of reference
-identifiers includes an SRV-ID of <tt>_xmpp-client.messenger.example</tt> and a DNS-ID
-of <tt>app.example</tt>, the client <bcp14>MUST</bcp14> check both the combination of an
-application service type of <tt>xmpp-client</tt> and a DNS domain name of
-<tt>messenger.example</tt> and, separately,
+SRV-ID or URI-ID itself.  Consider the example of a messaging client that has two reference
+identifiers: (1) an SRV-ID of <tt>_xmpp-client.messenger.example</tt> and (2) a DNS-ID
+of <tt>app.example</tt>.  The client <bcp14>MUST</bcp14> check (1) the combination of (a) an
+application service type of <tt>xmpp-client</tt> and (b) a DNS domain name of
+<tt>messenger.example</tt> as well as (2)
 a DNS domain name of <tt>app.example</tt>.  However, the
 client <bcp14>MUST NOT</bcp14> check the combination of an application service type of
 <tt>xmpp-client</tt> and a DNS domain name of <tt>app.example</tt> because it does not
@@ -780,11 +781,11 @@ have an SRV-ID of <tt>_xmpp-client.app.example</tt> in its list of reference
 identifiers.</t>
         <t>If the identifier is an SRV-ID, then the application service name <bcp14>MUST</bcp14>
 be matched in a case-insensitive manner, in accordance with <xref target="RFC2782"/>.
-Note that per <xref target="RFC4985"/>, the <tt>_</tt> character is part of the service name in
+Note that per <xref target="RFC4985"/>, the underscore "_" is part of the service name in
 DNS SRV records and in SRV-IDs.</t>
         <t>If the identifier is a URI-ID, then the scheme name portion <bcp14>MUST</bcp14> be
 matched in a case-insensitive manner, in accordance with <xref target="RFC3986"/>.
-Note that the <tt>:</tt> character is a separator between the scheme name
+Note that the colon ":" is a separator between the scheme name
 and the rest of the URI and thus does not need to be included in any
 comparison.</t>
       </section>
@@ -795,7 +796,7 @@ identifier, then the service identity check has succeeded.  In this case, the
 client <bcp14>MUST</bcp14> use the matched reference identifier as the validated identity of
 the application service.</t>
         <t>If the client does not find a presented identifier matching any of the
-reference identifiers, then the client <bcp14>MUST</bcp14> proceed as described as follows.</t>
+reference identifiers, then the client <bcp14>MUST</bcp14> proceed as follows.</t>
         <t>If the client is an automated application,
 then it <bcp14>SHOULD</bcp14> terminate the communication attempt with a bad
 certificate error and log the error appropriately.  The application <bcp14>MAY</bcp14>
@@ -882,14 +883,18 @@ Therefore, a client with an IP-ID reference identity cannot present any
 information about its reference identity when connecting to a server.  Servers
 that wish to present an IP-ID therefore need to present this identity when a
 connection is made without SNI.</t>
-        <t>The textual representation of an IPv4 address might be misinterpreted as a valid
-FQDN in some contexts. This can result in different security treatment that might cause
-different components of a system to classify the value differently, which might lead
-to vulnerabilities. For example, one system component enforces a security rule
-that is conditional on the type of identifier.  This component misclassifies an
-IP address as an FQDN.  A different component correctly classifies the
-identifier but might incorrectly assume that rules regarding IP addresses have
-been enforced.  Consistent classification of identifiers avoids this problem.</t>
+        <t>The textual representation of an IPv4 address might be misinterpreted
+as a valid FQDN in some contexts.  This can result in different
+security treatment that might cause different components of a system
+to classify the value differently, which might lead to
+vulnerabilities.  Consider a system in which one component enforces a
+security rule that is conditional on the type of identifier but 
+misclassifies an IP address as an FQDN, whereas a second component 
+correctly classifies the identifier but incorrectly assumes that 
+rules regarding IP addresses have been enforced by the first 
+component.  As a result, the system as a whole might behave in an 
+insecure manner.  Consistent classification of identifiers avoids 
+this problem.</t>
         <t>See also <xref target="design"/>, particularly the last paragraph.</t>
       </section>
       <section anchor="security-multi">
