@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-11-05T01:01:11.519768+00:00",
+  "timestamp": "2023-11-07T00:58:18.201094+00:00",
   "repo": "richsalz/draft-ietf-uta-rfc6125bis",
   "labels": [
     {
@@ -44,7 +44,7 @@
       "comments": [
         {
           "author": "sleevi",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "See also https://datatracker.ietf.org/doc/html/rfc6125#section-7.2",
           "createdAt": "2021-07-02T20:26:26Z",
           "updatedAt": "2021-07-02T20:26:26Z"
@@ -260,7 +260,7 @@
         },
         {
           "author": "stpeter",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "The terminology of client and server in RFC 6125 refers to TLS clients and servers, which seems perfectly appropriate. Even in a peer-to-peer architecture, for any given TLS interaction one entity will be the TLS client and one will be the TLS server.",
           "createdAt": "2021-09-10T17:57:43Z",
           "updatedAt": "2021-09-10T17:57:43Z"
@@ -1601,7 +1601,7 @@
             "abbreviatedOid": "0068e63"
           },
           "author": "sleevi",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2021-07-02T20:25:49Z",
@@ -3491,7 +3491,7 @@
       "comments": [
         {
           "author": "stpeter",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "I like the new title - short and sweet.",
           "createdAt": "2021-11-16T20:12:32Z",
           "updatedAt": "2021-11-16T20:12:32Z"
@@ -3531,7 +3531,7 @@
             "abbreviatedOid": "c9707a4"
           },
           "author": "stpeter",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2021-11-17T18:26:14Z",
